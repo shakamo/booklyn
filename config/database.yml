@@ -7,7 +7,7 @@ default: &default
   database: dn90sitc3qf2a
   username: odzbixpzvbohxp
   password: ugDEJn4g5YiGlzgoe9EkLiSjCH
-  host: localhost
+  host: ec2-54-225-101-124.compute-1.amazonaws.com
 
 development:
   <<: *default

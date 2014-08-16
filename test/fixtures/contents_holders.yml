@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contents_holder_code: MyString
+  contents_holder_name: MyString
+
+two:
+  contents_holder_code: MyString
+  contents_holder_name: MyString
