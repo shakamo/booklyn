@@ -1,7 +1,7 @@
 module Scrape
-class Scraping
-  def seld.execute()
-    
-  end
+  class Scraping
+    def hello
+          puts "Hoge::Fuga#hello"
+        end
   end
 end
