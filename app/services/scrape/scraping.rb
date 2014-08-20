@@ -100,7 +100,7 @@ module Scrape
             array.concat(item.inner_text.split('～'))
           end
           
-          array.sort{|a,b| a <=> b}
+          array = array.sort{|a,b| a <=> b}
           
           return ""
         end
