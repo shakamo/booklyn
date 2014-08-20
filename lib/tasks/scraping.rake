@@ -1,4 +1,4 @@
 task :scraping => :environment do
-    #処理
-    puts 'done.'
+
+    @test = Scrape::Scraping.execute("2014", "summer")
 end
