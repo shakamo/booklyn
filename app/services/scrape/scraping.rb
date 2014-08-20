@@ -86,24 +86,27 @@ module Scrape
     end
 
     def self.get_schedule_by_posite(title, year, season)
-      p title
-      p year
-      p season
-
       doc = @doc_factory.get_document_for_posite(title, year, season)
       doc.css('.ani_e').each do |node|
         text = node.css('td.title > a').inner_text
-
         if text.index(title)
-          date = node.css('td:last-child').inner_text
-          date = date.sub_all("～","").split("¥r¥n")
-          p date
+          
+          node.search('br').each do |word|
+            word.replace('')
+          end
+          
+          array = []
+          node.css('td:last-child').each do |item|
+            array.concat(item.inner_text.split('～'))
+          end
+          
+          array.sort{|a,b| a <=> b}
+          
           return ""
         end
       end
       doc.css('.ani_o').each do |node|
         text = node.css('td.title > a').inner_text
-
         if text.index(title)
           date = node.css('td:last-child').inner_text
           date = date.sub("?","").split(" ")
