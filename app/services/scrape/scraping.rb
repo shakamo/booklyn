@@ -34,6 +34,12 @@ module Scrape
       document_for_anikore.xpath('//*[@id="main"]/div').each do |node|
 
         if node.css('div[1]/span[2]/a').inner_text != "" then
+          content_id = node.css('div[1]/span[2]/a').attribute('href').value.split("/")[2].to_i
+          content = Content.find_or_initialize_by(id: content_id)
+          if content.title
+            p "skip"
+            next
+          end
 
           title = node.css('div[1]/span[2]/a').inner_text
 
@@ -53,20 +59,19 @@ module Scrape
             category_id = 90
           end
 
-          content_id = node.css('div[1]/span[2]/a').attribute('href').value.split("/")[2].to_i
           image = node.css('div.animeImage > a > img').attribute('src').value
           image = image.slice(0, image.index('?'))
 
           initial = get_initial_by_detail_page(content_id)
           description = get_description_by_detail_page(content_id)
           schedule_id = get_schedule_id(node, title, year, season)
-          content = Content.find_or_initialize_by(id: content_id)
           content.title = title
           content.initial = initial
           content.description = description
           content.category_id = category_id
           content.schedule_id = schedule_id
-
+          
+          content.save
         end
       end
     end
@@ -86,7 +91,7 @@ module Scrape
       if !schedule
         schedule = get_schedule_by_posite(title, year, season)
       end
-      
+
       if schedule
         schedule = Schedule.find_or_initialize_by(schedule_code: "01", date: schedule, week: Utils.Weeks(schedule.wday))
         schedule.save
