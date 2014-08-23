@@ -1,9 +1,9 @@
 require 'open-uri'
 require 'nokogiri'
 require 'logger'
-require 'utils'
 
 module Utils
+  
   class NokogiriDocumentFactory
 
     @anikore = nil
@@ -61,4 +61,20 @@ module Utils
       return @posite[key]
     end
   end
+  
+  def self.trim(str)
+    str.gsub!('・','')
+    str.gsub!('-','')
+    str.gsub!('!','')
+    str.gsub!('！','')
+    str.gsub!(' ','')
+    str.gsub!('　','')
+    return str
+  end
+  
+  def self.Weeks(num)
+    return WEEKS[num]
+  end
+  
+  WEEKS = %w(Sun Mon Tue Wed Thu Fri Sat)
 end

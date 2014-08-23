@@ -40,6 +40,8 @@ gem 'spring',        group: :development
 
 gem 'nokogiri'
 
+gem 'chronic'
+
 gem 'rails_12factor', group: :production
 
 ruby "2.1.1"

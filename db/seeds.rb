@@ -25,6 +25,15 @@
 @content.category_name = "その他"
 @content.save
 
+@schedule = Schedule.find_or_initialize_by(schedule_code: "90")
+@schedule.schedule_name = "Decided"
+@schedule.save
+
+@schedule = Schedule.find_or_initialize_by(schedule_code: "99")
+@schedule.schedule_name = "Unknown"
+@schedule.save
+
+
 # Category.destroy_all
 # 
 # Category.create(
