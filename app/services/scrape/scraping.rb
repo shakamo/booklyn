@@ -55,6 +55,9 @@ module Scrape
           if title.sub!("（Webアニメ）","") then
             category_id = 4
           end
+          if title.sub!("（OAD）","") then
+            category_id = 5
+          end
           if title.sub!("（その他）","") then
             category_id = 90
           end
@@ -70,7 +73,7 @@ module Scrape
           content.description = description
           content.category_id = category_id
           content.schedule_id = schedule_id
-          
+
           content.save
         end
       end

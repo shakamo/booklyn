@@ -20,6 +20,11 @@
 @content.category_name = "Webアニメ"
 @content.save
 
+@content = Category.find_or_initialize_by(id: 5)
+@content.category_code = "05" 
+@content.category_name = "OAD"
+@content.save
+
 @content = Category.find_or_initialize_by(id: 90)
 @content.category_code = "90" 
 @content.category_name = "その他"
