@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140824024203) do
+ActiveRecord::Schema.define(version: 20140824192204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,9 +83,10 @@ ActiveRecord::Schema.define(version: 20140824024203) do
     t.integer  "episode_id"
     t.integer  "contents_holder_id"
     t.integer  "platform_id"
-    t.boolean  "is_available"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "direct_url"
+    t.string   "available"
   end
 
   add_index "posts", ["contents_holder_id"], name: "index_posts_on_contents_holder_id", using: :btree

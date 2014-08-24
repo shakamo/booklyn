@@ -38,6 +38,22 @@
 @schedule.schedule_name = "Unknown"
 @schedule.save
 
+@schedule = ContentsHolder.find_or_initialize_by(contents_holder_code: "01")
+@schedule.contents_holder_name = "Himawari"
+@schedule.save
+
+@schedule = ContentsHolder.find_or_initialize_by(contents_holder_code: "02")
+@schedule.contents_holder_name = "B9"
+@schedule.save
+
+@schedule = Platform.find_or_initialize_by(platform_code: "1")
+@schedule.platform_name = "All"
+@schedule.save
+
+@schedule = Platform.find_or_initialize_by(platform_code: "10")
+@schedule.platform_name = "PC"
+@schedule.save
+
 
 # Category.destroy_all
 # 
