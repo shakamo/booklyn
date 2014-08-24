@@ -4,7 +4,7 @@ require 'utils'
 require 'chronic'
 
 module Scrape
-  class Scraping
+  class ScrapeForContents
 
     @doc_factory = nil
     @pager = 0
@@ -12,7 +12,7 @@ module Scrape
       @doc_factory = Utils::NokogiriDocumentFactory.new
       for i in 1..99 do
         document_for_anikore = @doc_factory.get_document_for_anikore(year, season, i)
-        create_record_for_content(document_for_anikore, year, season)
+        register_record_for_content(document_for_anikore, year, season)
 
         if @pager == i then
           break
@@ -20,7 +20,7 @@ module Scrape
       end
     end
 
-    def self.create_record_for_content(document_for_anikore, year, season)
+    def self.register_record_for_content(document_for_anikore, year, season)
 
       document_for_anikore.css('#main > div.paginator > span').each do |node|
         page = node.css('a.crpagebute').inner_text.to_i
@@ -35,48 +35,70 @@ module Scrape
 
         if node.css('div[1]/span[2]/a').inner_text != "" then
           content_id = node.css('div[1]/span[2]/a').attribute('href').value.split("/")[2].to_i
+
           content = Content.find_or_initialize_by(id: content_id)
           if content.title
             p "skip"
             next
           end
 
-          title = node.css('div[1]/span[2]/a').inner_text
+          title = get_title(node)
+          category_id = get_category_id(node)
 
-          if title.sub!("（テレビアニメ）","") then
-            category_id = 1
-          end
-          if title.sub!("（アニメ映画）","") then
-            category_id = 2
-          end
-          if title.sub!("（OVA）","") then
-            category_id = 3
-          end
-          if title.sub!("（Webアニメ）","") then
-            category_id = 4
-          end
-          if title.sub!("（OAD）","") then
-            category_id = 5
-          end
-          if title.sub!("（その他）","") then
-            category_id = 90
-          end
+          register_image(node, "contents", content_id)
 
-          image = node.css('div.animeImage > a > img').attribute('src').value
-          image = image.slice(0, image.index('?'))
+          trim_title = Utils.trim(title)
 
+          content.title = title
           initial = get_initial_by_detail_page(content_id)
           description = get_description_by_detail_page(content_id)
-          schedule_id = get_schedule_id(node, title, year, season)
-          content.title = title
+          schedule_id = get_schedule_id(node, trim_title, year, season)
           content.initial = initial
           content.description = description
           content.category_id = category_id
           content.schedule_id = schedule_id
+          content.trim_title = trim_title
 
           content.save
         end
       end
+    end
+
+    def self.get_title(node)
+      title = node.css('div[1]/span[2]/a').inner_text
+
+      title.sub!("（テレビアニメ）","")
+      title.sub!("（アニメ映画）","")
+      title.sub!("（OVA）","")
+      title.sub!("（Webアニメ）","")
+      title.sub!("（OAD）","")
+      title.sub!("（その他）","")
+
+      return title
+    end
+
+    def self.get_category_id(node)
+      title = node.css('div[1]/span[2]/a').inner_text
+
+      if title.index("（テレビアニメ）")
+        return 1
+      end
+      if title.index("（アニメ映画）")
+        return 2
+      end
+      if title.index("（OVA）")
+        return 3
+      end
+      if title.index("（Webアニメ）")
+        return 4
+      end
+      if title.index("（OAD）")
+        return 5
+      end
+      if title.index("（その他）")
+        return 90
+      end
+      return nil
     end
 
     def self.get_initial_by_detail_page(content_id)
@@ -151,7 +173,6 @@ module Scrape
 
       text = node.css('td.title > a').inner_text
       text = Utils.trim(text)
-      title = Utils.trim(title)
 
       if text != "" && (text.index(title) || title.index(text))
 
@@ -165,6 +186,16 @@ module Scrape
       end
 
       return array
+    end
+
+    def self.register_image(node, table_name, content_id)
+      image = Image.find_or_initialize_by(table_name: table_name, generic_id: content_id)
+      if image.url
+        return
+      end
+      image.url = node.css('div.animeImage > a > img').attribute('src').value
+      image.url = image.url.slice(0, image.url.index('?'))
+      image.save
     end
   end
 end

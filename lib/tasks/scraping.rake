@@ -1,4 +1,9 @@
+
+task :scraping_episodes => :environment do
+    Scrape::ScrapeForEpisodes.execute()
+end
+
 task :scraping => :environment do
 
-    @test = Scrape::Scraping.execute("2014", "summer")
+    Scrape::ScrapeForContents.execute("2014", "spring")
 end

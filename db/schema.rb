@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140823061251) do
+ActiveRecord::Schema.define(version: 20140824024203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20140823061251) do
     t.integer  "schedule_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "trim_title"
   end
 
   add_index "contents", ["category_id"], name: "index_contents_on_category_id", using: :btree
@@ -57,6 +58,14 @@ ActiveRecord::Schema.define(version: 20140823061251) do
 
   add_index "episodes", ["content_id"], name: "index_episodes_on_content_id", using: :btree
   add_index "episodes", ["episode_num"], name: "index_episodes_on_episode_num", using: :btree
+
+  create_table "images", force: true do |t|
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "table_name"
+    t.integer  "generic_id"
+  end
 
   create_table "platforms", force: true do |t|
     t.string   "platform_code"

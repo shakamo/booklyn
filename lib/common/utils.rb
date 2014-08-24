@@ -3,16 +3,18 @@ require 'nokogiri'
 require 'logger'
 
 module Utils
-  
   class NokogiriDocumentFactory
 
     @anikore = nil
     @anikore_detail = nil
     @posite = nil
+    @tvanimedouga = nil
+    
     def initialize
       @anikore = Hash.new
       @anikore_detail = Hash.new
       @posite = Hash.new
+      @tvanimedouga = Hash.new
     end
 
     def get_document(url)
@@ -60,9 +62,21 @@ module Utils
       @posite[key] = get_document(url)
       return @posite[key]
     end
+
+    def get_document_for_tvanimedouga()
+      key = "main"
+      
+      if @tvanimedouga.has_key?(key) then
+        return @tvanimedouga[key]
+      end
+      url = 'http://tvanimedouga.blog93.fc2.com/'
+      @tvanimedouga[key] = get_document(url)
+      return @tvanimedouga[key]
+    end
   end
-  
+
   def self.trim(str)
+    str = String.new(str)
     str.gsub!('・','')
     str.gsub!('-','')
     str.gsub!('!','')
@@ -71,10 +85,10 @@ module Utils
     str.gsub!('　','')
     return str
   end
-  
+
   def self.Weeks(num)
     return WEEKS[num]
   end
-  
+
   WEEKS = %w(Sun Mon Tue Wed Thu Fri Sat)
 end
