@@ -7,9 +7,8 @@ require 'uri'
 module Scrape
   class ScrapeForPosts
     @@Contents = %w(【ひまわり】 【B9】 【Saymove】 【anitube】 【NoSub】 【Videofan】 【Ｖｅｏｈ】)
-    def self.register_post(holder_name, url, episode_id)
+    def self.register_post(holder_name, url, episode)
       holder = nil
-
       case holder_name
       when @@Contents[0]
         holder = Himawari.new
@@ -19,21 +18,21 @@ module Scrape
       end
 
       if holder
-        holder.execute(url, episode_id)
+        holder.execute(url, episode)
       end
     end
   end
 
   class Himawari
-    def execute(url, episode_id)
-      p 'execute Himawari'
+    def execute(url, episode)
+      p 'execute Himawari ' + episode.to_s + ' ' + url
       @doc_factory = Utils::NokogiriDocumentFactory.new
       document = @doc_factory.get_document(url)
 
-      if episode_id
-        post = Post.find_or_initialize_by(episode_id: episode_id, url: url)
+      post = Post.find_or_initialize_by(url: url)
+      if episode
+        post.episode_id = episode.id
       else
-        post = Post.new
         post.url = url
       end
 
@@ -42,25 +41,27 @@ module Scrape
 
       if document.css('#link_disablemessag_own').inner_text != ''
         post.available = 'NG'
+        post.error = document.css('#link_disablemessag_own').inner_text
         return
-      elsif episode_id != nil
+      elsif episode != nil
         post.available = 'OK'
       else
         post.available = 'INSPECTION'
+        post.error = document.css('#movie_title').inner_text
       end
 
       platform = Platform.find_or_initialize_by(platform_code: '1')
       post.platform_id = platform.id
 
       script = document.css('#player > script').inner_text
-      direct_url = script.scan(/var movie_url = ['].*[']/)[0]
+      
+      direct_url = nil
+      /var movie_url = (?<direct_url>['].*['])/=~ script
       if direct_url
-        direct_url = direct_url[0].scan(/['].*[']/)[0]
-        if direct_url
-          direct_url.gsub("'",'').gsub('?','')
-          post.direct_url = direct_url
-        end
+        direct_url = direct_url.gsub("'","").gsub('?','')
+        post.direct_url = URI.unescape(direct_url).sub('external:','')
       end
+      post.save
 
     end
   end
