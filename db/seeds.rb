@@ -39,11 +39,27 @@
 @schedule.save
 
 @schedule = ContentsHolder.find_or_initialize_by(contents_holder_code: "01")
-@schedule.contents_holder_name = "Himawari"
+@schedule.contents_holder_name = "ひまわり動画"
 @schedule.save
 
 @schedule = ContentsHolder.find_or_initialize_by(contents_holder_code: "02")
-@schedule.contents_holder_name = "B9"
+@schedule.contents_holder_name = "B9DM"
+@schedule.save
+
+@schedule = ContentsHolder.find_or_initialize_by(contents_holder_code: "03")
+@schedule.contents_holder_name = "Nosub"
+@schedule.save
+
+@schedule = ContentsHolder.find_or_initialize_by(contents_holder_code: "04")
+@schedule.contents_holder_name = "Veoh"
+@schedule.save
+
+@schedule = ContentsHolder.find_or_initialize_by(contents_holder_code: "05")
+@schedule.contents_holder_name = "SayMove"
+@schedule.save
+
+@schedule = ContentsHolder.find_or_initialize_by(contents_holder_code: "06")
+@schedule.contents_holder_name = "Dailymotion"
 @schedule.save
 
 @schedule = Platform.find_or_initialize_by(platform_code: "1")

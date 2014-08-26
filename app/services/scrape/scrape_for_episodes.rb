@@ -45,12 +45,10 @@ module Scrape
 
       if episode && episode.episode_name == nil
         sub_title = document.css('#mainBlock > div.mainEntryBlock > div.mainEntryBase > div.mainEntryBody').inner_text
-        p sub_title
         sub_title = sub_title.scan(/話「.*」/)
         if sub_title.size == 1
           sub_title = sub_title[0]
           sub_title = sub_title.slice(2,sub_title.size()-3)
-          p sub_title
           episode.episode_name = sub_title
           episode.save
         end
@@ -62,8 +60,10 @@ module Scrape
         if !(holder_name.index('検索】'))
           url = item.attribute('href').value
 
-          if url.index('sortby')
-          elsif url.index('keyword')
+          if url.index('http://himado.in/?sort=&')
+          elsif url.index('http://himado.in/?keyword=')
+          elsif url.index('http://www.nosub.tv/?s=%')
+          elsif url.index('http://www.veoh.com/find/?query')
           else
             ScrapeForPosts.register_post(holder_name, url, episode)
           end
