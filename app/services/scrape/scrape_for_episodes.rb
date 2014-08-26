@@ -57,7 +57,7 @@ module Scrape
       end
 
       list.each do |item|
-        holder_name = item.inner_text
+        holder_name = item.inner_text.sub('【','').sub('】','')
 
         if !(holder_name.index('検索】'))
           url = item.attribute('href').value
