@@ -19,6 +19,11 @@ module Scrape
       node = document.css('#mainBlock > div.index_area > div > div > a')
       node.each do |item|
         episode_num = item.inner_text.scan(/　第[0-9]{1,3}話/)[0]
+        if episode_num == nil
+          episode_num = item.inner_text.scan(/[0-9]{1,3}話/)[0]
+          p episode_num
+        end
+
         title = item.inner_text.sub(episode_num, '')
 
         title = Utils.trim(title)
@@ -59,6 +64,8 @@ module Scrape
 
         if !(holder_name.index('検索】'))
           url = item.attribute('href').value
+
+          url = URI.escape(url)
 
           if url.index('http://himado.in/?sort=&')
           elsif url.index('http://himado.in/?keyword=')
