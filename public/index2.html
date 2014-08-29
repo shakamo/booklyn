@@ -321,7 +321,7 @@
                 <h6 class="panel-title"><i class="fa fa-tasks"></i> 更新履歴</h6>
               </div>
               <div ng-repeat="(date, history) in histories | groupBy: 'date':true">
-                <h6><i class="fa fa-calendar-o fa-fw"></i>{{ date | utc_to_local:''}}</h6>
+                <h6><i class="fa fa-calendar-o fa-fw"></i>{{ date | utc_to_local: ''}}</h6>
                 <ul class="list-group sidebar-nav-v1">
                   <!-- Typography -->
                   <li class="list-group-item">
