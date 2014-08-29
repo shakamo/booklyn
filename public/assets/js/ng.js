@@ -34,6 +34,7 @@ angular.module('App', [])
     newDate.setUTCMinutes(date.slice(10,12));
     newDate.setUTCSeconds('0');
     return newDate.toLocaleString("ja-JP");
+    
   };
 })
 .filter('groupBy', function($parse) {
