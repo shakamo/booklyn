@@ -32,7 +32,7 @@ angular.module('App', [])
     newDate.setUTCDate(date.slice(6,8));
     newDate.setUTCHours(date.slice(8,10));
     newDate.setUTCMinutes(date.slice(10,12));
-    newDate.setUTCSeconds('00');
+    newDate.setUTCSeconds('0');
     return newDate.toLocaleString("ja-JP");
   };
 }])
