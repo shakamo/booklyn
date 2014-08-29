@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'api/recent'
   get 'api/history'
   
-  get ':id', to: 'api#content'
+  get 'api/:id', to: 'api#content'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
