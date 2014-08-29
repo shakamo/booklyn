@@ -16,15 +16,15 @@ angular.module('App', [])
   error(function(data, status, headers, config) {
   });
 }])
-.filter('range', [function() {
+.filter('range', function() {
   return function(input, total) {
     total = parseInt(total);
     for (var i=0; i<total; i++)
       input.push(i);
     return input;
   };
-}])
-.filter('utc_to_local', [function() {
+})
+.filter('utc_to_local', function() {
   return function(date, format) {
     var newDate = new Date();
     newDate.setUTCFullYear(date.slice(0,4));
@@ -35,7 +35,7 @@ angular.module('App', [])
     newDate.setUTCSeconds('0');
     return newDate.toLocaleString("ja-JP");
   };
-}])
+})
 .filter('groupBy', function($parse) {
     return _.memoize(function(items, field) {
         var getter = $parse(field);
