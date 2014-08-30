@@ -26,7 +26,7 @@
 
     <!-- CSS Implementing Plugins -->
     <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
-    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css">
     <link rel="stylesheet" href="assets/plugins/parallax-slider/css/parallax-slider.css">
 
@@ -73,7 +73,7 @@
                   <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> ランキング </a>
                 </li>
                 <li class="dropdown">
-                  <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> 視聴方法 </a>
+                  <a href="/howto" class="dropdown-toggle" data-toggle="dropdown"> 視聴方法 </a>
                 </li>
                 <!-- End Pages -->
 
@@ -99,31 +99,13 @@
       </div>
       <!--=== End Header ===-->
 
-      <!--=== Purchase Block ===-->
-      <div class="purchase" style="display: none;">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-9 animated fadeInLeft">
-              <span>Unify is a clean and fully responsive incredible Template.</span>
-              <p>
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi  vehicula sem ut volutpat. Ut non libero magna fusce condimentum eleifend enim a feugiat corrupti quos.
-              </p>
-            </div>
-            <div class="col-md-3 btn-buy animated fadeInRight">
-              <a href="#" class="btn-u btn-u-lg"><i class="fa fa-cloud-download"></i> Download Now</a>
-            </div>
-          </div>
-        </div>
-      </div><!--/row-->
-      <!-- End Purchase Block -->
-
       <!--=== Content Part ===-->
       <div class="container content">
 
         <!-- Columns -->
         <div class="row">
           <!-- Column Left -->
-          <div class="col-md-2">
+          <div class="col-md-2" ng-hide="isHowto"  ng-controller="RightController"  ng-hide="isHowto">
             <ul class="list-group sidebar-nav-v1" id="sidebar-nav">
               <!-- Typography -->
               <li class="list-group-item list-toggle active">
@@ -146,13 +128,7 @@
               </li>
 
             </ul>
-          </div>
-          <!-- Column Center -->
-
-          <div ng-view></div>
-
-          <!-- Column Right -->
-          <div class="col-md-2" ng-controller="RightController">
+                      <!-- Column Right -->
             <!-- Danger Panel -->
             <div class="panel panel-danger">
               <div class="panel-heading">
@@ -173,67 +149,14 @@
               </div>
             </div>
             <!-- End Danger Panel -->
+            
           </div>
-          <!-- Our Clients -->
-          <div id="clients-flexslider" class="flexslider home clients">
-            <div class="headline">
-              <h2>Our Clients</h2>
-            </div>
-            <ul class="slides">
-              <li>
-                <a href="#"> <img src="assets/img/clients/hp_grey.png" alt=""> <img src="assets/img/clients/hp.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/igneus_grey.png" alt=""> <img src="assets/img/clients/igneus.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/vadafone_grey.png" alt=""> <img src="assets/img/clients/vadafone.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/walmart_grey.png" alt=""> <img src="assets/img/clients/walmart.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/shell_grey.png" alt=""> <img src="assets/img/clients/shell.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/natural_grey.png" alt=""> <img src="assets/img/clients/natural.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/aztec_grey.png" alt=""> <img src="assets/img/clients/aztec.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/gamescast_grey.png" alt=""> <img src="assets/img/clients/gamescast.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/cisco_grey.png" alt=""><img src="assets/img/clients/cisco.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/everyday_grey.png" alt=""> <img src="assets/img/clients/everyday.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/cocacola_grey.png" alt=""> <img src="assets/img/clients/cocacola.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/spinworkx_grey.png" alt=""> <img src="assets/img/clients/spinworkx.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/shell_grey.png" alt=""> <img src="assets/img/clients/shell.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/natural_grey.png" alt=""> <img src="assets/img/clients/natural.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/gamescast_grey.png" alt=""> <img src="assets/img/clients/gamescast.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/everyday_grey.png" alt=""> <img src="assets/img/clients/everyday.png" class="color-img" alt=""> </a>
-              </li>
-              <li>
-                <a href="#"> <img src="assets/img/clients/spinworkx_grey.png" alt=""> <img src="assets/img/clients/spinworkx.png" class="color-img" alt=""> </a>
-              </li>
-            </ul>
-          </div><!--/flexslider-->
-          <!-- End Our Clients -->
+          <!-- Column Center -->
+
+          <div ng-view></div>
+
+
+          </div>
         </div><!--/container-->
       </div>
       <!-- End Content Part -->
@@ -413,33 +336,38 @@
     <![endif]-->
 
     <script type="text/ng-template" id="main.html">
-
-      <div class="col-md-8" ng-controller="MainController">
+      <div class="col-md-10" ng-controller="MainController">
       <!-- Recent Works -->
-
-      
       <!-- Start Recent Works -->
       <div class="row">
-      <div ng-repeat="content in contents"class="animated">
-      <div class="col-md-3 col-sm-6">
+      <div ng-repeat="content in contents" class="animated">
+
+      <div class="col-md-3 col-sm-6 easy-block-v2">
         <div class="thumbnails thumbnail-style thumbnail-kenburn">
         <div class="thumbnail-img">
         <div class="overflow-hidden">
-        <img class="img-responsive" ng-src="{{content.url}}" alt="">
+          <a href="/episode/{{content.id}}">
+        <img class="img-responsive" ng-src="{{content.url}}" alt=""></a>
         </div>
         <a class="btn-more hover-effect" href="/episode/{{content.id}}">read more +</a>
+        <a href="/episode/{{content.id}}"><div class="easy-bg-v2 rgba-purple">New</div></a>
         </div>
         <div class="caption">
         <h4><a class="hover-effect" href="/episode/{{content.id}}">{{content.title}}</a></h4>
-        <p>
-        {{content.episode_num}}
-        </p>
+
+        </div> <ul class="list-unstyled">
+                        <li><i class="fa fa-desktop"></i> {{content.episode_num}}</li>
+                        <li><i class="fa fa-twitch"></i> {{content.episode_name}}</li>
+                    </ul>
+
         <i class="fa fa-play-circle-o fa-lg text-success" ng-repeat="ok in [] | range:content.ok"></i>
         <i class="fa fa-times-circle-o fa-lg text-danger" ng-repeat="ng in [] | range:content.ng"></i>
-        </div>
-        </div>
+        </div>    
         
+        
+            
       </div>
+
         <div class="col-md-12" ng-if="$index%4 == 3"></div>
       </div>
       </div>
@@ -456,6 +384,38 @@
 
       <!-- End Recent Works -->
       </div>
+    </script>
+    <script type="text/ng-template" id="howto.html">
+<div class="row margin-bottom-10">
+            <div class="col-md-3 col-sm-6">
+                <div class="servive-block servive-block-u">            
+                    <i class="icon-2x color-light fa fa-thumbs-o-up"></i>
+                    <h2 class="heading-md">Unify Box</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine. Fusce dapibus</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="servive-block servive-block-blue">
+                    <i class="icon-2x color-light icon-line icon-trophy"></i>
+                    <h2 class="heading-md">Blue Box</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine usce dapibus elit nondapibus</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="servive-block servive-block-dark">
+                    <i class="icon-2x color-light fa fa-bell-o"></i>
+                    <h2 class="heading-md">Dark Box</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine. Fusce dapibus</p>                        
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="servive-block servive-block-red">
+                    <i class="icon-2x color-light icon-line icon-fire"></i>
+                    <h2 class="heading-md">Red Box</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine. Fusce dapibus</p>                        
+                </div>
+            </div>
+        </div>
     </script>
   </body>
 </html>

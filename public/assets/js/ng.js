@@ -19,6 +19,11 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
     controller : 'EpisodeController',
     resolve : {
     }
+  }).when('/howto', {
+    templateUrl : 'howto.html',
+    controller : 'HowtoController',
+    resolve : {
+    }
   }).when('/Book/:bookId/ch/:chapterId', {
     templateUrl : 'chapter.html',
     controller : 'ChapterController'
@@ -26,10 +31,14 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
 
   // configure html5 to get links working on jsfiddle
   $locationProvider.html5Mode(true);
-}).controller('MainController', [ '$scope', '$http', function($scope, $http) {
+}).controller('MainController', [ '$rootScope', '$scope', '$http', function($rootScope, $scope, $http) {
 
+  $rootScope.isHowto = false;
 } ]).controller('ContentController', [ '$scope', '$http', function($scope, $http, $routeParams) {
 
+} ]).controller('HowtoController', [ '$scope', '$rootScope', function($scope, $rootScope, $routeParams) {
+
+  $rootScope.isHowto = true;
 } ]).controller('EpisodeController', [ '$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
   $scope.params = $routeParams;
   $http({
