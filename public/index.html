@@ -52,7 +52,7 @@
                 <span class="sr-only">Toggle navigation</span>
                 <span class="fa fa-bars"></span>
               </button>
-              <a class="navbar-brand" href="index.html"> <img id="logo-header" src="assets/img/Logo_Booklyn.png" alt="Logo"> </a>
+              <a class="navbar-brand" href="/"> <img id="logo-header" src="assets/img/Logo_Booklyn.png" alt="Logo"> </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -564,10 +564,10 @@
         <div class="overflow-hidden">
         <img class="img-responsive" ng-src="{{content.url}}" alt="">
         </div>
-        <a class="btn-more hover-effect" href="#">read more +</a>
+        <a class="btn-more hover-effect" href="/episode/{{content.id}}">read more +</a>
         </div>
         <div class="caption">
-        <h4><a class="hover-effect" href="#">{{content.title}}</a></h4>
+        <h4><a class="hover-effect" href="/episode/{{content.id}}">{{content.title}}</a></h4>
         <p>
         {{content.episode_num}}
         </p>
@@ -585,16 +585,12 @@
     </script>
     <script type="text/ng-template" id="episode.html">
 
-      <div class="col-md-8" ng-controller="EpisodeController">
+      <div class="col-md-8">
       <!-- Recent Works -->
       <div class="headline">
       <h2>Recent Contents</h2>
       </div>
-      <div class="row">
-      <div class="col-md-3 col-sm-6" ng-repeat="content in contents">
-
-      </div>
-      </div>
+{{ episode[0].title}}
       <!-- End Recent Works -->
       </div>
     </script>

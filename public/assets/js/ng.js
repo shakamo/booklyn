@@ -26,14 +26,15 @@ angular.module('App', [ 'ngRoute' ])
   $locationProvider.html5Mode(true);
 }).controller('MainController', [ '$scope', '$http', function($scope, $http) {
 
-} ]).controller('ContentController', [ '$scope', '$http', function($scope, $http) {
+} ]).controller('ContentController', [ '$scope', '$http', function($scope, $http, $routeParams) {
 
-} ]).controller('EpisodeController', [ '$scope', '$http', function($scope, $http) {
+} ]).controller('EpisodeController', [ '$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+  $scope.params = $routeParams;
   $http({
     method : 'GET',
-    url : '/api/episode/' + $scope.id
+    url : '/api/episode/' + $scope.params.id
   }).success(function(data, status, headers, config) {
-    $scope.histories = data;
+    $scope.episode = data;
   }).error(function(data, status, headers, config) {
 
   });

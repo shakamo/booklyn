@@ -4,6 +4,7 @@ class Episode < ActiveRecord::Base
     sql = <<-SQL
     
       select
+          c.id,
           c.title,
           '第' || e.episode_num || '話' as episode_num,
           e.episode_name,
@@ -26,6 +27,7 @@ to_char(e.created_at,'YYYYMMDDHH24MISS')
           and c.id = i.generic_id 
           and i.table_name = 'contents' 
       group by
+          c.id,
           c.title,
           e.episode_num,
           e.episode_name,
