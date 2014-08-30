@@ -1,4 +1,4 @@
-angular.module('App', [ 'ngRoute' ])
+angular.module('App', [ 'ngRoute', 'ngAnimate' ])
 
 .run([ '$rootScope', '$http', function($rootScope, $http) {
   $http({
@@ -8,6 +8,8 @@ angular.module('App', [ 'ngRoute' ])
     $rootScope.contents = data;
   }).error(function(data, status, headers, config) {
   });
+  $rootScope.weeks = ['土曜日','日曜日','月曜日','火曜日','水曜日','木曜日','金曜日'];
+  $rootScope.atoz = ['あ','か','さ','た','な','は','ま','や','ら','わ'];
 } ]).config(function($routeProvider, $locationProvider) {
   $routeProvider.when('/', {
     templateUrl : 'main.html',
