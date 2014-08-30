@@ -45,7 +45,7 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
     method : 'GET',
     url : '/api/episode/' + $scope.params.id
   }).success(function(data, status, headers, config) {
-    $scope.episode = data;
+    $scope.episode = data[0];
   }).error(function(data, status, headers, config) {
 
   });
