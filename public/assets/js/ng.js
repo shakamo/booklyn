@@ -12,16 +12,10 @@ angular.module('App', [ 'ngRoute' ])
   $routeProvider.when('/', {
     templateUrl : 'main.html',
     controller : 'ContentController'
-  }).when('/Book/:bookId', {
-    templateUrl : 'book.html',
-    controller : 'BookController',
+  }).when('/episode/:id', {
+    templateUrl : 'episode.html',
+    controller : 'EpisodeController',
     resolve : {
-      // I will cause a 1 second delay
-      delay : function($q, $timeout) {
-        var delay = $q.defer();
-        $timeout(delay.resolve, 1000);
-        return delay.promise;
-      }
     }
   }).when('/Book/:bookId/ch/:chapterId', {
     templateUrl : 'chapter.html',
@@ -34,6 +28,15 @@ angular.module('App', [ 'ngRoute' ])
 
 } ]).controller('ContentController', [ '$scope', '$http', function($scope, $http) {
 
+} ]).controller('EpisodeController', [ '$scope', '$http', function($scope, $http) {
+  $http({
+    method : 'GET',
+    url : '/api/episode/' + $scope.id
+  }).success(function(data, status, headers, config) {
+    $scope.histories = data;
+  }).error(function(data, status, headers, config) {
+
+  });
 } ]).controller('RightController', [ '$scope', '$http', function($scope, $http) {
   $http({
     method : 'GET',

@@ -14,7 +14,7 @@
     <meta name="author" content="">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
 
     <!-- CSS Global Compulsory -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -301,7 +301,7 @@
                   <li class="list-group-item">
                     <ul>
                       <li ng-repeat="data in history">
-                        <a href="api/{{data.id}}"><i class="fa fa-chevron-circle-right"></i> {{data.title}} </a>
+                        <a href="/episode/{{data.id}}"><i class="fa fa-chevron-circle-right"></i> {{data.title}} </a>
                       </li>
                     </ul>
                   </li>
@@ -554,25 +554,45 @@
       <div class="headline">
       <h2>Recent Contents</h2>
       </div>
+      
+      <!-- Start Recent Works -->
+      <div class="row">
+      <div ng-repeat="content in contents">
+      <div class="col-md-3 col-sm-6">
+        <div class="thumbnails thumbnail-style thumbnail-kenburn">
+        <div class="thumbnail-img">
+        <div class="overflow-hidden">
+        <img class="img-responsive" ng-src="{{content.url}}" alt="">
+        </div>
+        <a class="btn-more hover-effect" href="#">read more +</a>
+        </div>
+        <div class="caption">
+        <h4><a class="hover-effect" href="#">{{content.title}}</a></h4>
+        <p>
+        {{content.episode_num}}
+        </p>
+        <i class="fa fa-play-circle-o fa-lg text-success" ng-repeat="ok in [] | range:content.ok"></i>
+        <i class="fa fa-times-circle-o fa-lg text-danger" ng-repeat="ng in [] | range:content.ng"></i>
+        </div>
+        </div>
+        
+      </div>
+        <div class="col-md-12" ng-if="$index%4 == 3"></div>
+      </div>
+      </div>
+      <!-- End Recent Works -->
+      </div>
+    </script>
+    <script type="text/ng-template" id="episode.html">
+
+      <div class="col-md-8" ng-controller="EpisodeController">
+      <!-- Recent Works -->
+      <div class="headline">
+      <h2>Recent Contents</h2>
+      </div>
       <div class="row">
       <div class="col-md-3 col-sm-6" ng-repeat="content in contents">
-      <div class="thumbnails thumbnail-style thumbnail-kenburn">
-      <div class="thumbnail-img">
-      <div class="overflow-hidden">
-      <img class="img-responsive" ng-src="{{content.url}}" alt="">
-      </div>
-      <a class="btn-more hover-effect" href="#">read more +</a>
-      </div>
-      <div class="caption">
-      <h4><a class="hover-effect" href="#">{{content.title}}</a></h4>
-      <p>
-      {{content.episode_num}}
 
-      </p>
-      <i class="fa fa-play-circle-o fa-lg text-success" ng-repeat="ok in [] | range:content.ok"></i>
-      <i class="fa fa-times-circle-o fa-lg text-danger" ng-repeat="ng in [] | range:content.ng"></i>
-      </div>
-      </div>
       </div>
       </div>
       <!-- End Recent Works -->
