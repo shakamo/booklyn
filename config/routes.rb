@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   get 'api/content/:id', to: 'api#content'
   get 'api/recent'
   get 'api/history'
-  
+
   get 'api/episode/:id', to: 'api#content'
+  
+  get 'episode/:id' => redirect('/')
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

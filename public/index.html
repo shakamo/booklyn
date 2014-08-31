@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/themes/default.css" id="style_color">
     <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/pages/profile.css">
 
     <!-- CSS Implementing Plugins -->
     <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
@@ -47,18 +48,13 @@
         <!-- Navbar -->
         <div class="navbar navbar-default" role="navigation">
           <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-
+             <div class="collapse navbar-collapse navbar-responsive-collapse">
+              
               <a href="/">
                 <i class="fa fa-book fa-3x text-info"><span style="font-family: sans-serif;font-style:italic;">Booklyn</span>
                 </i>
-                <i class="text-info">( ブックリン )</i></a>
-
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-responsive-collapse">
+                <i class="text-info"> ( ブックリン )</i>
+              </a>
               <ul class="nav navbar-nav">
                 <!-- Home -->
                 <li class="dropdown active">
@@ -101,7 +97,7 @@
       <!--=== End Header ===-->
 
       <!--=== Content Part ===-->
-      <div class="container content">
+      <div class="profile container content">
 
         <!-- Columns -->
         <div class="row">
@@ -340,9 +336,8 @@
       <li><i class="fa fa-twitch"></i> {{content.episode_name}}</li>
       <li><i class="fa fa-clock-o"></i> {{content.date}}</li>
       <li><i class="fa fa-line-chart"></i>
-      <i class="fa fa-heart text-info" ng-repeat="ok in [] | range:content.ok"></i>
-      <i class="fa fa-heart text-danger" ng-repeat="ok in [] | range:content.ng"></i>
-
+        <i class="fa fa-heart text-info" ng-repeat="ok in [] | range:content.ok"></i>
+        <i class="fa fa-heart text-danger" ng-repeat="ok in [] | range:content.ng"></i>
       </li>
 
       </ul>
@@ -356,10 +351,11 @@
       <!-- End Recent Works -->
       </div>
     </script>
+    
     <script type="text/ng-template" id="episode.html">
 
       <!-- Carousel -->
-      <div class="col-md-5">
+      <div class="col-md-4">
       <div class="carousel slide carousel-v1" id="myCarousel">
       <div class="carousel-inner">
       <div class="item active">
@@ -379,29 +375,57 @@
       <!-- End Carousel -->
 
       <!-- Content Info -->
-      <div class="col-md-5">
+      <div class="col-md-6 profile-body">
       <h2>{{episode.title}}</h2>
       <p> {{episode.description}} </p>
+      
+                            <div class="panel panel-profile no-bg">
+                                <div class="panel-heading overflow-h">
+                                    <h2 class="panel-title heading-sm pull-left"><i class="fa fa-briefcase"></i>Episodes</h2>
+                                </div>
+                                <div id="scrollbar2" class="panel-body contentHolder ps-container">
+                                    <div class="profile-event">
+                                        <div class="date-formats">
+                                            <span>1</span>
+                                            <small>Episode</small>
+                                        </div>
+                                        <div class="overflow-h">
       <ul class="list-unstyled">
-      <li><i class="fa fa-user color-green"></i> Jack Baur</li>
-      <li><i class="fa fa-calendar color-green"></i> 14,2003 February</li>
-      <li><i class="fa fa-tags color-green"></i> Websites, Google, HTML5/CSS3</li>
+      <li><i class="fa fa-desktop"></i> {{content.episode_num}}</li>
+      <li><i class="fa fa-twitch"></i> {{content.episode_name}}</li>
+      <li><i class="fa fa-clock-o"></i> {{content.date}}</li>
+      <li>
+        <button class="btn-u btn-u-red btn-u-xs margin-bottom-5"><i class="fa fa-sort-amount-desc margin-right-5"></i> Deep</button>
+        <button class="btn-u btn-u-red btn-u-xs margin-bottom-5"><i class="fa fa-sort-amount-desc margin-right-5"></i> Deep</button>
+        <button class="btn-u btn-u-red btn-u-xs margin-bottom-5"><i class="fa fa-sort-amount-desc margin-right-5"></i> Deep</button>
+        <button class="btn-u btn-u-red btn-u-xs margin-bottom-5"><i class="fa fa-sort-amount-desc margin-right-5"></i> Deep</button>
+        <button class="btn-u btn-u-red btn-u-xs margin-bottom-5"><i class="fa fa-sort-amount-desc margin-right-5"></i> Deep</button>
+        <button class="btn-u btn-u-red btn-u-xs margin-bottom-5"><i class="fa fa-sort-amount-desc margin-right-5"></i> Deep</button>
+        <button class="btn-u btn-u-red btn-u-xs margin-bottom-5"><i class="fa fa-sort-amount-desc margin-right-5"></i> Deep</button>
+        <button class="btn-u btn-u-red btn-u-xs margin-bottom-5"><i class="fa fa-sort-amount-desc margin-right-5"></i> Deep</button>
+        <button class="btn-u btn-u-red btn-u-xs margin-bottom-5"><i class="fa fa-sort-amount-desc margin-right-5"></i> Deep</button>
+      </li>
       </ul>
-      <a href="#" class="btn-u btn-u-large">VISIT THE PROJECT</a>
+                                        </div>    
+                                    </div>
+                                    <div class="profile-event">
+                                        <div class="date-formats">
+                                            <small>Episode</small>
+                                            <span>2</span>
+                                        </div>
+                                        <div class="overflow-h">
+                                            <h3 class="heading-xs"><a href="#">GitHub seminars in Japan.</a></h3>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry printing.</p>
+                                        </div>    
+                                    </div>
+                                <div class="ps-scrollbar-x-rail" style="width: 389px; display: none; left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; height: 320px; display: inherit; right: 3px;"><div class="ps-scrollbar-y" style="top: 0px; height: 181px;"></div></div></div>    
+                            </div>
+      
       </div>
       <!-- End Content Info -->
 
-      <div class="col-md-10">
-      <div class="media">
-      <a class="pull-left" href="#">
-      <img class="media-object" ng-src="{{episode.url}}" alt="">
-      </a>
-      <div class="media-body">
-      <h4 class="media-heading">Media heading</h4>
-      aaaaaa
-      </div>
-      </div>
-      </div>
+                
+    
 
     </script>
     <script type="text/ng-template" id="howto.html">

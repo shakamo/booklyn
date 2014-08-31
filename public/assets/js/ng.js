@@ -4,9 +4,10 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
   $http({
     method : 'GET',
     url : '/api/recent'
-  }).success(function(data, status, headers, config) {
+  })
+  .success(function(data, status, headers, config) {
 
-    data.forEach(function(item){
+    data.forEach(function(item) {
       var newDate = new Date();
       var date = item.created_at;
       newDate.setUTCFullYear(date.slice(0, 4));
@@ -17,52 +18,60 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
       newDate.setUTCSeconds('0');
       item.date = newDate.toLocaleString("ja-JP");
     });
-    
+
     $rootScope.contents = data;
   }).error(function(data, status, headers, config) {
   });
-  $rootScope.weeks = ['土曜日','日曜日','月曜日','火曜日','水曜日','木曜日','金曜日'];
-  $rootScope.atoz = ['あ','か','さ','た','な','は','ま','や','ら','わ'];
-} ]).config(function($routeProvider, $locationProvider) {
+  $rootScope.weeks = [ '土曜日', '日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日' ];
+  $rootScope.atoz = [ 'あ', 'か', 'さ', 'た', 'な', 'は', 'ま', 'や', 'ら', 'わ' ];
+} ])
+.config(function($routeProvider, $locationProvider) {
   $routeProvider.when('/', {
     templateUrl : 'main.html',
     controller : 'ContentController'
   }).when('/episode/:id', {
     templateUrl : 'episode.html',
     controller : 'EpisodeController',
-    resolve : {
-    }
+    resolve : {}
   }).when('/howto', {
     templateUrl : 'howto.html',
     controller : 'HowtoController',
-    resolve : {
-    }
+    resolve : {}
   }).when('/Book/:bookId/ch/:chapterId', {
     templateUrl : 'chapter.html',
     controller : 'ChapterController'
+  }).otherwise({
+    redirectTo: '/'
   });
 
   // configure html5 to get links working on jsfiddle
   $locationProvider.html5Mode(true);
-}).controller('MainController', [ '$rootScope', '$scope', '$http', function($rootScope, $scope, $http) {
+}).controller('MainController',
+    [ '$rootScope', '$scope', '$http', function($rootScope, $scope, $http) {
 
-  $rootScope.isHowto = false;
-} ]).controller('ContentController', [ '$scope', '$http', function($scope, $http, $routeParams) {
+      $rootScope.isHowto = false;
+    } ])
+.controller('ContentController',
+    [ '$scope', '$http', function($scope, $http, $routeParams) {
 
-} ]).controller('HowtoController', [ '$scope', '$rootScope', function($scope, $rootScope, $routeParams) {
+    } ])
+.controller('HowtoController',
+    [ '$scope', '$rootScope', function($scope, $rootScope, $routeParams) {
 
-  $rootScope.isHowto = true;
-} ]).controller('EpisodeController', [ '$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
-  $scope.params = $routeParams;
-  $http({
-    method : 'GET',
-    url : '/api/episode/' + $scope.params.id
-  }).success(function(data, status, headers, config) {
-    $scope.episode = data[0];
-  }).error(function(data, status, headers, config) {
+      $rootScope.isHowto = true;
+    } ])
+.controller('EpisodeController',
+    [ '$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+      $scope.params = $routeParams;
+      $http({
+        method : 'GET',
+        url : '/api/episode/' + $scope.params.id
+      }).success(function(data, status, headers, config) {
+        $scope.episode = data[0];
+      }).error(function(data, status, headers, config) {
 
-  });
-} ]).controller('RightController', [ '$scope', '$http', function($scope, $http) {
+      });
+    } ]).controller('RightController', [ '$scope', '$http', function($scope, $http) {
   $http({
     method : 'GET',
     url : '/api/history'
