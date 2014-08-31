@@ -1239,7 +1239,9 @@ a.thumbnail {
 
 .thumbnail-style { 
 	padding: 7px;
+/* Remove 2014/8/29
 	margin-bottom: 20px; 
+------------------------------------*/
 }
 .thumbnail-style:hover { 
 	box-shadow: 0 0 8px #ddd; 
