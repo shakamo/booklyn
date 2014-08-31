@@ -49,10 +49,12 @@
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
- 
-              
-              <a href="/"> <i class="fa fa-book fa-3x text-info"><span style="font-family: sans-serif;font-style:italic;">Booklyn</span></i> </a>
-            
+
+              <a href="/">
+                <i class="fa fa-book fa-3x text-info"><span style="font-family: sans-serif;font-style:italic;">Booklyn</span>
+                </i>
+                <i class="text-info">( ブックリン )</i></a>
+
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -128,7 +130,7 @@
 
             </ul>
             <!-- Column Right -->
- 
+
           </div>
           <!-- Column Center -->
 
@@ -337,12 +339,12 @@
       <li><i class="fa fa-desktop"></i> {{content.episode_num}}</li>
       <li><i class="fa fa-twitch"></i> {{content.episode_name}}</li>
       <li><i class="fa fa-clock-o"></i> {{content.date}}</li>
-      <li><i class="fa fa-line-chart"></i> 
-        <i class="fa fa-heart text-info" ng-repeat="ok in [] | range:content.ok"></i>
-        <i class="fa fa-heart text-danger" ng-repeat="ok in [] | range:content.ng"></i>
-        
+      <li><i class="fa fa-line-chart"></i>
+      <i class="fa fa-heart text-info" ng-repeat="ok in [] | range:content.ok"></i>
+      <i class="fa fa-heart text-danger" ng-repeat="ok in [] | range:content.ng"></i>
+
       </li>
-      
+
       </ul>
       </div>
 
@@ -388,19 +390,18 @@
       <a href="#" class="btn-u btn-u-large">VISIT THE PROJECT</a>
       </div>
       <!-- End Content Info -->
-      
+
       <div class="col-md-10">
       <div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" ng-src="{{episode.url}}" alt="">
-  </a>
-  <div class="media-body">
-    <h4 class="media-heading">Media heading</h4>
-    aaaaaa
-  </div>
-</div>
-</div>
-      
+      <a class="pull-left" href="#">
+      <img class="media-object" ng-src="{{episode.url}}" alt="">
+      </a>
+      <div class="media-body">
+      <h4 class="media-heading">Media heading</h4>
+      aaaaaa
+      </div>
+      </div>
+      </div>
 
     </script>
     <script type="text/ng-template" id="howto.html">
