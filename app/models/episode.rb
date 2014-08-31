@@ -3,38 +3,37 @@ class Episode < ActiveRecord::Base
   def get_recent
     sql = <<-SQL
     
-      select
-          c.id,
-          c.title,
-          '第' || e.episode_num || '話' as episode_num,
-          e.episode_name,
-          count(case 
-              when p.available = 'OK' then 1
-          end) as OK,
-          count(case 
-              when p.available = 'NG' then 1
-          end) as NG,
-          i.url,
-to_char(e.created_at,'YYYYMMDDHH24MISS')
-      from
-          episodes e,
-          contents c,
-          posts p,
-          images i 
-      where
-          c.id = e.content_id 
-          and p.episode_id = e.id 
-          and c.id = i.generic_id 
-          and i.table_name = 'contents' 
-      group by
-          c.id,
-          c.title,
-          e.episode_num,
-          e.episode_name,
-          i.url,
-          e.created_at 
-      order by
-          e.created_at desc limit 12
+    select
+        c.id,
+        c.title, '第' || e.episode_num || '話' as episode_num,
+        e.episode_name,
+        count(case                        
+            when p.available = 'OK' then 1                
+        end) as OK,
+        count(case                        
+            when p.available = 'NG' then 1                
+        end) as NG,
+        i.url,
+        to_char(e.created_at, 'YYYYMMDDHH24MISS')    as created_at
+    from
+        episodes e,
+        contents c,
+        posts p,
+        images i        
+    where
+        c.id = e.content_id                
+        and p.episode_id = e.id                
+        and c.id = i.generic_id                
+        and i.table_name = 'contents'        
+    group by
+        e.created_at,
+        c.id,
+        c.title,
+        e.episode_num,
+        e.episode_name,
+        i.url        
+    order by
+        e.created_at desc limit 12
     SQL
     
     return ActiveRecord::Base.connection.select_all(sql)

@@ -49,11 +49,10 @@
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="fa fa-bars"></span>
-              </button>
-              <a class="navbar-brand" href="/"> <img id="logo-header" src="assets/img/export.png" alt="Logo"> </a>
+ 
+              
+              <a href="/"> <i class="fa fa-book fa-3x text-info"><span style="font-family: sans-serif;font-style:italic;">Booklyn</span></i> </a>
+            
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -129,27 +128,7 @@
 
             </ul>
             <!-- Column Right -->
-            <!-- Danger Panel -->
-            <div class="panel panel-danger">
-              <div class="panel-heading">
-                <h6 class="panel-title"><i class="fa fa-tasks"></i> 更新履歴</h6>
-              </div>
-              <div ng-repeat="(date, history) in histories | groupBy: 'date':true">
-                <h6><i class="fa fa-calendar-o fa-fw"></i>{{ date | utc_to_local: ''}}</h6>
-                <ul class="list-group sidebar-nav-v1">
-                  <!-- Typography -->
-                  <li class="list-group-item">
-                    <ul>
-                      <li ng-repeat="data in history">
-                        <a href="/episode/{{data.id}}"><i class="fa fa-chevron-circle-right"></i> {{data.title}} </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- End Danger Panel -->
-
+ 
           </div>
           <!-- Column Center -->
 
@@ -357,10 +336,14 @@
       </div> <ul class="list-unstyled">
       <li><i class="fa fa-desktop"></i> {{content.episode_num}}</li>
       <li><i class="fa fa-twitch"></i> {{content.episode_name}}</li>
+      <li><i class="fa fa-clock-o"></i> {{content.date}}</li>
+      <li><i class="fa fa-line-chart"></i> 
+        <i class="fa fa-heart text-info" ng-repeat="ok in [] | range:content.ok"></i>
+        <i class="fa fa-heart text-danger" ng-repeat="ok in [] | range:content.ng"></i>
+        
+      </li>
+      
       </ul>
-
-      <i class="fa fa-play-circle-o fa-lg text-success" ng-repeat="ok in [] | range:content.ok"></i>
-      <i class="fa fa-times-circle-o fa-lg text-danger" ng-repeat="ng in [] | range:content.ng"></i>
       </div>
 
       </div>

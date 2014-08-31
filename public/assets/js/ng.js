@@ -5,6 +5,19 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
     method : 'GET',
     url : '/api/recent'
   }).success(function(data, status, headers, config) {
+
+    data.forEach(function(item){
+      var newDate = new Date();
+      var date = item.created_at;
+      newDate.setUTCFullYear(date.slice(0, 4));
+      newDate.setUTCMonth(+date.slice(4, 6) - 1);
+      newDate.setUTCDate(date.slice(6, 8));
+      newDate.setUTCHours(date.slice(8, 10));
+      newDate.setUTCMinutes(date.slice(10, 12));
+      newDate.setUTCSeconds('0');
+      item.date = newDate.toLocaleString("ja-JP");
+    });
+    
     $rootScope.contents = data;
   }).error(function(data, status, headers, config) {
   });
