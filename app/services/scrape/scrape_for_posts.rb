@@ -74,6 +74,10 @@ module Scrape
         post.available = 'NG'
         post.error = document.css('#link_disablemessag_own').inner_text
         return
+      elsif document.css('#link_disablemessage_rights').inner_text != ''
+        post.available = 'NG'
+        post.error = document.css('#link_disablemessage_rights').inner_text
+        return
       elsif episode != nil
         post.available = 'OK'
       else

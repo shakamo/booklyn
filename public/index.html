@@ -54,6 +54,9 @@
                 <i class="fa fa-book fa-3x text-info"><span style="font-family: sans-serif;font-style:italic;">Booklyn</span>
                 </i>
                 <i class="text-info"> ( ブックリン )</i>
+                <i class="fa fa-3x text-danger"><span style="font-family: sans-serif;font-style:italic;">β</span>
+                </i>
+                <i class="text-danger"> ( ベータ )</i>
               </a>
               <ul class="nav navbar-nav">
                 <!-- Home -->
@@ -145,34 +148,17 @@
               <h2>About</h2>
             </div>
             <p class="margin-bottom-25 md-margin-bottom-40">
-              Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals.
+              動画リンクサイトです。
             </p>
             <!-- End About -->
 
-            <!-- Monthly Newsletter -->
-            <div class="headline">
-              <h2>Monthly Newsletter</h2>
-            </div>
-            <p>
-              Subscribe to our newsletter and stay up to date with the latest news and deals!
-            </p>
-            <form class="footer-subsribe">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Email Address">
-                <span class="input-group-btn">
-                  <button class="btn-u" type="button">
-                    Subscribe
-                  </button> </span>
-              </div>
-            </form>
-            <!-- End Monthly Newsletter -->
           </div><!--/col-md-4-->
 
           <div class="col-md-4 md-margin-bottom-40">
             <!-- Recent Blogs -->
             <div class="posts">
               <div class="headline">
-                <h2>Recent Blog Entries</h2>
+                <h2>Recent Entries</h2>
               </div>
               <dl class="dl-horizontal">
                 <dt>
@@ -180,27 +166,7 @@
                 </dt>
                 <dd>
                   <p>
-                    <a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a>
-                  </p>
-                </dd>
-              </dl>
-              <dl class="dl-horizontal">
-                <dt>
-                  <a href="#"><img src="assets/img/sliders/elastislide/10.jpg" alt=""></a>
-                </dt>
-                <dd>
-                  <p>
-                    <a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a>
-                  </p>
-                </dd>
-              </dl>
-              <dl class="dl-horizontal">
-                <dt>
-                  <a href="#"><img src="assets/img/sliders/elastislide/11.jpg" alt=""></a>
-                </dt>
-                <dd>
-                  <p>
-                    <a href="#">Anim moon officia Unify is an incredibly beautiful responsive Bootstrap Template</a>
+                    <a href="#">ITエンジニアが技術検証を兼ねて作成したページです。</a>
                   </p>
                 </dd>
               </dl>
@@ -214,46 +180,11 @@
               <h2>Contact Us</h2>
             </div>
             <address class="md-margin-bottom-40">
-              25, Lorem Lis Street, Orange
-              <br />
-              California, US
-              <br />
-              Phone: 800 123 3456
-              <br />
-              Fax: 800 123 3456
-              <br />
-              Email: <a href="mailto:info@anybiz.com" class="">info@anybiz.com</a>
+              Email: <a href="mailto:broadwell1234@gmail.com" class="">broadwell1234@gmail.com</a>
             </address>
             <!-- End Contact Us -->
 
-            <!-- Social Links -->
-            <div class="headline">
-              <h2>Stay Connected</h2>
-            </div>
-            <ul class="social-icons">
-              <li>
-                <a href="#" data-original-title="Feed" class="social_rss"></a>
-              </li>
-              <li>
-                <a href="#" data-original-title="Facebook" class="social_facebook"></a>
-              </li>
-              <li>
-                <a href="#" data-original-title="Twitter" class="social_twitter"></a>
-              </li>
-              <li>
-                <a href="#" data-original-title="Goole Plus" class="social_googleplus"></a>
-              </li>
-              <li>
-                <a href="#" data-original-title="Pinterest" class="social_pintrest"></a>
-              </li>
-              <li>
-                <a href="#" data-original-title="Linkedin" class="social_linkedin"></a>
-              </li>
-              <li>
-                <a href="#" data-original-title="Vimeo" class="social_vimeo"></a>
-              </li>
-            </ul>
-            <!-- End Social Links -->
+
           </div><!--/col-md-4-->
         </div>
       </div>
@@ -266,8 +197,8 @@
         <div class="row">
           <div class="col-md-6">
             <p>
-              2014 &copy; Unify. ALL Rights Reserved.
-              <a target="_blank" href="https://twitter.com/htmlstream">Htmlstream</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+              2014 &copy;  ALL Rights Reserved.
+              <a target="_blank" href="https://twitter.com/htmlstream">Htmlstream</a>
             </p>
           </div>
           <div class="col-md-6">
@@ -360,14 +291,6 @@
       <img alt="" ng-src="{{content.url}}" style="margin: 0 auto;">
       </div>
       </div>
-      <div class="carousel-arrow">
-      <a data-slide="prev" href="#myCarousel" class="left carousel-control">
-      <i class="fa fa-angle-left"></i>
-      </a>
-      <a data-slide="next" href="#myCarousel" class="right carousel-control">
-      <i class="fa fa-angle-right"></i>
-      </a>
-      </div>
       </div>
       </div>
       <!-- End Carousel -->
@@ -397,7 +320,7 @@
       <li><i class="fa fa-twitch"></i> {{episode.episode_name}}</li>
       <li><i class="fa fa-clock-o"></i> {{episode.date}}</li>
       <li>
-        <a href=" {{post.url}}" ng-repeat="post in episode.posts" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-5">
+        <a href=" {{post.url}}" target="_blank" ng-repeat="post in episode.posts" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-5">
           <i class="fa fa-heart text-info margin-right-5"></i> {{post.contents_holder_name}}</a>
       </li>
       </ul>
@@ -474,123 +397,6 @@
 
       <div class="margin-bottom-20 clearfix"></div>
 
-      <!-- Recent Works -->
-      <div class="owl-carousel-v1 owl-work-v1 margin-bottom-40">
-      <div class="headline"><h2 class="pull-left">Recent Works</h2>
-      <div class="owl-navigation">
-      <div class="customNavigation">
-      <a class="owl-btn prev-v2"><i class="fa fa-angle-left"></i></a>
-      <a class="owl-btn next-v2"><i class="fa fa-angle-right"></i></a>
-      </div>
-      </div><!--/navigation-->
-      </div>
-
-      <div class="owl-slider-v2 owl-carousel owl-theme" style="opacity: 1; display: block;">
-      <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 5700px; left: 0px; display: block;"><div class="owl-item" style="width: 285px;"><div class="item">
-      <a href="#">
-      <em class="overflow-hidden">
-      <img class="img-responsive" src="assets/img/main/1.jpg" alt="">
-      </em>
-      <span>
-      <strong>Happy New Year</strong>
-      <i>Anim pariatur cliche reprehenderit</i>
-      </span>
-      </a>
-      </div></div><div class="owl-item" style="width: 285px;"><div class="item">
-      <a href="#">
-      <em class="overflow-hidden">
-      <img class="img-responsive" src="assets/img/main/2.jpg" alt="">
-      </em>
-      <span>
-      <strong>Award Winning Agency</strong>
-      <i>Responsive Bootstrap Template</i>
-      </span>
-      </a>
-      </div></div><div class="owl-item" style="width: 285px;"><div class="item">
-      <a href="#">
-      <em class="overflow-hidden">
-      <img class="img-responsive" src="assets/img/main/3.jpg" alt="">
-      </em>
-      <span>
-      <strong>Wolf Moon Officia</strong>
-      <i>Pariatur prehe cliche reprehrit</i>
-      </span>
-      </a>
-      </div></div><div class="owl-item" style="width: 285px;"><div class="item">
-      <a href="#">
-      <em class="overflow-hidden">
-      <img class="img-responsive" src="assets/img/main/4.jpg" alt="">
-      </em>
-      <span>
-      <strong>Food Truck Quinoa Nesciunt</strong>
-      <i>Craft labore wes anderson cred</i>
-      </span>
-      </a>
-      </div></div><div class="owl-item" style="width: 285px;"><div class="item">
-      <a href="#">
-      <em class="overflow-hidden">
-      <img class="img-responsive" src="assets/img/main/5.jpg" alt="">
-      </em>
-      <span>
-      <strong>Happy New Year</strong>
-      <i>Anim pariatur cliche reprehenderit</i>
-      </span>
-      </a>
-      </div></div><div class="owl-item" style="width: 285px;"><div class="item">
-      <a href="#">
-      <em class="overflow-hidden">
-      <img class="img-responsive" src="assets/img/main/1.jpg" alt="">
-      </em>
-      <span>
-      <strong>Happy New Year</strong>
-      <i>Anim pariatur cliche reprehenderit</i>
-      </span>
-      </a>
-      </div></div><div class="owl-item" style="width: 285px;"><div class="item">
-      <a href="#">
-      <em class="overflow-hidden">
-      <img class="img-responsive" src="assets/img/main/2.jpg" alt="">
-      </em>
-      <span>
-      <strong>Award Winning Agency</strong>
-      <i>Responsive Bootstrap Template</i>
-      </span>
-      </a>
-      </div></div><div class="owl-item" style="width: 285px;"><div class="item">
-      <a href="#">
-      <em class="overflow-hidden">
-      <img class="img-responsive" src="assets/img/main/3.jpg" alt="">
-      </em>
-      <span>
-      <strong>Wolf Moon Officia</strong>
-      <i>Pariatur prehe cliche reprehrit</i>
-      </span>
-      </a>
-      </div></div><div class="owl-item" style="width: 285px;"><div class="item">
-      <a href="#">
-      <em class="overflow-hidden">
-      <img class="img-responsive" src="assets/img/main/4.jpg" alt="">
-      </em>
-      <span>
-      <strong>Food Truck Quinoa Nesciunt</strong>
-      <i>Craft labore wes anderson cred</i>
-      </span>
-      </a>
-      </div></div><div class="owl-item" style="width: 285px;"><div class="item">
-      <a href="#">
-      <em class="overflow-hidden">
-      <img class="img-responsive" src="assets/img/main/5.jpg" alt="">
-      </em>
-      <span>
-      <strong>Happy New Year</strong>
-      <i>Anim pariatur cliche reprehenderit</i>
-      </span>
-      </a>
-      </div></div></div></div>
-
-      <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div></div></div>
-      </div>
-      <!-- End Recent Works -->
       </div>
 
     </script>

@@ -38,6 +38,7 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
 
     } ]).controller('ContentController',
     [ '$rootScope', '$scope', '$http', function($rootScope, $scope, $http, $routeParams) {
+      $rootScope.contents = [];
       $http({
         method : 'GET',
         url : '/api/recent'
@@ -64,6 +65,7 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
     'WeekController',
     [ '$rootScope', '$scope', '$http', '$routeParams',
         function($rootScope, $scope, $http, $routeParams) {
+      $rootScope.contents = [];
           $scope.params = $routeParams;
           $http({
             method : 'GET',
@@ -90,6 +92,7 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
     'AtozController',
     [ '$rootScope', '$scope', '$http', '$routeParams',
         function($rootScope, $scope, $http, $routeParams) {
+      $rootScope.contents = [];
           $scope.params = $routeParams;
           $http({
             method : 'GET',
@@ -120,6 +123,7 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
     'EpisodeController',
     [ '$scope', '$http', '$routeParams', '$location', '$anchorScroll',
         function($scope, $http, $routeParams, $location, $anchorScroll) {
+      $scope.content = [];
           $scope.params = $routeParams;
           $http({
             method : 'GET',
