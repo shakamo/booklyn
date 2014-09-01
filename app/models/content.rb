@@ -31,6 +31,8 @@ class Content < ActiveRecord::Base
     group by
         e.episode_num,
         e.episode_name
+    order by
+        e.episode_num desc
     SQL
     content['episodes'] = ActiveRecord::Base.connection.select_all(sql).to_ary
     

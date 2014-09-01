@@ -66,13 +66,12 @@ module Utils
       return @posite[key]
     end
 
-    def get_document_for_tvanimedouga()
+    def get_document_for_tvanimedouga(url)
       key = "main"
 
       if @tvanimedouga.has_key?(key) then
         return @tvanimedouga[key]
       end
-      url = 'http://tvanimedouga.blog93.fc2.com/archives.html'
       @tvanimedouga[key] = get_document(url)
       return @tvanimedouga[key]
     end

@@ -304,32 +304,28 @@
                                 <div class="panel-heading overflow-h">
                                     <h2 class="panel-title heading-sm pull-left"><i class="fa fa-briefcase"></i>Episodes</h2>
                                 </div>
+
+
                                 <div id="scrollbar2" class="panel-body contentHolder ps-container">
-
-
-
-
-
                                     <div class="profile-event" ng-repeat="episode in content.episodes">
                                         <div class="date-formats">
                                             <span>{{episode.episode_num}}</span>
                                             <small>Episode</small>
                                         </div>
                                         <div class="overflow-h">
-      <ul class="list-unstyled">
-      <li><i class="fa fa-twitch"></i> {{episode.episode_name}}</li>
-      <li><i class="fa fa-clock-o"></i> {{episode.date}}</li>
-      <li>
-        <a href=" {{post.url}}" target="_blank" ng-repeat="post in episode.posts" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-5">
-          <i class="fa fa-heart text-info margin-right-5"></i> {{post.contents_holder_name}}</a>
-      </li>
-      </ul>
-                                        </div>    
+                                          <ul class="list-unstyled">
+                                          <li><i class="fa fa-twitch"></i> {{episode.episode_name}}</li>
+                                          <li><i class="fa fa-clock-o"></i> {{episode.date}}</li>
+                                          <li>
+                                            <a href=" {{post.url}}" target="_blank" ng-repeat="post in episode.posts" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-5">
+                                              <i class="fa fa-heart text-info margin-right-5"></i> {{post.contents_holder_name}}</a>
+                                          </li>
+                                          </ul>
+                                        </div>
                                     </div>
+                                </div>
 
 
-      
-      </div>
       <!-- End Content Info -->
 
                 

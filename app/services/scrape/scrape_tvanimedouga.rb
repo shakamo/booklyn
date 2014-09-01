@@ -7,9 +7,9 @@ require 'uri'
 module Scrape
 
   class ScrapeTvanimedouga
-    def self.execute()
+    def self.execute(url)
       @doc_factory = Utils::NokogiriDocumentFactory.new
-      document = @doc_factory.get_document_for_tvanimedouga()
+      document = @doc_factory.get_document_for_tvanimedouga(url)
 
       node = document.css('#blog_achives > div > dl > dt > a.entry_title')
       node.each do |item|
