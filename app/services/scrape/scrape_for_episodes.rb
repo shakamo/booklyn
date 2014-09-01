@@ -16,12 +16,16 @@ module Scrape
       @doc_factory = Utils::NokogiriDocumentFactory.new
       document = @doc_factory.get_document_for_tvanimedouga()
 
-      node = document.css('#mainBlock > div.index_area > div > div > a')
+      node = document.css('#blog_achives > div > dl > dt > a.entry_title')
       node.each do |item|
         episode_num = item.inner_text.scan(/　第[0-9]{1,3}話/)[0]
         if episode_num == nil
           episode_num = item.inner_text.scan(/[0-9]{1,3}話/)[0]
-          p episode_num
+          
+          if episode_num == nil
+            p '☆ScrapeTvanimedouga.execute(): ' + item
+            next
+          end
         end
 
         title = item.inner_text.sub(episode_num, '')
@@ -37,14 +41,14 @@ module Scrape
           episode = nil
         end
 
-        url = item.attribute('href').value
+        url = "http://tvanimedouga.blog93.fc2.com/" + item.attribute('href').value
 
         get_tvanimedouga_detail(url, episode)
       end
     end
 
     def self.get_tvanimedouga_detail(url, episode)
-
+p url
       document = @doc_factory.get_document(url)
       list = document.css('#mainBlock > div.mainEntryBlock > div.mainEntryBase > div.mainEntrykiji > a')
 

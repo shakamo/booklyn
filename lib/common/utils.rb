@@ -9,7 +9,6 @@ module Utils
     @anikore_detail = nil
     @posite = nil
     @tvanimedouga = nil
-    
     def initialize
       @anikore = Hash.new
       @anikore_detail = Hash.new
@@ -18,10 +17,14 @@ module Utils
     end
 
     def get_document(url)
-      charset = nil
-      html = open(url) do |f|
-        charset = f.charset
-        f.read
+      begin
+        charset = nil
+        html = open(url) do |f|
+          charset = f.charset
+          f.read
+        end
+      rescue
+        p '☆get_document(url): ' + url 
       end
 
       return doc = Nokogiri::HTML.parse(html, nil, charset)
@@ -65,11 +68,11 @@ module Utils
 
     def get_document_for_tvanimedouga()
       key = "main"
-      
+
       if @tvanimedouga.has_key?(key) then
         return @tvanimedouga[key]
       end
-      url = 'http://tvanimedouga.blog93.fc2.com/'
+      url = 'http://tvanimedouga.blog93.fc2.com/archives.html'
       @tvanimedouga[key] = get_document(url)
       return @tvanimedouga[key]
     end

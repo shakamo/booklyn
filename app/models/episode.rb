@@ -38,6 +38,87 @@ class Episode < ActiveRecord::Base
     
     return ActiveRecord::Base.connection.select_all(sql)
   end
+def get_recent_by_week(week)
+  sql = <<-SQL
+  
+  select
+      c.id,
+      c.title, '第' || e.episode_num || '話' as episode_num,
+      e.episode_name,
+      count(case                        
+          when p.available = 'OK' then 1                
+      end) as OK,
+      count(case                        
+          when p.available = 'NG' then 1                
+      end) as NG,
+      i.url,
+      to_char(e.created_at, 'YYYYMMDDHH24MISS')    as created_at
+  from
+      episodes e,
+      contents c,
+      posts p,
+      images i,
+      schedules s
+  where
+      c.id = e.content_id                
+      and p.episode_id = e.id                
+      and c.id = i.generic_id                
+      and i.table_name = 'contents'
+      and c.schedule_id = s.id
+      and s.week = '#{week}'      
+  group by
+      e.created_at,
+      c.id,
+      c.title,
+      e.episode_num,
+      e.episode_name,
+      i.url        
+  order by
+      e.created_at desc limit 12
+  SQL
+  
+  return ActiveRecord::Base.connection.select_all(sql)
+end
+def get_recent_by_atoz(atoz)
+sql = <<-SQL
+
+select
+    c.id,
+    c.title, '第' || e.episode_num || '話' as episode_num,
+    e.episode_name,
+    count(case                        
+        when p.available = 'OK' then 1                
+    end) as OK,
+    count(case                        
+        when p.available = 'NG' then 1                
+    end) as NG,
+    i.url,
+    to_char(e.created_at, 'YYYYMMDDHH24MISS')    as created_at
+from
+    episodes e,
+    contents c,
+    posts p,
+    images i
+where
+    c.id = e.content_id                
+    and p.episode_id = e.id                
+    and c.id = i.generic_id                
+    and i.table_name = 'contents'
+    and c.initial like '#{atoz}%'
+group by
+    e.created_at,
+    c.id,
+    c.title,
+    e.episode_num,
+    e.episode_name,
+    i.url        
+order by
+    e.created_at desc limit 12
+SQL
+
+return ActiveRecord::Base.connection.select_all(sql)
+end
+  
   def get_history
     sql = <<-SQL
 

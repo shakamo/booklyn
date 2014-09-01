@@ -161,8 +161,13 @@ module Scrape
       array = array.compact
       array.delete("")
 
-      array.sort! do |a,b|
-        Chronic.parse(a) <=> Chronic.parse(b)
+      begin
+        array.sort! do |a,b|
+          Chronic.parse(a) <=> Chronic.parse(b)
+        end
+      rescue
+        p '☆ScrapeForContents.get_schedule_by_posite(' + title + ',' + year + ',' + season + '): ' + array.to_s
+        return nil
       end
 
       return Chronic.parse(array.first)

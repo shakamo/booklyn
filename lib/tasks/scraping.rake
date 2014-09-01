@@ -5,5 +5,5 @@ end
 
 task :scraping => :environment do
 
-    Scrape::ScrapeForContents.execute("2014", "summer")
+    Scrape::ScrapeForContents.execute("2012", "winter")
 end
