@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'episode/:id' => redirect('/')
   get 'week/:week' => redirect('/')
+  get 'atoz/:atoz' => redirect('/')
   
 
   # The priority is based upon order of creation: first created -> highest priority.

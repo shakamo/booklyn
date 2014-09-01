@@ -27,9 +27,6 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
     templateUrl : 'howto.html',
     controller : 'HowtoController',
     resolve : {}
-  }).when('/Book/:bookId/ch/:chapterId', {
-    templateUrl : 'chapter.html',
-    controller : 'ChapterController'
   }).otherwise({
     redirectTo : '/'
   });
@@ -63,8 +60,10 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
       }).error(function(data, status, headers, config) {
       });
       $rootScope.isHowto = false;
-    } ]).controller('WeekController',
-        [ '$rootScope', '$scope', '$http', '$routeParams', function($rootScope, $scope, $http, $routeParams) {
+    } ]).controller(
+    'WeekController',
+    [ '$rootScope', '$scope', '$http', '$routeParams',
+        function($rootScope, $scope, $http, $routeParams) {
           $scope.params = $routeParams;
           $http({
             method : 'GET',
@@ -87,31 +86,33 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
           }).error(function(data, status, headers, config) {
           });
           $rootScope.isHowto = false;
-        } ]).controller('AtozController',
-            [ '$rootScope', '$scope', '$http', '$routeParams', function($rootScope, $scope, $http, $routeParams) {
-              $scope.params = $routeParams;
-              $http({
-                method : 'GET',
-                url : '/api/atoz/' + $scope.params.atoz
-              }).success(function(data, status, headers, config) {
+        } ]).controller(
+    'AtozController',
+    [ '$rootScope', '$scope', '$http', '$routeParams',
+        function($rootScope, $scope, $http, $routeParams) {
+          $scope.params = $routeParams;
+          $http({
+            method : 'GET',
+            url : '/api/atoz/' + $scope.params.atoz
+          }).success(function(data, status, headers, config) {
 
-                data.forEach(function(item) {
-                  var newDate = new Date();
-                  var date = item.created_at;
-                  newDate.setUTCFullYear(date.slice(0, 4));
-                  newDate.setUTCMonth(+date.slice(4, 6) - 1);
-                  newDate.setUTCDate(date.slice(6, 8));
-                  newDate.setUTCHours(date.slice(8, 10));
-                  newDate.setUTCMinutes(date.slice(10, 12));
-                  newDate.setUTCSeconds('0');
-                  item.date = newDate.toLocaleString("ja-JP");
-                });
+            data.forEach(function(item) {
+              var newDate = new Date();
+              var date = item.created_at;
+              newDate.setUTCFullYear(date.slice(0, 4));
+              newDate.setUTCMonth(+date.slice(4, 6) - 1);
+              newDate.setUTCDate(date.slice(6, 8));
+              newDate.setUTCHours(date.slice(8, 10));
+              newDate.setUTCMinutes(date.slice(10, 12));
+              newDate.setUTCSeconds('0');
+              item.date = newDate.toLocaleString("ja-JP");
+            });
 
-                $rootScope.contents = data;
-              }).error(function(data, status, headers, config) {
-              });
-              $rootScope.isHowto = false;
-    } ]).controller('HowtoController',
+            $rootScope.contents = data;
+          }).error(function(data, status, headers, config) {
+          });
+          $rootScope.isHowto = false;
+        } ]).controller('HowtoController',
     [ '$scope', '$rootScope', function($scope, $rootScope, $routeParams) {
 
       $rootScope.isHowto = true;

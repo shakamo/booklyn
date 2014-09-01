@@ -105,20 +105,18 @@
           <div class="col-md-2" ng-hide="isHowto"  ng-controller="RightController"  ng-hide="isHowto">
             <ul class="list-group sidebar-nav-v1" id="sidebar-nav">
               <!-- Typography -->
-              <li class="list-group-item list-toggle active">
+              <li class="list-group-item active">
                 <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-week-anime">アニメ（放送曜日）</a>
                 <ul id="collapse-week-anime" class="collapse in">
-                  <li class="active" ng-repeat="week in weeks">
-                    <span class="badge badge-u">New</span>
+                  <li ng-repeat="week in weeks">
                     <a href="/week/{{week[1]}}"><i class="fa fa-chevron-circle-right"></i> {{week[0]}}</a>
                   </li>
                 </ul>
               </li>
-              <li class="list-group-item list-toggle active">
+              <li class="list-group-item active">
                 <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-atoz-anime">アニメ（五十音順）</a>
                 <ul id="collapse-atoz-anime" class="collapse in">
-                  <li class="active" ng-repeat="a in atoz">
-                    <span class="badge badge-u">New</span>
+                  <li ng-repeat="a in atoz">
                     <a href="/atoz/{{a}}"><i class="fa fa-chevron-circle-right"></i> {{a}}</a>
                   </li>
                 </ul>
