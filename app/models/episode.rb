@@ -33,7 +33,7 @@ class Episode < ActiveRecord::Base
         e.episode_name,
         i.url        
     order by
-        e.created_at desc limit 12
+        e.created_at desc limit 20
     SQL
     
     return ActiveRecord::Base.connection.select_all(sql)
@@ -74,7 +74,7 @@ def get_recent_by_week(week)
       e.episode_name,
       i.url        
   order by
-      e.created_at desc limit 12
+      e.created_at desc limit 20
   SQL
   
   return ActiveRecord::Base.connection.select_all(sql)
