@@ -46,4 +46,6 @@ gem 'rails_12factor', group: :production
 
 gem 'dalli'
 
+gem 'prerender_rails'
+
 ruby "2.1.1"
