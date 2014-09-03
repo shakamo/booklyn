@@ -69,30 +69,28 @@ module Scrape
 
       platform_name = 'All'
       post = create_post(url, episode, holder_name, platform_name)
-
       if document.css('#link_disablemessag_own').inner_text != ''
         post.available = 'NG'
         post.error = document.css('#link_disablemessag_own').inner_text
-        return
       elsif document.css('#link_disablemessage_rights').inner_text != ''
         post.available = 'NG'
         post.error = document.css('#link_disablemessage_rights').inner_text
-        return
       elsif episode != nil
         post.available = 'OK'
+  
+        direct_url = nil
+        script = document.css('#player > script').inner_text
+        /var movie_url = (?<direct_url>['].*['])/=~ script
+        if direct_url
+          direct_url = direct_url.gsub("'","").gsub('?','')
+          post.direct_url = URI.unescape(direct_url).sub('external:','')
+        end
       else
         post.available = 'INSPECTION'
         post.error = document.css('#movie_title').inner_text
       end
 
-      direct_url = nil
-      script = document.css('#player > script').inner_text
-      /var movie_url = (?<direct_url>['].*['])/=~ script
-      if direct_url
-        direct_url = direct_url.gsub("'","").gsub('?','')
-        post.direct_url = URI.unescape(direct_url).sub('external:','')
-      end
-
+      
       post.save
     end
   end
@@ -111,7 +109,6 @@ module Scrape
       if false
         post.available = 'NG'
         post.error = ''
-        return
       elsif episode != nil
         post.available = 'OK'
       else
@@ -136,7 +133,6 @@ module Scrape
       if document.css('.error_404_return').inner_text != ''
         post.available = 'NG'
         post.error = '404'
-        return
       elsif episode != nil
         post.available = 'OK'
       else
@@ -162,7 +158,6 @@ module Scrape
       if false
         post.available = 'NG'
         post.error = ''
-        return
       elsif episode != nil
         post.available = 'OK'
       else
@@ -187,7 +182,6 @@ module Scrape
       if false
         post.available = 'NG'
         post.error = ''
-        return
       elsif episode != nil
         post.available = 'OK'
       else

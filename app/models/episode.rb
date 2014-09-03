@@ -1,4 +1,38 @@
 class Episode < ActiveRecord::Base
+  
+
+  @@str = Hash.new
+  @@str['あ'] = <<-S
+    ('あ','い','う','え','お') 
+    S
+  @@str['か'] = <<-S
+    ('か','き','く','け','こ') 
+    S
+  @@str['さ'] = <<-S
+    ('さ','し','す','せ','そ') 
+    S
+  @@str['た'] = <<-S
+    ('た','ち','つ','て','と') 
+    S
+  @@str['な'] = <<-S
+    ('な','に','ぬ','ね','の') 
+    S
+  @@str['は'] = <<-S
+    ('は','ひ','ふ','へ','ほ') 
+    S
+  @@str['ま'] = <<-S
+    ('ま','み','む','め','も') 
+    S
+  @@str['や'] = <<-S
+    ('や','ゆ','よ') 
+    S
+  @@str['ら'] = <<-S
+    ('ら','り','る','れ','ろ') 
+    S
+  @@str['わ'] = <<-S
+    ('わ','を','ん') 
+    S
+  
   belongs_to :content
   def get_recent
     sql = <<-SQL
@@ -80,6 +114,9 @@ def get_recent_by_week(week)
   return ActiveRecord::Base.connection.select_all(sql)
 end
 def get_recent_by_atoz(atoz)
+  
+  atoz = @@str[atoz]
+  
 sql = <<-SQL
 
 select
@@ -104,7 +141,8 @@ where
     and p.episode_id = e.id                
     and c.id = i.generic_id                
     and i.table_name = 'contents'
-    and c.initial like '#{atoz}%'
+    and substring(c.initial for 1) IN #{atoz}
+    
 group by
     e.created_at,
     c.id,
