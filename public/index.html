@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- microdata マークアップを Google 構造化データ マークアップ支援ツールで追加 -->
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
@@ -250,22 +251,27 @@
       <div ng-repeat="content in contents" class="animated">
 
       <div class="col-md-3 col-sm-6 easy-block-v2">
-      <div class="thumbnails thumbnail-style thumbnail-kenburn">
+      <div itemscope itemtype="http://schema.org/TVEpisode" class="thumbnails thumbnail-style thumbnail-kenburn">
       <div class="thumbnail-img">
       <div class="overflow-hidden">
       <a href="/episode/{{content.id}}">
-      <img class="img-responsive" ng-src="{{content.url}}" alt=""></a>
+      <img itemprop="image" class="img-responsive" ng-src="{{content.url}}" alt=""></a>
       </div>
       <a class="btn-more hover-effect" href="/episode/{{content.id}}">read more +</a>
       <a href="/episode/{{content.id}}"><div class="easy-bg-v2 rgba-purple">New</div></a>
       </div>
       <div class="caption">
-      <h4><a class="hover-effect" href="/episode/{{content.id}}">{{content.title}}</a></h4>
+      <h4><a class="hover-effect" href="/episode/{{content.id}}">
+        <span itemprop="partOfTVSeries" itemscope itemtype="http://schema.org/TVSeries">
+          <span itemprop="name">
+          {{content.title}}
+          </span></span>
+          </a></h4>
 
       </div> <ul class="list-unstyled">
-      <li><i class="fa fa-desktop"></i> {{content.episode_num}}</li>
-      <li><i class="fa fa-twitch"></i> {{content.episode_name}}</li>
-      <li><i class="fa fa-clock-o"></i> {{content.date}}</li>
+      <li itemprop="episodeNumber"><i class="fa fa-desktop"></i> {{content.episode_num}}</li>
+      <li itemprop="name"><i class="fa fa-twitch"></i> {{content.episode_name}}</li>
+      <li itemprop="datePublished" content="2014-09-02T16:41:00"><i class="fa fa-clock-o"></i> {{content.date}}</li>
       <li><i class="fa fa-line-chart"></i>
         <i class="fa fa-heart text-info" ng-repeat="ok in [] | range:content.ok"></i>
         <i class="fa fa-heart text-danger" ng-repeat="ok in [] | range:content.ng"></i>
