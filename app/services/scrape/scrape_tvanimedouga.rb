@@ -5,7 +5,6 @@ require 'chronic'
 require 'uri'
 
 module Scrape
-
   class ScrapeTvanimedouga
     def self.execute(url)
       @doc_factory = Utils::NokogiriDocumentFactory.new
@@ -16,7 +15,7 @@ module Scrape
         episode_num = item.inner_text.scan(/　第[0-9]{1,3}話/)[0]
         if episode_num == nil
           episode_num = item.inner_text.scan(/[0-9]{1,3}話/)[0]
-          
+
           if episode_num == nil
             p '☆ScrapeTvanimedouga.execute(): ' + item
             next
@@ -28,11 +27,17 @@ module Scrape
         title = Utils.trim(title)
         episode_num = episode_num.sub('　第','').sub('話','')
 
-        contents = Content.where(Content.arel_table[:trim_title].matches('%' + title + '%'))
+        contents = Content.where(
+          Content.arel_table[:trim_title].eq(title).
+          or(Content.arel_table[:trim_title].matches(title + '%').
+            or(Content.arel_table[:trim_title].matches('%' + title).
+              or(Content.arel_table[:trim_title].matches('%' + title + '%')))))
+                
         if contents && contents.size == 1
           episode = Episode.find_or_initialize_by(content_id: contents.first.id, episode_num: episode_num)
           episode.save
         else
+          p '☆Not match: ' + title
           episode = nil
         end
 
@@ -43,7 +48,6 @@ module Scrape
     end
 
     def self.get_tvanimedouga_detail(url, episode)
-p url
       document = @doc_factory.get_document(url)
       list = document.css('#mainBlock > div.mainEntryBlock > div.mainEntryBase > div.mainEntrykiji > a')
 

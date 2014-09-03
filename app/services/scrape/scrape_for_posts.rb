@@ -62,7 +62,6 @@ module Scrape
 
   class Himawari < Holder
     def execute(url, episode)
-      p 'execute Himawari ' + episode.to_s + ' ' + url
       holder_name = 'ひまわり動画'
       @doc_factory = Utils::NokogiriDocumentFactory.new
       document = @doc_factory.get_document(url)
@@ -97,7 +96,6 @@ module Scrape
 
   class B9 < Holder
     def execute(url, episode)
-      p 'execute B9 ' + episode.to_s + ' ' + url
       holder_name = 'B9DM'
 
       @doc_factory = Utils::NokogiriDocumentFactory.new
@@ -121,7 +119,6 @@ module Scrape
 
   class Nosub < Holder
     def execute(url, episode)
-      p 'execute Nosub ' + episode.to_s + ' ' + url
       holder_name = 'Nosub'
 
       @doc_factory = Utils::NokogiriDocumentFactory.new
@@ -145,7 +142,6 @@ module Scrape
 
   class Veoh < Holder
     def execute(url, episode)
-      p 'execute Veoh ' + episode.to_s + ' ' + url
       holder_name = 'Veoh'
 
       @doc_factory = Utils::NokogiriDocumentFactory.new
@@ -170,7 +166,6 @@ module Scrape
 
   class SayMove < Holder
     def execute(url, episode)
-      p 'execute SayMove ' + episode.to_s + ' ' + url
       holder_name = 'SayMove'
 
       @doc_factory = Utils::NokogiriDocumentFactory.new
@@ -194,7 +189,6 @@ module Scrape
 
   class Dailymotion < Holder
     def execute(url, episode)
-      p 'execute Dailymotion ' + episode.to_s + ' ' + url
       holder_name = 'Dailymotion'
 
       @doc_factory = Utils::NokogiriDocumentFactory.new
