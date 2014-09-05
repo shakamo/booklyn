@@ -1,3 +1,3 @@
 https://github.com/stomita/heroku-buildpack-phantomjs.git
-https://github.com/envygeeks/heroku-nginx-buildpack.git
+https://github.com/rhy-jot/buildpack-nginx.git
 https://github.com/heroku/heroku-buildpack-ruby.git
