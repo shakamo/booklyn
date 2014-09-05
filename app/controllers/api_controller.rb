@@ -1,3 +1,5 @@
+require "open3"
+
 class ApiController < ApplicationController
   def recent
     render :json => Episode.new.get_recent
@@ -13,5 +15,14 @@ class ApiController < ApplicationController
   end
   def history
     render :json => Episode.new.get_history
+  end
+  def seo
+    p params
+    if params[:_escaped_fragment_] == ''
+      out, err, status = Open3.capture3('phantomjs /phantomjs-test.js ' + request.host_with_port)
+      render :inline => out
+    else
+      render 'index'
+    end
   end
 end

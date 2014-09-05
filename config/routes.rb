@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'episode/:id' => redirect('/')
   get 'week/:week' => redirect('/')
   get 'atoz/:atoz' => redirect('/')
+
+  get '', to: 'api#seo'
   
   
   

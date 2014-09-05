@@ -1,7 +1,12 @@
-console.log('Loading a web page');
+
+var System = require('system');
+var port = System.args[1];
 var page = require('webpage').create();
-var url = 'http://www.phantomjs.org/';
-page.open(url, function(status) {
-  // Page is loaded!
+page.open('http://' + port, function(status) {
+  if (status !== 'success') {
+    console.log('FAIL to load the address');
+  } else {
+    console.log(page.content);
+  }
   phantom.exit();
 });
