@@ -20,6 +20,7 @@ class ApiController < ApplicationController
     p params
     if params[:_escaped_fragment_] == ''
       out, err, status = Open3.capture3('phantomjs /phantomjs-test.js ' + request.host_with_port)
+      out.gsub!('<meta name="fragment" content="!">','')
       render :inline => out
     else
       render 'index'
