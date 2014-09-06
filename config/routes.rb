@@ -4,14 +4,14 @@ Rails.application.routes.draw do
   get 'api/week/:week', to: 'api#week'
   get 'api/atoz/:atoz', to: 'api#atoz'
   get 'api/history'
-
   get 'api/episode/:id', to: 'api#content'
 
-  get 'episode/:id' => redirect('/')
-  get 'week/:week' => redirect('/')
-  get 'atoz/:atoz' => redirect('/')
+  root 'api#seo'
 
-  get '', to: 'api#seo'
+  get 'episode/:id', to: 'api#seo'
+  get 'week/:week', to: 'api#seo'
+  get 'atoz/:atoz', to: 'api#seo'
+
   
   
   
