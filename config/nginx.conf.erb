@@ -42,8 +42,8 @@ http {
 			proxy_pass http://app_server;
 		}
 		
-		location ~* /episode/.*\.(jpg|gif|png|css|js|html|) {
-    root   /app/public/assets;
+		location ~* /episode/.*\.(jpg|gif|png|css|js|) {
+    root   /app/public;
   }
 	}
 }
