@@ -2,8 +2,8 @@
 .animated.ng-enter,
 .animated.ng-leave,
 .animated.ng-move {
-  -webkit-transition: opacity 0.3s linear;
-  transition: opacity 0.3s linear;
+  -webkit-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
 }
 .animated.ng-enter {
   opacity: 0;
@@ -18,7 +18,7 @@
   opacity: 0;
 }
 .animated.ng-move {
-  opacity: .5;
+  opacity: 0.5;
 }
 .animated.ng-move.ng-move-active {
   opacity: 1;

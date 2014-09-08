@@ -105,7 +105,18 @@
 
       <!--=== Content Part ===-->
       <div class="profile container content">
-
+<div class="ninja_onebutton">
+<script type="text/javascript">
+//<![CDATA[
+(function(d){
+if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='undefined'){
+    document.write("<sc"+"ript type='text\/javascript' src='http:\/\/omt.shinobi.jp\/b\/1f263a0af358ac52954b0a1496e4cfbe'><\/sc"+"ript>");
+}else{
+    window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe.ONETAGButton_Load();}
+})(document);
+//]]>
+</script><span class="ninja_onebutton_hidden" style="display:none;"></span><span style="display:none;" class="ninja_onebutton_hidden"></span>
+</div>
         <!-- Columns -->
         <div class="row">
           <!-- Column Left -->
@@ -114,7 +125,7 @@
               <!-- Typography -->
               <li class="list-group-item active">
                 <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-week-anime">アニメ（放送曜日）</a>
-                <ul id="collapse-week-anime" class="collapse in">
+                <ul id="collapse-week-anime" class="collapse">
                   <div ng-repeat="week in weeks">
                   <li>
                     <a href="/week/{{week['en']}}"><i class="fa fa-chevron-circle-right"></i> {{week['ja']}}</a>
