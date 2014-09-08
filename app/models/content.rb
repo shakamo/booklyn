@@ -61,13 +61,11 @@ class Content < ActiveRecord::Base
       episode['posts'] = Array.new
       
       posts.each do |post|
-        p episode['episode_num'] +  post['episode_num']
         if(episode['episode_num'] == post['episode_num'])
           episode['posts'] << post
         end
       end
     end
-    p content
     return content
   end
 end

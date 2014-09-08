@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'episode/:id', to: 'api#seo'
   get 'week/:week', to: 'api#seo'
   get 'atoz/:atoz', to: 'api#seo'
+  get 'howto/', to: 'api#seo'
 
   
   

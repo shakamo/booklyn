@@ -17,9 +17,10 @@ class ApiController < ApplicationController
     render :json => Episode.new.get_history
   end
   def seo
-    p params
     if params[:_escaped_fragment_] == ''
-      out, err, status = Open3.capture3('phantomjs /phantomjs-test.js ' + request.host_with_port)
+      path = request.host_with_port + request.fullpath
+      path = path.gsub('?_escaped_fragment_=','')
+      out, err, status = Open3.capture3('phantomjs /phantomjs-test.js ' + path)
       out.gsub!('<meta name="fragment" content="!">','')
       render :inline => out
     else

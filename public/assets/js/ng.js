@@ -1,24 +1,70 @@
-angular.module('App', [ 'ngRoute', 'ngAnimate' ])
+angular.module('App', [ 'ngRoute', 'ngAnimate' ]).run(
+    [ '$rootScope', '$http', function($rootScope, $http) {
 
-.run(
-    [
-        '$rootScope',
-        '$http',
-        function($rootScope, $http) {
+      $rootScope.weeks = [ {
+        ja : '土曜日',
+        en : 'Sat'
+      }, {
+        ja : '日曜日',
+        en : 'Sun'
+      }, {
+        ja : '月曜日',
+        en : 'Mon'
+      }, {
+        ja : '火曜日',
+        en : 'Tue'
+      }, {
+        ja : '水曜日',
+        en : 'Wed'
+      }, {
+        ja : '木曜日',
+        en : 'Thu'
+      }, {
+        ja : '金曜日',
+        en : 'Fri'
+      } ];
 
-          $rootScope.weeks = [ [ '土曜日', 'Sat' ], [ '日曜日', 'Sun' ], [ '月曜日', 'Mon' ],
-              [ '火曜日', 'Tue' ], [ '水曜日', 'Wed' ], [ '木曜日', 'Thu' ], [ '金曜日', 'Fri' ] ];
-          $rootScope.atoz = [ 'あ', 'か', 'さ', 'た', 'な', 'は', 'ま', 'や', 'ら', 'わ' ];
-        } ]).config(function($routeProvider, $locationProvider) {
+      $rootScope.atoz = [ {
+        ja : 'あ',
+        en : 'a'
+      }, {
+        ja : 'か',
+        en : 'k'
+      }, {
+        ja : 'さ',
+        en : 's'
+      }, {
+        ja : 'た',
+        en : 't'
+      }, {
+        ja : 'な',
+        en : 'n'
+      }, {
+        ja : 'は',
+        en : 'h'
+      }, {
+        ja : 'ま',
+        en : 'm'
+      }, {
+        ja : 'や',
+        en : 'y'
+      }, {
+        ja : 'ら',
+        en : 'r'
+      }, {
+        ja : 'わ',
+        en : 'w'
+      } ];
+    } ]).config(function($routeProvider, $locationProvider) {
   $routeProvider.when('/', {
     templateUrl : 'main.html',
     controller : 'ContentController'
-  }).when('/week/:week', {
-    templateUrl : 'main.html',
-    controller : 'WeekController'
   }).when('/atoz/:atoz', {
     templateUrl : 'main.html',
     controller : 'AtozController'
+  }).when('/week/:week', {
+    templateUrl : 'main.html',
+    controller : 'WeekController'
   }).when('/episode/:id', {
     templateUrl : 'episode.html',
     controller : 'EpisodeController',
@@ -65,7 +111,7 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
     'WeekController',
     [ '$rootScope', '$scope', '$http', '$routeParams',
         function($rootScope, $scope, $http, $routeParams) {
-      $rootScope.contents = [];
+          $rootScope.contents = [];
           $scope.params = $routeParams;
           $http({
             method : 'GET',
@@ -92,7 +138,7 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
     'AtozController',
     [ '$rootScope', '$scope', '$http', '$routeParams',
         function($rootScope, $scope, $http, $routeParams) {
-      $rootScope.contents = [];
+          $rootScope.contents = [];
           $scope.params = $routeParams;
           $http({
             method : 'GET',
@@ -123,7 +169,7 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
     'EpisodeController',
     [ '$scope', '$http', '$routeParams', '$location', '$anchorScroll',
         function($scope, $http, $routeParams, $location, $anchorScroll) {
-      $scope.content = [];
+          $scope.content = [];
           $scope.params = $routeParams;
           $http({
             method : 'GET',
@@ -146,16 +192,7 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
           }).error(function(data, status, headers, config) {
 
           });
-        } ]).controller('RightController', [ '$scope', '$http', function($scope, $http) {
-  $http({
-    method : 'GET',
-    url : '/api/history'
-  }).success(function(data, status, headers, config) {
-    $scope.histories = data;
-  }).error(function(data, status, headers, config) {
-
-  });
-} ]).filter('range', function() {
+        } ]).filter('range', function() {
   return function(input, total) {
     total = parseInt(total);
     for (var i = 0; i < total; i++)
@@ -182,10 +219,16 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ])
     });
   });
 });
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+(function(i, s, o, g, r, a, m) {
+  i['GoogleAnalyticsObject'] = r;
+  i[r] = i[r] || function() {
+    (i[r].q = i[r].q || []).push(arguments)
+  }, i[r].l = 1 * new Date();
+  a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+  a.async = 1;
+  a.src = g;
+  m.parentNode.insertBefore(a, m)
+})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-54425801-1', 'auto');
-  ga('send', 'pageview');
+ga('create', 'UA-54425801-1', 'auto');
+ga('send', 'pageview');
