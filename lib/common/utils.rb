@@ -1,6 +1,8 @@
 require 'open-uri'
 require 'nokogiri'
 require 'logger'
+require 'net/http'
+require 'uri'
 
 module Utils
   class NokogiriDocumentFactory
@@ -21,11 +23,18 @@ module Utils
         charset = nil
         html = open(url) do |f|
           charset = f.charset
-          f.read
         end
       rescue
-        p '☆get_document(url): ' + url 
       end
+      
+      url = URI.parse(url)
+      Net::HTTP.version_1_2
+
+      html = Net::HTTP.start(url.host, url.port) do |http|
+        http.get('/').response.body
+      end
+p charset
+
 
       return doc = Nokogiri::HTML.parse(html, nil, charset)
     end

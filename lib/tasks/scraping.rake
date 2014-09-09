@@ -43,3 +43,10 @@ task :te => :environment do
   e = Episode.find_or_initialize_by(id:70)
   Scrape::ScrapeForPosts.register_post("ひまわり","http://himado.in/234128", e)
 end
+
+task :tes => :environment do
+      @doc_factory = Utils::NokogiriDocumentFactory.new
+      document = @doc_factory.get_document("http://www.anikore.jp/")
+    p  document.title
+    
+end
