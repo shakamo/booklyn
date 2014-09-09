@@ -30,6 +30,11 @@
 @content.category_name = "その他"
 @content.save
 
+@content = Category.find_or_initialize_by(id: 99)
+@content.category_code = "99" 
+@content.category_name = "未分類"
+@content.save
+
 @schedule = Schedule.find_or_initialize_by(schedule_code: "90")
 @schedule.schedule_name = "Decided"
 @schedule.save

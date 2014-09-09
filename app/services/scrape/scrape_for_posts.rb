@@ -21,11 +21,36 @@ module Scrape
 
       return post
     end
+
+    def get_episode(trim_title, episode_num)
+      contents = Content.where(
+      Content.arel_table[:trim_title].eq(trim_title).
+      or(Content.arel_table[:trim_title].matches(trim_title + '%').
+      or(Content.arel_table[:trim_title].matches('%' + trim_title).
+      or(Content.arel_table[:trim_title].matches('%' + trim_title + '%')))))
+
+      if contents && contents.size == 1
+        episode = Episode.find_or_initialize_by(content_id: contents.first.id, episode_num: episode_num)
+        episode.save
+        return episode
+      else
+        error = Error.find_or_initialize_by(name: 'NotFoundContent', description: trim_title)
+        error.save
+        return nil
+      end
+    end
+
+    def set_error(entity, error_name, error_description)
+      current = entity.error.to_s
+      error = '[' + error_name + ']' + error_description + ' '
+      entity.error = current + error
+      p error
+    end
   end
 
   class ScrapeForPosts
     @@Contents = %w(ひまわり B9 Saymove anitube NoSub Videofan Ｖｅｏｈ)
-    def self.register_post(holder_name, url, episode)
+    def self.register_post(holder_name, url, trim_title, episode_num)
       holder = nil
       case holder_name
       when 'ひまわり'
@@ -55,13 +80,15 @@ module Scrape
       end
 
       if holder
-        holder.execute(url, episode)
+        holder.execute(url, trim_title, episode_num)
       end
     end
   end
 
   class Himawari < Holder
-    def execute(url, episode)
+    def execute(url, trim_title, episode_num)
+      episode = get_episode(trim_title, episode_num)
+
       holder_name = 'ひまわり動画'
       @doc_factory = Utils::NokogiriDocumentFactory.new
       document = @doc_factory.get_document(url)
@@ -76,7 +103,7 @@ module Scrape
         post.error = document.css('#link_disablemessage_rights').inner_text
       elsif episode != nil
         post.available = 'OK'
-  
+
         direct_url = nil
         script = document.css('#player > script').inner_text
         /var movie_url = (?<direct_url>['].*['])/=~ script
@@ -89,13 +116,14 @@ module Scrape
         post.error = document.css('#movie_title').inner_text
       end
 
-      
       post.save
     end
   end
 
   class B9 < Holder
-    def execute(url, episode)
+    def execute(url, trim_title, episode_num)
+      episode = get_episode(trim_title, episode_num)
+
       holder_name = 'B9DM'
 
       @doc_factory = Utils::NokogiriDocumentFactory.new
@@ -118,7 +146,9 @@ module Scrape
   end
 
   class Nosub < Holder
-    def execute(url, episode)
+    def execute(url, trim_title, episode_num)
+      episode = get_episode(trim_title, episode_num)
+
       holder_name = 'Nosub'
 
       @doc_factory = Utils::NokogiriDocumentFactory.new
@@ -141,7 +171,9 @@ module Scrape
   end
 
   class Veoh < Holder
-    def execute(url, episode)
+    def execute(url, trim_title, episode_num)
+      episode = get_episode(trim_title, episode_num)
+
       holder_name = 'Veoh'
 
       @doc_factory = Utils::NokogiriDocumentFactory.new
@@ -165,7 +197,9 @@ module Scrape
   end
 
   class SayMove < Holder
-    def execute(url, episode)
+    def execute(url, trim_title, episode_num)
+      episode = get_episode(trim_title, episode_num)
+
       holder_name = 'SayMove'
 
       @doc_factory = Utils::NokogiriDocumentFactory.new
@@ -188,7 +222,9 @@ module Scrape
   end
 
   class Dailymotion < Holder
-    def execute(url, episode)
+    def execute(url, trim_title, episode_num)
+      episode = get_episode(trim_title, episode_num)
+
       holder_name = 'Dailymotion'
 
       @doc_factory = Utils::NokogiriDocumentFactory.new

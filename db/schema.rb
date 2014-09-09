@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904064013) do
+ActiveRecord::Schema.define(version: 20140909035354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,14 @@ ActiveRecord::Schema.define(version: 20140904064013) do
 
   add_index "episodes", ["content_id"], name: "index_episodes_on_content_id", using: :btree
   add_index "episodes", ["episode_num"], name: "index_episodes_on_episode_num", using: :btree
+
+  create_table "errors", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "images", force: true do |t|
     t.string   "url"

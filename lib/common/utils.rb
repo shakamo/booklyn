@@ -77,15 +77,16 @@ module Utils
     end
   end
 
-  def self.trim(str)
-    str = String.new(str)
-    str.gsub!('・','')
-    str.gsub!('-','')
-    str.gsub!('!','')
-    str.gsub!('！','')
-    str.gsub!(' ','')
-    str.gsub!('　','')
-    return str
+  def self.trim(value)
+    trim_value = String.new(value)
+    
+    TRIM_STR.each do |str|
+      trim_value.gsub!(str, '')
+    end
+    
+    trim_value.gsub!(' ','')
+    trim_value.gsub!('　','')
+    return trim_value
   end
 
   def self.Weeks(num)
@@ -93,4 +94,5 @@ module Utils
   end
 
   WEEKS = %w(Sun Mon Tue Wed Thu Fri Sat)
+  TRIM_STR = %w(・ - ! ！ [ ] { } / | ^ ~ = @ ` : * ; + _ ? > < . " # $ % & ' ¥( ¥) ¥¥ ☆ ★ ？ ＿ ＞ ＜ 、 。 」 「 『 』 ＠ ｀ ： ＊ ； ＋ ｜ ￥ ＾ 〜 ー ＝ ” ＃ ＄ ％ ＆ ’ （ ）)
 end
