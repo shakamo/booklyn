@@ -134,6 +134,7 @@ DEPENDENCIES
   dalli
   jbuilder (~> 2.0)
   jquery-rails
+  minitest
   nokogiri
   pg
   rails (= 4.1.4)

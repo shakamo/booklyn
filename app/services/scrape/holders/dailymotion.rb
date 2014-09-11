@@ -32,5 +32,9 @@ module Scrape::Holders
       end
       post.save
     end
+    
+    def execute_user(user_id) 
+      
+    end
   end
 end

@@ -40,6 +40,8 @@ gem 'unicorn'
 
 gem 'nokogiri'
 
+gem 'minitest', group: :test
+
 gem 'chronic'
 
 gem 'rails_12factor', group: :production
