@@ -12,16 +12,23 @@ module Scrape
 
       node = document.css('#blog_achives > div > dl > dt > a.entry_title')
       node.each do |item|
-        full_episode_num = item.inner_text.scan(/[\s　]+(第[0-9]{1,3}話)/)
+        full_episode_num = item.inner_text.scan(/[\s　]+([第]?[0-9]{1,3}話)/)
         if full_episode_num != nil
           full_episode_num = full_episode_num.flatten
           full_episode_num = full_episode_num.compact
           full_episode_num = full_episode_num[0]
+          
+          if full_episode_num == nil
+            error = Error.find_or_initialize_by(name: 'ScrapeTvanimedougaNotFoundEpisodeNum', description: item.inner_text)
+            error.save
+            next
+          end
         else
           error = Error.find_or_initialize_by(name: 'ScrapeTvanimedougaNotFoundEpisodeNum', description: item.inner_text)
           error.save
           next
         end
+        
         title = item.inner_text.sub(full_episode_num, '')
         trim_title = Utils.trim(title)
 
@@ -65,7 +72,7 @@ module Scrape
           elsif url.index('http://www.nosub.tv/?s=%')
           elsif url.index('http://www.veoh.com/find/?query')
           else
-            ScrapeForPosts.register_post(holder_name, url, trim_title, episode_num)
+            Holders::ScrapeForPosts.register_post(holder_name, url, trim_title, episode_num)
           end
         end
       end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140909035354) do
+ActiveRecord::Schema.define(version: 20140910020047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(version: 20140909035354) do
   end
 
   add_index "contents_holders", ["contents_holder_code"], name: "index_contents_holders_on_contents_holder_code", using: :btree
+
+  create_table "direct_urls", force: true do |t|
+    t.integer  "post_id"
+    t.string   "direct_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "episodes", force: true do |t|
     t.integer  "episode_num"

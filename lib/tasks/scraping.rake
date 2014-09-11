@@ -33,9 +33,20 @@ Letv
 RuTube
 Anitube
 B9
+
+
+
+
+
+
 =end
 task :scraping_episodes => :environment do
-  url = 'http://tvanimedouga.blog93.fc2.com/archives.html'
+  # url = 'http://tvanimedouga.blog93.fc2.com/archives.html'
+  url = 'http://tvanimedouga.blog93.fc2.com/?all&p=30'
+  Scrape::ScrapeForEpisodes.executeTvanimedouga(url)
+end
+
+task :scraping_new_episodes => :environment do
   Scrape::ScrapeForEpisodes.executeTvanimedouga(url)
 end
 
@@ -48,5 +59,12 @@ task :tes => :environment do
       @doc_factory = Utils::NokogiriDocumentFactory.new
       document = @doc_factory.get_document("http://www.anikore.jp/")
     p  document.title
+    
+end
+
+task :direct_url => :environment do
+  
+  direct_url = Utils.check_status('http://www.aji.sakura.ne.jp/motion/dnld.php?fpath=penguin.Mp4')
+  p direct_url
     
 end

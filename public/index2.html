@@ -326,7 +326,8 @@
                                           <li><i class="fa fa-clock-o"></i> {{episode.date}}</li>
                                           <li>
                                             <a href=" {{post.url}}" target="_blank" ng-repeat="post in episode.posts" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-5">
-                                              <i class="fa fa-heart text-info margin-right-5"></i> {{post.contents_holder_name}}</a>
+                                              <i ng-if="{{post.available}}=='OK'" class="fa fa-heart text-info margin-right-5"></i> {{post.contents_holder_name}}</a>
+                                              <i ng-if="{{post.available=='NG'}}=='NG'"  class="fa fa-heart text-danger margin-right-5"></i> {{post.contents_holder_name}}</a>
                                           </li>
                                           </ul>
                                         </div>

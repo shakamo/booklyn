@@ -19,24 +19,40 @@ module Utils
     end
 
     def get_document(url)
-      begin
-        charset = nil
-        html = open(url) do |f|
-          charset = f.charset
-        end
-      rescue
-      end
-      
+
       url = URI.parse(url)
       Net::HTTP.version_1_2
 
       html = Net::HTTP.start(url.host, url.port) do |http|
-        http.get('/').response.body
+        path = url.path.to_s
+        if 0 < url.query.to_s.length
+          path << '?' + url.query.to_s
+        end
+        res = http.get(path)
+
+        case res
+        when Net::HTTPSuccess then
+          res.response.body
+        when Net::HTTPRedirection then
+          loc = res.fetch 'location'              # res['location']でも可。
+          puts "redirected to #{loc}"
+          return nil
+        else
+          if res.code == '410'
+            return nil
+          elsif res.code == '403'
+            return nil
+          elsif res.code == '404'
+            return nil
+          elsif res.code == '502'
+            return nil
+          else
+            p 'ResponseCode:' + res.code
+            res.response.body
+          end
+        end
       end
-p charset
-
-
-      return doc = Nokogiri::HTML.parse(html, nil, charset)
+      return doc = Nokogiri::HTML.parse(html, nil)
     end
 
     def get_document_for_anikore(year, season, page)
@@ -86,13 +102,39 @@ p charset
     end
   end
 
+  def self.check_status(url)
+    regex = url.scan(/.*\.(mp4|ogv|webm)$/i).flatten.compact[0]
+
+    if regex == nil
+      return false
+    end
+
+    url = URI.parse(url)
+    Net::HTTP.version_1_2
+
+    html = Net::HTTP.start(url.host, url.port) do |http|
+      path = url.path.to_s
+      if 0 < url.query.to_s.length
+        path << '?' + url.query.to_s
+      end
+
+      res = http.head(path)
+
+      if res.code == '200'
+        return true
+      else
+        return false
+      end
+    end
+  end
+
   def self.trim(value)
     trim_value = String.new(value)
-    
+
     TRIM_STR.each do |str|
       trim_value.gsub!(str, '')
     end
-    
+
     trim_value.gsub!(' ','')
     trim_value.gsub!('　','')
     return trim_value
