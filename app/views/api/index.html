@@ -284,8 +284,7 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
       <li itemprop="name"><i class="fa fa-twitch"></i> {{content.episode_name}}</li>
       <li itemprop="datePublished" content="2014-09-02T16:41:00"><i class="fa fa-clock-o"></i> {{content.date}}</li>
       <li><i class="fa fa-line-chart"></i>
-        <i class="fa fa-heart text-info" ng-repeat="ok in [] | range:content.ok"></i>
-        <i class="fa fa-heart text-danger" ng-repeat="ok in [] | range:content.ng"></i>
+        <i class="fa fa-heart text-info" ng-repeat="ok in [] | range:content.ok">&nbsp;</i><i class="fa fa-heart text-danger" ng-repeat="ok in [] | range:content.ng">&nbsp;</i>
       </li>
 
       </ul>
@@ -337,8 +336,7 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
                                           <li><i class="fa fa-clock-o"></i> {{episode.date}}</li>
                                           <li>
                                             <a href=" {{post.url}}" target="_blank" ng-repeat="post in episode.posts" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs margin-bottom-5">
-                                              <i ng-if="post.available==='OK'" class="fa fa-heart text-info margin-right-5"></i>
-                                              <i ng-if="post.available==='NG'"  class="fa fa-heart text-danger margin-right-5"></i>
+                                              <i ng-if="post.available==='OK'" class="fa fa-heart text-info margin-right-5"></i><i ng-if="post.available==='NG'" class="fa fa-heart text-danger margin-right-5"></i>
                                               {{post.contents_holder_name}}</a>
                                 
                                           </li>

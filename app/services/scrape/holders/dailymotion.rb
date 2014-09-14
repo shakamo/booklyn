@@ -1,6 +1,5 @@
 require 'open-uri'
 require 'nokogiri'
-require 'utils'
 require 'chronic'
 require 'uri'
 
@@ -11,8 +10,7 @@ module Scrape::Holders
 
       holder_name = 'Dailymotion'
 
-      @doc_factory = Utils::NokogiriDocumentFactory.new
-      document = @doc_factory.get_document(url)
+      document = Common::UrlUtils.instance.get_document(url)
 
       platform_name = 'PC'
       post = create_post(url, episode, holder_name, platform_name)
@@ -32,9 +30,28 @@ module Scrape::Holders
       end
       post.save
     end
-    
-    def execute_user(user_id) 
-      
+
+    def execute_by_user(user_id)
+      index = 1
+
+      while true do
+
+        url = 'https://api.dailymotion.com/videos?fields=language,status%2Ctitle%2Curl&owners=' + user_id + '&sort=recent&limit=10&page=' + index.to_s
+        json = Common::UrlUtils.instance.get_json(url)
+
+        # TODO
+        json['list'].each do |item|
+          title = item['title']
+            
+            Common::RegexUtils.get_trim_title
+        end
+
+        if json['has_more']
+          index += 1
+        else
+          break
+        end
+      end
     end
   end
 end

@@ -1,6 +1,5 @@
 require 'open-uri'
 require 'nokogiri'
-require 'utils'
 require 'chronic'
 require 'uri'
 
@@ -14,6 +13,8 @@ module Scrape::Holders
         holder = Himawari.new
       when 'Himawari'
         holder = Himawari.new
+      when 'himawari'
+        holder = Himawari.new
       when 'B9'
         holder = B9dm.new
       when 'B9DM'
@@ -22,12 +23,18 @@ module Scrape::Holders
         holder = Nosub.new
       when 'Nosub'
         holder = Nosub.new
+      when 'nosub'
+        holder = Nosub.new
       when 'Ｖｅｏｈ'
         holder = Veoh.new
       when 'Veoh'
         holder = Veoh.new
       when 'SayMove'
-        holder = SayMove.new
+        holder = Saymove.new
+      when 'Saymove'
+        holder = Saymove.new
+      when 'saymove'
+        holder = Saymove.new
       when 'Dailymotion'
         holder = Dailymotion.new
       else

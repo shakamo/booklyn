@@ -1,6 +1,5 @@
 require 'open-uri'
 require 'nokogiri'
-require 'utils'
 require 'chronic'
 require 'uri'
 
@@ -10,8 +9,8 @@ module Scrape::Holders
       episode = get_episode(trim_title, episode_num)
 
       holder_name = 'ひまわり動画'
-      @doc_factory = Utils::NokogiriDocumentFactory.new
-      document = @doc_factory.get_document(url)
+      
+      document = Common::UrlUtils.instance.get_document(url)
 
       platform_name = 'All'
       post = create_post(url, episode, holder_name, platform_name)
@@ -34,8 +33,7 @@ module Scrape::Holders
         if direct_url
           direct_url = direct_url.gsub("'","").gsub('?','')
           direct_url = URI.unescape(direct_url).sub('external:','')
-          direct = Direct.new
-          direct.execute(direct_url, post)
+          save_direct_url(direct_url, post)
         end
       else
         post.available = 'INSPECTION'

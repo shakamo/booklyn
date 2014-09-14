@@ -1,17 +1,15 @@
 require 'open-uri'
 require 'nokogiri'
-require 'utils'
+require 'common/utils'
 require 'chronic'
 
 module Scrape
   class ScrapeForContents
 
-    @doc_factory = nil
     @pager = 0
     def self.execute(year, season)
-      @doc_factory = Utils::NokogiriDocumentFactory.new
       for i in 1..99 do
-        document_for_anikore = @doc_factory.get_document_for_anikore(year, season, i)
+        document_for_anikore = Common::UrlUtils.instance.get_document_for_anikore(year, season, i)
         register_record_for_content(document_for_anikore, year, season)
 
         if @pager == i then
@@ -134,7 +132,7 @@ module Scrape
     end
 
     def self.set_initial_by_detail_page(content)
-      doc_by_detail = @doc_factory.get_document_for_anikore_by_detail(content.id)
+      doc_by_detail = Common::UrlUtils.instance.get_document_for_anikore_by_detail(content.id)
       initial = doc_by_detail.css('#anime_intro_right > p.anime_intro_kana').inner_text.sub!('よみがな：','')
 
       if initial
@@ -148,7 +146,7 @@ module Scrape
     end
 
     def self.set_description_by_detail_page(content)
-      doc_by_detail = @doc_factory.get_document_for_anikore_by_detail(content.id)
+      doc_by_detail = Common::UrlUtils.instance.get_document_for_anikore_by_detail(content.id)
       description = doc_by_detail.css('#anime_intro > div.anime_title_intro_exp > blockquote').inner_text
 
       if description
@@ -159,7 +157,7 @@ module Scrape
     end
 
     def self.set_trim_title(content)
-      content.trim_title = Utils.trim(content.title)
+      content.trim_title = Common::Utils.trim(content.title)
     end
 
     def self.set_schedule_id(content, node, year, season)
@@ -169,7 +167,7 @@ module Scrape
       end
 
       if schedule
-        schedule = Schedule.find_or_initialize_by(schedule_code: "01", date: schedule, week: Utils.Weeks(schedule.wday))
+        schedule = Schedule.find_or_initialize_by(schedule_code: "01", date: schedule, week: Common::Utils.Weeks(schedule.wday))
         schedule.save
         content.schedule_id = schedule.id
       else
@@ -202,7 +200,7 @@ module Scrape
     def self.get_schedule_by_posite(content, year, season)
       trim_title = content.trim_title
 
-      doc = @doc_factory.get_document_for_posite(trim_title, year, season)
+      doc = Common::UrlUtils.instance.get_document_for_posite(trim_title, year, season)
 
       array = []
       doc.css('.ani_e').each do |node|
@@ -247,7 +245,7 @@ module Scrape
       array = []
 
       text = node.css('td.title > a').inner_text
-      text = Utils.trim(text)
+      text = Common::Utils.trim(text)
 
       if text != "" && (text.index(trim_title) || trim_title.index(text))
 

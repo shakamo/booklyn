@@ -1,6 +1,5 @@
 require 'open-uri'
 require 'nokogiri'
-require 'utils'
 require 'chronic'
 require 'uri'
 
@@ -48,7 +47,7 @@ module Scrape::Holders
     end
     
     def save_direct_url(url, post)
-      if Utils.check_status(url)
+      if Common::UrlUtils.instance.check_direct_url(url)
         direct_url = DirectUrl.find_or_initialize_by(direct_url: url)
         direct_url.post_id = post.id
         direct_url.save
