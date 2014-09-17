@@ -24,7 +24,7 @@ class ApiController < ApplicationController
       out.gsub!('<meta name="fragment" content="!">','')
       render :inline => out
     else
-      render :file => 'api/index.html', :layout => false
+      render :file => 'index.html', :layout => false
     end
   end
 end

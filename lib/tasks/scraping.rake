@@ -37,28 +37,11 @@ B9
 =end
 task :scrape_episodes => :environment do
 # url = 'http://tvanimedouga.blog93.fc2.com/archives.html'
- 
-  p '26'
-  url = 'http://tvanimedouga.blog93.fc2.com/?all&p=26'
+
+  url = 'http://tvanimedouga.blog93.fc2.com/?all&p=1'
+  p url
   Scrape::ScrapeForEpisodes.executeTvanimedouga(url)
-  p '25'
-  url = 'http://tvanimedouga.blog93.fc2.com/?all&p=25'
-  Scrape::ScrapeForEpisodes.executeTvanimedouga(url)
-  p '24'
-  url = 'http://tvanimedouga.blog93.fc2.com/?all&p=24'
-  Scrape::ScrapeForEpisodes.executeTvanimedouga(url)
-  p '23'
-  url = 'http://tvanimedouga.blog93.fc2.com/?all&p=23'
-  Scrape::ScrapeForEpisodes.executeTvanimedouga(url)
-  p '22'
-  url = 'http://tvanimedouga.blog93.fc2.com/?all&p=22'
-  Scrape::ScrapeForEpisodes.executeTvanimedouga(url)
-  p '21'
-  url = 'http://tvanimedouga.blog93.fc2.com/?all&p=21'
-  Scrape::ScrapeForEpisodes.executeTvanimedouga(url)
-  p '20'
-  url = 'http://tvanimedouga.blog93.fc2.com/?all&p=20'
-  Scrape::ScrapeForEpisodes.executeTvanimedouga(url)
+  
 end
 
 task :scrape_new_episodes => :environment do
