@@ -24,19 +24,23 @@ class ApiController < ApplicationController
 
   def seo
     if params[:_escaped_fragment_] == ''
+      path = request.host_with_port + request.fullpath
+      path = path.gsub('?_escaped_fragment_=','')
 
       if ENV["MEMCACHEDCLOUD_SERVERS"]
         $cache = Dalli::Client.new(ENV["MEMCACHEDCLOUD_SERVERS"].split(','), :username => ENV["MEMCACHEDCLOUD_USERNAME"], :password => ENV["MEMCACHEDCLOUD_PASSWORD"])
-      end
 
-      path = request.host_with_port + request.fullpath
-      out = $cache.get(path)
-      if out == nil
-        path = path.gsub('?_escaped_fragment_=','')
+        out = $cache.get(path)
+        if out == nil
+          out, err, status = Open3.capture3('phantomjs /phantomjs-test.js ' + path)
+          out.gsub!('<meta name="fragment" content="!">','')
+        end
+
+      else
         out, err, status = Open3.capture3('phantomjs /phantomjs-test.js ' + path)
         out.gsub!('<meta name="fragment" content="!">','')
-        $cache.set(path, out)
       end
+
       render :inline => out
     else
       render :file => 'index.html', :layout => false
