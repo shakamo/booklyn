@@ -4,10 +4,10 @@ default: &default
   pool: 5
   timeout: 5000
   encoding: utf8
-  database: dn90sitc3qf2a
-  username: odzbixpzvbohxp
-  password: ugDEJn4g5YiGlzgoe9EkLiSjCH
-  host: ec2-54-225-101-124.compute-1.amazonaws.com
+  database: dc5jqha1ulrosq
+  username: pgzrqfmgwceenj
+  password: ByMhkJ0HClp-iIt-CJOo9GVRky
+  host: ec2-54-225-156-230.compute-1.amazonaws.com
 
 development:
   <<: *default
