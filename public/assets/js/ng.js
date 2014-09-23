@@ -1,4 +1,4 @@
-angular.module('App', [ 'ngRoute', 'ngAnimate' ]).run(
+angular.module('App', [ 'ngRoute', 'ngAnimate', 'snap' ]).run(
     [ '$rootScope', '$http', function($rootScope, $http) {
 
       $rootScope.weeks = [ {

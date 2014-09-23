@@ -34,11 +34,13 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/plugins/flexslider/flexslider.css">
     <link rel="stylesheet" href="/assets/plugins/parallax-slider/css/parallax-slider.css">
+    <link rel="stylesheet" href="http://jtrussell.github.io/angular-snap.js/bower_components/angular-snap/angular-snap-only.css">
 
   </head>
 
   <body id="top" class="boxed-layout container" ng-app="App">
-    <div class="wrapper" ng-controller="MainController">
+    <div snap-drawer>aaaaa</div>
+    <div class="wrapper" ng-controller="MainController" snap-content snap-options="snapOpts">
       <!--=== Header ===-->
       <div class="header">
         <!-- Topbar -->
@@ -48,14 +50,13 @@
           </div>
         </div>
         <!-- End Topbar -->
-
         <!-- Navbar -->
         <div class="navbar navbar-default" role="navigation">
           <div class="container">
              <div class="collapse navbar-collapse navbar-responsive-collapse">
               
               <a href="/">
-                <i class="fa fa-book fa-3x text-info"><span style="font-family: sans-serif;font-style:italic;">Booklyn</span>
+                <i class="fa fa-book fa-3x text-info" snap-toggle="left"></i><i class="fa fa-3x text-info"><span style="font-family: sans-serif;font-style:italic;">Booklyn</span>
                 </i>
                 <i class="text-info"> ( ブックリン )</i>
                 <i class="fa fa-3x text-danger"><span style="font-family: sans-serif;font-style:italic;">β</span>
@@ -151,9 +152,8 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
 
         </div>
       </div><!--/container-->
-    </div>
-    <!-- End Content Part -->
-
+      
+      
     <!--=== Footer ===-->
     <div class="footer">
       <div class="container">
@@ -225,6 +225,11 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
     </div><!--/copyright-->
     <!--=== End Copyright ===-->
 
+      
+      
+    </div>
+    <!-- End Content Part -->
+
     <!-- JS Global Compulsory -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -242,6 +247,9 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
     <script type="text/javascript" src="/assets/js/app.js"></script>
     <script type="text/javascript" src="/assets/js/ng.js"></script>
     <script type="text/javascript" src="/assets/js/pages/index.js"></script>
+    <script src="http://jtrussell.github.io/angular-snap.js/bower_components/snapjs/snap.js"></script>
+    <script src="http://jtrussell.github.io/angular-snap.js/bower_components/angular-snap/angular-snap.js"></script>
+    
     <script type="text/javascript">
       jQuery(document).ready(function() {
         App.init();
