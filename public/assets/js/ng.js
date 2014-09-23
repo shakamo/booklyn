@@ -86,7 +86,9 @@ angular.module('App', [ 'ngRoute', 'ngAnimate', 'snap' ]).run(
   $locationProvider.html5Mode(true);
 }).controller('MainController',
     [ '$rootScope', '$scope', '$http', function($rootScope, $scope, $http) {
-
+      $scope.snapOpts = {
+          disable: 'right'
+        };
     } ]).controller('ContentController',
         [ '$rootScope', '$scope', '$http', function($rootScope, $scope, $http, $routeParams) {
           $rootScope.contents = [];
