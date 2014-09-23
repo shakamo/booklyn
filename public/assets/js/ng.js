@@ -59,6 +59,12 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ]).run(
   $routeProvider.when('/', {
     templateUrl : 'main.html',
     controller : 'ContentController'
+  }).when('/collapse-atoz-anime', {
+    templateUrl : 'main.html',
+    controller : 'collapseController'
+  }).when('/collapse-week-anime', {
+    templateUrl : 'main.html',
+    controller : 'collapseController'
   }).when('/atoz/:atoz', {
     templateUrl : 'main.html',
     controller : 'AtozController'
@@ -74,7 +80,6 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ]).run(
     controller : 'HowtoController',
     resolve : {}
   }).otherwise({
-    redirectTo : '/'
   });
 
   // configure html5 to get links working on jsfiddle
@@ -83,31 +88,35 @@ angular.module('App', [ 'ngRoute', 'ngAnimate' ]).run(
     [ '$rootScope', '$scope', '$http', function($rootScope, $scope, $http) {
 
     } ]).controller('ContentController',
-    [ '$rootScope', '$scope', '$http', function($rootScope, $scope, $http, $routeParams) {
-      $rootScope.contents = [];
-      $http({
-        method : 'GET',
-        url : '/api/recent'
-      }).success(function(data, status, headers, config) {
+        [ '$rootScope', '$scope', '$http', function($rootScope, $scope, $http, $routeParams) {
+          $rootScope.contents = [];
+          $http({
+            method : 'GET',
+            url : '/api/recent'
+          }).success(function(data, status, headers, config) {
 
-        data.forEach(function(item) {
-          var newDate = new Date();
-          var date = item.created_at;
-          newDate.setUTCFullYear(date.slice(0, 4));
-          newDate.setUTCMonth(+date.slice(4, 6) - 1);
-          newDate.setUTCDate(date.slice(6, 8));
-          newDate.setUTCHours(date.slice(8, 10));
-          newDate.setUTCMinutes(date.slice(10, 12));
-          newDate.setUTCSeconds('0');
-          item.date = newDate.toLocaleString("ja-JP");
-        });
+            data.forEach(function(item) {
+              var newDate = new Date();
+              var date = item.created_at;
+              newDate.setUTCFullYear(date.slice(0, 4));
+              newDate.setUTCMonth(+date.slice(4, 6) - 1);
+              newDate.setUTCDate(date.slice(6, 8));
+              newDate.setUTCHours(date.slice(8, 10));
+              newDate.setUTCMinutes(date.slice(10, 12));
+              newDate.setUTCSeconds('0');
+              item.date = newDate.toLocaleString("ja-JP");
+            });
 
-        $rootScope.contents = data;
-        $rootScope.isHowto = false;
-      }).error(function(data, status, headers, config) {
-      });
-      $rootScope.isHowto = false;
-    } ]).controller(
+            $rootScope.contents = data;
+            $rootScope.isHowto = false;
+          }).error(function(data, status, headers, config) {
+          });
+          $rootScope.isHowto = false;
+        } ]).controller('collapseController',
+            ['$location', '$anchorScroll', function($location, $anchorScroll) {
+              $location.hash('top');
+              $anchorScroll();
+            } ]).controller(
     'WeekController',
     [ '$rootScope', '$scope', '$http', '$routeParams',
         function($rootScope, $scope, $http, $routeParams) {
