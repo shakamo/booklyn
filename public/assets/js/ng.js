@@ -116,8 +116,8 @@ angular.module('App', [ 'ngRoute', 'ngAnimate', 'snap' ]).run(
           $rootScope.isHowto = false;
         } ]).controller('collapseController',
             ['$location', '$anchorScroll', function($location, $anchorScroll) {
-              $location.hash('top');
-              $anchorScroll();
+              // $location.hash('top');
+              // $anchorScroll();
             } ]).controller(
     'WeekController',
     [ '$rootScope', '$scope', '$http', '$routeParams',
