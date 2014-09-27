@@ -38,8 +38,8 @@
 
   </head>
 
-  <body id="top" class="boxed-layout container" ng-app="App">
-    <div snap-drawer>  
+  <body id="top" class="boxed-layout container" ng-app="App" ng-controller="MainController">
+    <div snap-drawer>
             <ul class="list-group sidebar-nav-v1" id="sidebar-snap">
               <!-- Start Anime -->
               <li class="panel">
@@ -86,7 +86,7 @@
  
    </div>
 
-    <div class="wrapper" ng-controller="MainController" snap-content snap-options="snapOpts">
+    <div class="wrapper" snap-content snap-options="snapOpts">
       <!--=== Header ===-->
       <div class="header">
         <!-- Topbar -->

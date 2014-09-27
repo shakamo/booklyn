@@ -65,6 +65,12 @@ angular.module('App', [ 'ngRoute', 'ngAnimate', 'snap' ]).run(
   }).when('/collapse-week-anime', {
     templateUrl : 'main.html',
     controller : 'collapseController'
+  }).when('/collapse-atoz-anime-snap', {
+    templateUrl : 'main.html',
+    controller : 'collapseController'
+  }).when('/collapse-week-anime-snap', {
+    templateUrl : 'main.html',
+    controller : 'collapseController'
   }).when('/atoz/:atoz', {
     templateUrl : 'main.html',
     controller : 'AtozController'
