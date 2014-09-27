@@ -39,7 +39,53 @@
   </head>
 
   <body id="top" class="boxed-layout container" ng-app="App">
-    <div snap-drawer>aaaaa</div>
+    <div snap-drawer>  
+            <ul class="list-group sidebar-nav-v1" id="sidebar-snap">
+              <!-- Start Anime -->
+              <li class="panel">
+                <a data-toggle="collapse" data-parent="#sidebar-snap" href="#collapse-week-anime-snap">アニメ（放送曜日）</a>
+                <ul id="collapse-week-anime-snap" class="collapse in">
+                  <li ng-repeat="week in weeks">
+                    <a href="/week/{{week['en']}}"><i class="fa fa-chevron-circle-right"></i> {{week['ja']}}</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="panel">
+                <a data-toggle="collapse" data-parent="#sidebar-snap" href="#collapse-atoz-anime-snap">アニメ（五十音順）</a>
+                <ul id="collapse-atoz-anime-snap" class="collapse">
+                  <li ng-repeat="a in atoz">
+                    <a href="/atoz/{{a['en']}}"><i class="fa fa-chevron-circle-right"></i> {{a['ja']}}</a>
+                  </li>
+                </ul>
+              </li>
+              <!-- End Anime -->
+              <!-- Start Drama -->
+              <li class="panel">
+                <a data-toggle="collapse" data-parent="#sidebar-snap" href="#collapse-week-drama-snap">ドラマ（放送曜日）</a>
+                <ul id="collapse-week-drama-snap" class="collapse">
+                  <li ng-repeat="week in weeks">
+                    <a href="/week/{{week['en']}}"><i class="fa fa-chevron-circle-right"></i> {{week['ja']}}</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="panel">
+                <a data-toggle="collapse" data-parent="#sidebar-snap" href="#collapse-atoz-drama-snap">ドラマ（五十音順）</a>
+                <ul id="collapse-atoz-drama-snap" class="collapse">
+                  <li ng-repeat="a in atoz">
+                    <a href="/atoz/{{a['en']}}"><i class="fa fa-chevron-circle-right"></i> {{a['ja']}}</a>
+                  </li>
+                </ul>
+              </li>
+              <!-- End Anime -->
+
+            </ul>
+            <!-- Column Right -->
+
+ 
+ 
+ 
+   </div>
+
     <div class="wrapper" ng-controller="MainController" snap-content snap-options="snapOpts">
       <!--=== Header ===-->
       <div class="header">
@@ -148,7 +194,7 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
           <div class="col-md-2" ng-hide="isHowto">
             <ul class="list-group sidebar-nav-v1" id="sidebar-nav">
               <!-- Start Anime -->
-              <li class="panel list-group-item active">
+              <li class="panel">
                 <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-week-anime">アニメ（放送曜日）</a>
                 <ul id="collapse-week-anime" class="collapse in">
                   <li ng-repeat="week in weeks">
@@ -156,7 +202,7 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
                   </li>
                 </ul>
               </li>
-              <li class="panel list-group-item active">
+              <li class="panel">
                 <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-atoz-anime">アニメ（五十音順）</a>
                 <ul id="collapse-atoz-anime" class="collapse">
                   <li ng-repeat="a in atoz">
@@ -166,7 +212,7 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
               </li>
               <!-- End Anime -->
               <!-- Start Drama -->
-              <li class="panel list-group-item active">
+              <li class="panel">
                 <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-week-drama">ドラマ（放送曜日）</a>
                 <ul id="collapse-week-drama" class="collapse">
                   <li ng-repeat="week in weeks">
@@ -174,7 +220,7 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
                   </li>
                 </ul>
               </li>
-              <li class="panel list-group-item active">
+              <li class="panel">
                 <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-atoz-drama">ドラマ（五十音順）</a>
                 <ul id="collapse-atoz-drama" class="collapse">
                   <li ng-repeat="a in atoz">
@@ -266,8 +312,6 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
       </div>
     </div><!--/copyright-->
     <!--=== End Copyright ===-->
-
-      
       
     </div>
     <!-- End Content Part -->
