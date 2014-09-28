@@ -71,6 +71,18 @@ angular.module('App', [ 'ngRoute', 'ngAnimate', 'snap' ]).run(
   }).when('/collapse-week-anime-snap', {
     templateUrl : 'main.html',
     controller : 'collapseController'
+  }).when('/collapse-atoz-drama', {
+    templateUrl : 'main.html',
+    controller : 'collapseController'
+  }).when('/collapse-week-drama', {
+    templateUrl : 'main.html',
+    controller : 'collapseController'
+  }).when('/collapse-atoz-drama-snap', {
+    templateUrl : 'main.html',
+    controller : 'collapseController'
+  }).when('/collapse-week-drama-snap', {
+    templateUrl : 'main.html',
+    controller : 'collapseController'
   }).when('/atoz/:atoz', {
     templateUrl : 'main.html',
     controller : 'AtozController'
@@ -86,6 +98,7 @@ angular.module('App', [ 'ngRoute', 'ngAnimate', 'snap' ]).run(
     controller : 'HowtoController',
     resolve : {}
   }).otherwise({
+    controller : 'errorController',
   });
 
   // configure html5 to get links working on jsfiddle
@@ -209,6 +222,10 @@ angular.module('App', [ 'ngRoute', 'ngAnimate', 'snap' ]).run(
           }).error(function(data, status, headers, config) {
 
           });
+        } ]).controller('errorController',
+    [ '$scope', '$rootScope', function($scope, $rootScope, $routeParams) {
+
+alert('transition error');
         } ]).filter('range', function() {
   return function(input, total) {
     total = parseInt(total);

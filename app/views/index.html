@@ -43,7 +43,7 @@
             <ul class="list-group sidebar-nav-v1" id="sidebar-snap">
               <!-- Start Anime -->
               <li class="panel">
-                <a data-toggle="collapse" data-parent="#sidebar-snap" href="#collapse-week-anime-snap">アニメ（放送曜日）</a>
+                <a data-toggle="collapse" data-parent="#sidebar-snap" href="/#collapse-week-anime-snap">アニメ（放送曜日）</a>
                 <ul id="collapse-week-anime-snap" class="collapse in">
                   <li ng-repeat="week in weeks">
                     <a href="/week/{{week['en']}}"><i class="fa fa-chevron-circle-right"></i> {{week['ja']}}</a>
@@ -51,7 +51,7 @@
                 </ul>
               </li>
               <li class="panel">
-                <a data-toggle="collapse" data-parent="#sidebar-snap" href="#collapse-atoz-anime-snap">アニメ（五十音順）</a>
+                <a data-toggle="collapse" data-parent="#sidebar-snap" href="/#collapse-atoz-anime-snap">アニメ（五十音順）</a>
                 <ul id="collapse-atoz-anime-snap" class="collapse">
                   <li ng-repeat="a in atoz">
                     <a href="/atoz/{{a['en']}}"><i class="fa fa-chevron-circle-right"></i> {{a['ja']}}</a>
@@ -61,7 +61,7 @@
               <!-- End Anime -->
               <!-- Start Drama -->
               <li class="panel">
-                <a data-toggle="collapse" data-parent="#sidebar-snap" href="#collapse-week-drama-snap">ドラマ（放送曜日）</a>
+                <a data-toggle="collapse" data-parent="#sidebar-snap" href="/#collapse-week-drama-snap">ドラマ（放送曜日）</a>
                 <ul id="collapse-week-drama-snap" class="collapse">
                   <li ng-repeat="week in weeks">
                     <a href="/week/{{week['en']}}"><i class="fa fa-chevron-circle-right"></i> {{week['ja']}}</a>
@@ -69,7 +69,7 @@
                 </ul>
               </li>
               <li class="panel">
-                <a data-toggle="collapse" data-parent="#sidebar-snap" href="#collapse-atoz-drama-snap">ドラマ（五十音順）</a>
+                <a data-toggle="collapse" data-parent="#sidebar-snap" href="/#collapse-atoz-drama-snap">ドラマ（五十音順）</a>
                 <ul id="collapse-atoz-drama-snap" class="collapse">
                   <li ng-repeat="a in atoz">
                     <a href="/atoz/{{a['en']}}"><i class="fa fa-chevron-circle-right"></i> {{a['ja']}}</a>
@@ -89,36 +89,29 @@
     <div class="wrapper" snap-content snap-options="snapOpts">
       <!--=== Header ===-->
       <div class="header">
-        <!-- Topbar -->
-        <div class="topbar">
-          <div class="container">
-
-          </div>
-        </div>
-        <!-- End Topbar -->
         <!-- Navbar -->
         <div class="navbar navbar-default" role="navigation">
           <div class="container">
-             <div class="collapse navbar-collapse navbar-responsive-collapse">
-              
-              <a href="/">
-                <i class="fa fa-book fa-3x text-info" snap-toggle="left"></i><i class="fa fa-3x text-info"><span style="font-family: sans-serif;font-style:italic;">Booklyn</span>
+              <i class="fa fa-book fa-3x text-info" snap-toggle="left"></i>
+              <a href="/"><i class="fa fa-3x text-info"><span style="font-family: sans-serif;font-style:italic;">Booklyn</span>
                 </i>
                 <i class="text-info"> ( ブックリン )</i>
                 <i class="fa fa-3x text-danger"><span style="font-family: sans-serif;font-style:italic;">β</span>
                 </i>
                 <i class="text-danger"> ( ベータ )</i>
               </a>
+             <div class="collapse navbar-collapse navbar-responsive-collapse">
+              
               <ul class="nav navbar-nav">
                 <!-- Home -->
                 <li class="dropdown active">
                   <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> 現在放送中の作品 </a>
                   <ul class="dropdown-menu">
                     <li>
-                      <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-week-anime"> アニメ </a>
+                      <a data-toggle="collapse" data-parent="#sidebar-nav" href="/#collapse-week-anime"> アニメ </a>
                     </li>
                     <li>
-                      <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-week-drama"> ドラマ </a>
+                      <a data-toggle="collapse" data-parent="#sidebar-nav" href="/#collapse-week-drama"> ドラマ </a>
                     </li>
                   </ul>
                 </li>
@@ -129,10 +122,10 @@
                   <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"> 過去の作品 </a>
                   <ul class="dropdown-menu">
                     <li>
-                      <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-atoz-anime"> アニメ </a>
+                      <a data-toggle="collapse" data-parent="#sidebar-nav" href="/#collapse-atoz-anime"> アニメ </a>
                     </li>
                     <li>
-                      <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-atoz-drama"> ドラマ </a>
+                      <a data-toggle="collapse" data-parent="#sidebar-nav" href="/#collapse-atoz-drama"> ドラマ </a>
                     </li>
                   </ul>
                 </li>
@@ -195,7 +188,7 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
             <ul class="list-group sidebar-nav-v1" id="sidebar-nav">
               <!-- Start Anime -->
               <li class="panel">
-                <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-week-anime">アニメ（放送曜日）</a>
+                <a data-toggle="collapse" data-parent="#sidebar-nav" href="/#collapse-week-anime">アニメ（放送曜日）</a>
                 <ul id="collapse-week-anime" class="collapse in">
                   <li ng-repeat="week in weeks">
                     <a href="/week/{{week['en']}}"><i class="fa fa-chevron-circle-right"></i> {{week['ja']}}</a>
@@ -203,7 +196,7 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
                 </ul>
               </li>
               <li class="panel">
-                <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-atoz-anime">アニメ（五十音順）</a>
+                <a data-toggle="collapse" data-parent="#sidebar-nav" href="/#collapse-atoz-anime">アニメ（五十音順）</a>
                 <ul id="collapse-atoz-anime" class="collapse">
                   <li ng-repeat="a in atoz">
                     <a href="/atoz/{{a['en']}}"><i class="fa fa-chevron-circle-right"></i> {{a['ja']}}</a>
@@ -213,7 +206,7 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
               <!-- End Anime -->
               <!-- Start Drama -->
               <li class="panel">
-                <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-week-drama">ドラマ（放送曜日）</a>
+                <a data-toggle="collapse" data-parent="#sidebar-nav" href="/#collapse-week-drama">ドラマ（放送曜日）</a>
                 <ul id="collapse-week-drama" class="collapse">
                   <li ng-repeat="week in weeks">
                     <a href="/week/{{week['en']}}"><i class="fa fa-chevron-circle-right"></i> {{week['ja']}}</a>
@@ -221,7 +214,7 @@ if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_1f263a0af358ac52954b0a1496e4cfbe)=='u
                 </ul>
               </li>
               <li class="panel">
-                <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-atoz-drama">ドラマ（五十音順）</a>
+                <a data-toggle="collapse" data-parent="#sidebar-nav" href="/#collapse-atoz-drama">ドラマ（五十音順）</a>
                 <ul id="collapse-atoz-drama" class="collapse">
                   <li ng-repeat="a in atoz">
                     <a href="/atoz/{{a['en']}}"><i class="fa fa-chevron-circle-right"></i> {{a['ja']}}</a>
