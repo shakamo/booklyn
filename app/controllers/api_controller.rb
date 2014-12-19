@@ -27,6 +27,8 @@ class ApiController < ApplicationController
       path = request.host_with_port + request.fullpath
       path = path.gsub('?_escaped_fragment_=','')
 
+      puts path
+
       if ENV["MEMCACHEDCLOUD_SERVERS"]
         $cache = Dalli::Client.new(ENV["MEMCACHEDCLOUD_SERVERS"].split(','), :username => ENV["MEMCACHEDCLOUD_USERNAME"], :password => ENV["MEMCACHEDCLOUD_PASSWORD"])
 
@@ -45,5 +47,9 @@ class ApiController < ApplicationController
     else
       render :file => 'index.html', :layout => false
     end
+  end
+
+  def develop
+
   end
 end

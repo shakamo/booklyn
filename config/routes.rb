@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'howto/', to: 'api#seo'
 
   
-  
+  get 'develop', to: 'api#develop'
   
 
   # The priority is based upon order of creation: first created -> highest priority.
