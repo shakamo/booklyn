@@ -83,5 +83,20 @@ Rails.application.configure do
   config.serve_static_assets = true
   config.assets.compile = true
   config.assets.digest = true
-  
+  if ENV["MEMCACHEDCLOUD_SERVERS"]
+      config.cache_store = :dalli_store, ENV["MEMCACHEDCLOUD_SERVERS"].split(','), { :username => ENV["MEMCACHEDCLOUD_USERNAME"], :password => ENV["MEMCACHEDCLOUD_PASSWORD"] }
+  end
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { :host => 'heroku-booklyn-project.herokuapp.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => 'smtp.gmail.com',
+    :port => 587,
+    :domain => 'booklyn.info',
+    :user_name => 'js6070699@gmail.com',
+    :password => '8at6v7gm',
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
 end

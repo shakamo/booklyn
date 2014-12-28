@@ -5,9 +5,7 @@ require 'uri'
 
 module Scrape::Holders
   class B9dm < Holder
-    def execute(url, trim_title, episode_num)
-      episode = get_episode(trim_title, episode_num)
-
+    def execute(url, content, episode)
       holder_name = 'B9DM'
 
       document = Common::UrlUtils.instance.get_document(url)

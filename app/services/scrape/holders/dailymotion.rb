@@ -5,9 +5,7 @@ require 'uri'
 
 module Scrape::Holders
   class Dailymotion < Holder
-    def execute(url, trim_title, episode_num)
-      episode = get_episode(trim_title, episode_num)
-
+    def execute(url, content, episode)
       holder_name = 'Dailymotion'
 
       document = Common::UrlUtils.instance.get_document(url)
@@ -39,11 +37,29 @@ module Scrape::Holders
         url = 'https://api.dailymotion.com/videos?fields=language,status%2Ctitle%2Curl&owners=' + user_id + '&sort=recent&limit=10&page=' + index.to_s
         json = Common::UrlUtils.instance.get_json(url)
 
-        # TODO
         json['list'].each do |item|
           title = item['title']
-            
-            Common::RegexUtils.get_trim_title
+          begin
+
+            trim_title = Common::RegexUtils.get_trim_title(title)
+            episode_num = Common::RegexUtils.get_episode_num(title)
+            sub_title = Common::RegexUtils.get_sub_title(title)
+            url = item['url']
+
+            holder = Holder.new
+
+            episode = holder.get_episode(trim_title, episode_num)
+            if episode
+
+              episode.episode_name = sub_title
+              holder.create_post(url, episode, 'Dailymotion', 'All')
+            else
+              p title
+            end
+
+          rescue => e
+            p e
+          end
         end
 
         if json['has_more']

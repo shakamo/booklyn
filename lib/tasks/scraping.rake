@@ -7,12 +7,10 @@ select * from contents where error like '%set_schedule_id%'
 ※ただし、何かしら放送日が設定されている場合（手で設定した場合）はスキップする。
 =end
 task :scrape_contents => :environment do
-# Scrape::ScrapeForContents.execute("2013", "summer")
-# Scrape::ScrapeForContents.execute("2013", "autumn")
-# Scrape::ScrapeForContents.execute("2014", "winter")
 # Scrape::ScrapeForContents.execute("2014", "spring")
-  Scrape::ScrapeForContents.execute("2014", "summer")
-  Scrape::ScrapeForContents.execute("2014", "autumn")
+# Scrape::ContentManager.createAll("Anikore", "2014", "summer")
+Scrape::ContentManager.createAll("Anikore", "2014", "autumn")
+  Scrape::ContentManager.createAll("Anikore", "2015", "winter")
 end
 
 =begin
@@ -36,22 +34,33 @@ B9
 
 =end
 task :scrape_episodes => :environment do
-# url = 'http://tvanimedouga.blog93.fc2.com/archives.html'
+  Scrape::EpisodeManager.update('tvanimedouga', 10)
 
-  url = 'http://tvanimedouga.blog93.fc2.com/?all&p=1'
-  p url
-  Scrape::ScrapeForEpisodes.executeTvanimedouga(url)
-  
 end
 
-task :scrape_new_episodes => :environment do
-  url = 'http://tvanimedouga.blog93.fc2.com/?all&p=1'
-  Scrape::ScrapeForEpisodes.executeTvanimedouga(url)
+
+
+
+
+task :scrape_episodes_all => :environment do
+  Scrape::ScrapeForEpisodes.createAll('tvanimedouga')
 end
 
 task :scrape_dailymotion => :environment do
 
   dailymotion =Scrape::Holders::Dailymotion.new
-  dailymotion.execute_by_user('x1cbwok')
+  dailymotion.execute_by_user('', 'x1cbwok')
 
 end
+
+require 'rake/testtask'
+
+task :default => [:test]
+
+Rake::TestTask.new do |test|
+
+  test.test_files = Dir['test/**/test_*{holder,regex}*.rb'] 
+    test.verbose = true
+
+end
+

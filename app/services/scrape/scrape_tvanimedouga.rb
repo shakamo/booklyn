@@ -5,40 +5,44 @@ require 'uri'
 
 module Scrape
   class ScrapeTvanimedouga
-    def self.execute(url)
-      
-      document = Common::UrlUtils.instance.get_document(url)
+    @@url = 'http://tvanimedouga.blog93.fc2.com/?all&p=1'
+
+    def self.createAll()
+
+      document = Common::UrlUtils.instance.get_document(@@url)
 
       node = document.css('#blog_achives > div > dl > dt > a.entry_title')
       node.each do |item|
-        begin
-          episode_num = Common::RegexUtils.get_episode_num(item.inner_text)
-        rescue
-          error = Error.find_or_initialize_by(name: 'ScrapeTvanimedougaNotFoundEpisodeNum', description: item.inner_text)
-          error.save
-          next
-        end
-
-        begin
-          trim_title = Common::RegexUtils.get_trim_title(item.inner_text)
-        rescue
-          error = Error.find_or_initialize_by(name: 'ScrapeTvanimedougaNotFoundTitle', description: item.inner_text)
-          error.save
-          next
-        end
-
-        url = "http://tvanimedouga.blog93.fc2.com/" + item.attribute('href').value
-        get_tvanimedouga_detail(url, trim_title, episode_num)
+        load_episode(item)
       end
     end
 
-    def self.get_tvanimedouga_detail(url, trim_title, episode_num)
-      document = Common::UrlUtils.instance.get_document(url)
+    def self.update(count)
 
-      begin
-        sub_title = Common::RegexUtils.get_sub_title(document.css('#mainBlock > div.mainEntryBlock > div.mainEntryBase > div.mainEntryBody').inner_text)
-      rescue
+      document = Common::UrlUtils.instance.get_document(@@url)
+
+      node = document.css('#blog_achives > div > dl > dt > a.entry_title')
+      count.times do |index|
+        load_episode(node[index])
       end
+    end
+
+    def self.load_episode(item)
+      title = Common::RegexUtils.get_title(item.inner_text)
+      title_query = Common::RegexUtils.get_title_query(item.inner_text)
+      title_trim = Common::RegexUtils.get_title_trim(item.inner_text)
+      episode_num = Common::RegexUtils.get_episode_num(item.inner_text)
+      content = Scrape::ContentManager.get_content(title_query)
+      if content != nil then
+        episode = Scrape::EpisodeManager.get_episode(content, episode_num)
+      end
+      path = item.attribute('href').value
+      load_tvanimedouga_detail(path, content, episode)
+    end
+
+    def self.load_tvanimedouga_detail(path, content, episode)
+      detail_url = "http://tvanimedouga.blog93.fc2.com/" + path
+      document = Common::UrlUtils.instance.get_document(detail_url)
 
       list = document.css('#mainBlock > div.mainEntryBlock > div.mainEntryBase > div.mainEntrykiji > a')
       list.each do |item|
@@ -53,7 +57,7 @@ module Scrape
           elsif url.index('http://www.nosub.tv/?s=%')
           elsif url.index('http://www.veoh.com/find/?query')
           else
-            Holders::ScrapeForPosts.register_post(holder_name, url, trim_title, episode_num)
+            Scrape::PostManager.register_post(holder_name, url, content, episode)
           end
         end
       end

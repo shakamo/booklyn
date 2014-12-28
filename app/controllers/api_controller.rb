@@ -27,15 +27,18 @@ class ApiController < ApplicationController
       path = request.host_with_port + request.fullpath
       path = path.gsub('?_escaped_fragment_=','')
 
-      puts path
-
       if ENV["MEMCACHEDCLOUD_SERVERS"]
         $cache = Dalli::Client.new(ENV["MEMCACHEDCLOUD_SERVERS"].split(','), :username => ENV["MEMCACHEDCLOUD_USERNAME"], :password => ENV["MEMCACHEDCLOUD_PASSWORD"])
+
 
         out = $cache.get(path)
         if out == nil
           out, err, status = Open3.capture3('phantomjs /phantomjs-test.js ' + path)
           out.gsub!('<meta name="fragment" content="!">','')
+
+          puts 'dalli get on-cache' + path
+        else
+          puts 'dalli get no-cache' + path
         end
 
       else

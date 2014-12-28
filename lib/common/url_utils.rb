@@ -76,7 +76,6 @@ module Common
     end
 
     def get_document_for_anikore(year, season, page)
-      url = 'http://www.anikore.jp/chronicle/' + year + '/' + season +'/page:' + page.to_s
       get_document(url)
     end
 
@@ -85,7 +84,28 @@ module Common
       get_document(url)
     end
 
-    def get_document_for_posite(title, year, season)
+    def get_document_for_shoboi(content, type)
+
+      if content.title == '蟲師 続章（後半エピソード）'
+        result_search = get_document(URI.encode('http://cal.syoboi.jp/find?sd=0&kw=蟲師 続章(第2期)&ch=&st=&cm=&r=0&rd=&v=0'))
+      else
+        result_search = get_document(URI.encode('http://cal.syoboi.jp/find?sd=0&kw=' + content.title + '&ch=&st=&cm=&r=0&rd=&v=0'))
+      end
+
+      result_doc = result_search.css('#main > table > tr > td > table.tframe > tr > td > a')
+
+      if result_doc == nil || result_doc.length == 0
+        return nil
+      else
+        path = result_doc[0][:href]
+      end
+
+      url = 'http://cal.syoboi.jp' + path + '/' + type
+      url?(url)
+      get_document(url)
+    end
+
+    def get_document_for_posite(year, season)
       season = "01" if season == "winter"
       season = "04" if season == "spring"
       season = "07" if season == "summer"
@@ -93,6 +113,7 @@ module Common
 
       key = year + season
       url = 'http://www.posite-c.com/anime/weekly/?' + key
+
       get_document(url)
     end
 
@@ -157,7 +178,7 @@ module Common
       begin
         uri = URI.parse(str)
       rescue
-        p str
+        p 'This is not url.' + str
         return false
       end
       return uri.scheme == 'http' || uri.scheme == 'https'

@@ -5,9 +5,7 @@ require 'uri'
 
 module Scrape::Holders
   class Himawari < Holder
-    def execute(url, trim_title, episode_num)
-      episode = get_episode(trim_title, episode_num)
-
+    def execute(url, content, episode)
       holder_name = 'ひまわり動画'
       
       document = Common::UrlUtils.instance.get_document(url)

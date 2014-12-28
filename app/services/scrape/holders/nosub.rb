@@ -5,9 +5,7 @@ require 'uri'
 
 module Scrape::Holders
   class Nosub < Holder
-    def execute(url, trim_title, episode_num)
-      episode = get_episode(trim_title, episode_num)
-
+    def execute(url, content, episode)
       holder_name = 'Nosub'
       
       document = Common::UrlUtils.instance.get_document(url)

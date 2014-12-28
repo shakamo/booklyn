@@ -22,9 +22,15 @@ module Scrape::Holders
     end
 
     def get_episode(trim_title, episode_num)
-      contents = Content.where(
-      Content.arel_table[:trim_title].eq(trim_title).
-      or(Content.arel_table[:trim_title].matches(trim_title + '%').
+      contents = Content.where(Content.arel_table[:trim_title].eq(trim_title))
+
+      if contents && contents.size == 1
+        episode = Episode.find_or_initialize_by(content_id: contents.first.id, episode_num: episode_num)
+        episode.save
+        return episode
+      end
+
+      contents = Content.where((Content.arel_table[:trim_title].matches(trim_title + '%').
       or(Content.arel_table[:trim_title].matches('%' + trim_title).
       or(Content.arel_table[:trim_title].matches('%' + trim_title + '%')))))
 
@@ -45,7 +51,7 @@ module Scrape::Holders
       entity.error = current + error
       p error
     end
-    
+
     def save_direct_url(url, post)
       if Common::UrlUtils.instance.check_direct_url(url)
         direct_url = DirectUrl.find_or_initialize_by(direct_url: url)
