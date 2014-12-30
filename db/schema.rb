@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910020047) do
+ActiveRecord::Schema.define(version: 20141229060141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20140910020047) do
   create_table "contents", force: true do |t|
     t.string   "title"
     t.string   "initial"
-    t.string   "description", limit: 2048
+    t.string   "description", limit: 8192
     t.integer  "category_id"
     t.integer  "schedule_id"
     t.datetime "created_at"

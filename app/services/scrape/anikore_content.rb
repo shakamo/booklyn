@@ -165,7 +165,9 @@ module Scrape
     def self.set_trim_title(content)
       trim_title = Common::RegexUtils.get_title_trim(content.title)
 
-      if !content.trim_title.include?(trim_title) then
+      if content.trim_title == nil then
+        content.trim_title = trim_title
+      elsif !content.trim_title.include?(trim_title) then
         content.trim_title += trim_title
       end
     end

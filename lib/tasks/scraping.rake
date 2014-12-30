@@ -7,10 +7,17 @@ select * from contents where error like '%set_schedule_id%'
 ※ただし、何かしら放送日が設定されている場合（手で設定した場合）はスキップする。
 =end
 task :scrape_contents => :environment do
-# Scrape::ScrapeForContents.execute("2014", "spring")
-# Scrape::ContentManager.createAll("Anikore", "2014", "summer")
-Scrape::ContentManager.createAll("Anikore", "2014", "autumn")
+  # Scrape::ScrapeForContents.execute("2014", "spring")
+  # Scrape::ContentManager.createAll("Anikore", "2014", "summer")
+  Scrape::ContentManager.createAll("Anikore", "2014", "autumn")
   Scrape::ContentManager.createAll("Anikore", "2015", "winter")
+
+  Scrape::ContentManager.createAll('Rakuten', '', 'autumn')
+  Scrape::ContentManager.createAll('Rakuten', '', 'winter')
+end
+task :scrape_contents_rakuten => :environment do
+  Scrape::ContentManager.createAll('Rakuten', '', 'autumn')
+  Scrape::ContentManager.createAll('Rakuten', '', 'winter')
 end
 
 =begin
@@ -38,8 +45,10 @@ task :scrape_episodes => :environment do
 
 end
 
+task :scrape_episodes_drama => :environment do
+  Scrape::EpisodeManager.update('tvdramadouga', 10)
 
-
+end
 
 
 task :scrape_episodes_all => :environment do

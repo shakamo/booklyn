@@ -1,15 +1,11 @@
 module Scrape
   class ContentManager
 
-    def self.createAll(site_name, year)
-      if site_name == 'Anikore' then
-        AnikoreContent.createAll(year)
-      end
-    end
-
     def self.createAll(site_name, year, season)
       if site_name == 'Anikore' then
         AnikoreContent.createAll(year, season)
+      elsif site_name == 'Rakuten' then
+        RakutenContent.create(season)
       end
     end
 

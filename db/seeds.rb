@@ -25,6 +25,11 @@
 @content.category_name = "OAD"
 @content.save
 
+@content = Category.find_or_initialize_by(id: 11)
+@content.category_code = "11" 
+@content.category_name = "ドラマ"
+@content.save
+
 @content = Category.find_or_initialize_by(id: 90)
 @content.category_code = "90" 
 @content.category_name = "その他"
@@ -34,6 +39,38 @@
 @content.category_code = "99" 
 @content.category_name = "未分類"
 @content.save
+
+@schedule = Schedule.find_or_initialize_by(schedule_code: "80")
+@schedule.schedule_name = "Every"
+@schedule.save
+
+@schedule = Schedule.find_or_initialize_by(schedule_code: "81")
+@schedule.schedule_name = "Sun"
+@schedule.save
+
+@schedule = Schedule.find_or_initialize_by(schedule_code: "82")
+@schedule.schedule_name = "Mon"
+@schedule.save
+
+@schedule = Schedule.find_or_initialize_by(schedule_code: "83")
+@schedule.schedule_name = "Tue"
+@schedule.save
+
+@schedule = Schedule.find_or_initialize_by(schedule_code: "84")
+@schedule.schedule_name = "Wed"
+@schedule.save
+
+@schedule = Schedule.find_or_initialize_by(schedule_code: "85")
+@schedule.schedule_name = "Thu"
+@schedule.save
+
+@schedule = Schedule.find_or_initialize_by(schedule_code: "86")
+@schedule.schedule_name = "Fri"
+@schedule.save
+
+@schedule = Schedule.find_or_initialize_by(schedule_code: "87")
+@schedule.schedule_name = "Sat"
+@schedule.save
 
 @schedule = Schedule.find_or_initialize_by(schedule_code: "90")
 @schedule.schedule_name = "Decided"

@@ -100,5 +100,16 @@ module Common
       assert_nil RegexUtils.get_title_for_anikore(str)
       assert_nil RegexUtils.get_sub_title(str)
     end
+
+    def test_9
+      str = 'ドラマ24「怪奇恋愛作戦」'
+      assert_nil RegexUtils.get_episode_num(str)
+      assert_nil RegexUtils.get_episode_string(str)
+      assert_equal 'ドラマ24「怪奇恋愛作戦」', RegexUtils.get_title(str)
+      assert_equal 'ドラマ24怪奇恋愛作戦', RegexUtils.get_title_trim(str)
+      assert_equal 'ドラマ24%怪奇恋愛作戦%', RegexUtils.get_title_query(str)
+      assert_nil RegexUtils.get_title_for_anikore(str)
+      assert_nil RegexUtils.get_sub_title(str)
+    end
   end
 end

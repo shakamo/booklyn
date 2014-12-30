@@ -12,9 +12,11 @@ module Scrape
     end
 
     def self.update(site_name, count)
-    	if site_name == 'tvanimedouga' then
-      	ScrapeTvanimedouga.update(count)
-    	end
+      if site_name == 'tvanimedouga' then
+        ScrapeTvanimedouga.update(count)
+      elsif site_name == 'tvdramadouga' then
+        ScrapeTvdramadouga.update(count)
+      end
     end
 
     def self.get_episode(content, episode_num)
@@ -25,6 +27,8 @@ module Scrape
     end
 
     def self.set_episode_name(content, episode)
+
+      p content.to_yaml
     	episode_name = Scrape::ShoboiContent.get_episode_name(content, episode)
     	if episode_name != episode.episode_name then
     		episode.episode_name = episode_name
