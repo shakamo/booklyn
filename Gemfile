@@ -48,4 +48,4 @@ gem 'rails_12factor', group: :production
 
 gem 'dalli'
 
-ruby "2.1.1"
+ruby "2.2.0"
