@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141229060141) do
+ActiveRecord::Schema.define(version: 20150124072006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,5 +126,14 @@ ActiveRecord::Schema.define(version: 20141229060141) do
   end
 
   add_index "schedules", ["schedule_code"], name: "index_schedules_on_schedule_code", using: :btree
+
+  create_table "term_frequencies", force: true do |t|
+    t.integer  "content_id"
+    t.string   "word"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "term_frequencies", ["content_id"], name: "index_term_frequencies_on_content_id", using: :btree
 
 end

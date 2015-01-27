@@ -1,3 +1,5 @@
+
+require 'rake/testtask'
 =begin
 Contentsを更新したら、contents.errorを確認する。
 
@@ -41,7 +43,7 @@ B9
 
 =end
 task :scrape_episodes => :environment do
-  Scrape::EpisodeManager.update('tvanimedouga', 10)
+  Scrape::EpisodeManager.update('tvanimedouga', 30)
 
 end
 
@@ -56,20 +58,22 @@ task :scrape_episodes_all => :environment do
 end
 
 task :scrape_dailymotion => :environment do
-
   dailymotion =Scrape::Holders::Dailymotion.new
   dailymotion.execute_by_user('', 'x1cbwok')
-
 end
 
-require 'rake/testtask'
 
 task :default => [:test]
-
-Rake::TestTask.new do |test|
-
+  Rake::TestTask.new do |test|
   test.test_files = Dir['test/**/test_*{holder,regex}*.rb'] 
-    test.verbose = true
+  test.verbose = true
+end
 
+task :tfidf => :environment do
+  Scrape::ContentManager.insert_tfidf
+end
+
+task :get_idf => :environment do
+  puts Scrape::ContentManager.get_tfidf("劇場版 銀魂 完結篇 万事屋よ永遠なれ")
 end
 

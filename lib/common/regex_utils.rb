@@ -88,8 +88,6 @@ module Common
     end
 
     def self.get_title_trim(str)
-      str = get_title(str)
-
       if str
         str.upcase!
         str = Utils.multi_trim(str)
@@ -99,7 +97,6 @@ module Common
     end
 
     def self.get_title_query(str)
-      str = get_title(str)
       if str
         str.upcase!
         str = Utils.query_trim(str)
