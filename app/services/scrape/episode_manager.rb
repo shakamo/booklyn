@@ -8,6 +8,7 @@ module Scrape
     def self.createAll(site_name)
     	if site_name == 'tvanimedouga'
     		ScrapeTvanimedouga.createAll()
+        
     	end
     end
 
