@@ -87,7 +87,6 @@ module Scrape
           end
         end
       end
-
       items = items.sort do |left, right| 
         right.tfidf <=> left.tfidf
       end
