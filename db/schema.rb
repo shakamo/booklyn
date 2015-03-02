@@ -11,54 +11,70 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124072006) do
+ActiveRecord::Schema.define(version: 20150301005051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "categories", force: true do |t|
-    t.string   "category_code"
-    t.string   "category_name"
+  create_table "categories", force: :cascade do |t|
+    t.string   "category_code", limit: 255
+    t.string   "category_name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "categories", ["category_code"], name: "index_categories_on_category_code", using: :btree
 
-  create_table "contents", force: true do |t|
-    t.string   "title"
-    t.string   "initial"
+  create_table "contents", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.string   "initial",     limit: 255
     t.string   "description", limit: 8192
     t.integer  "category_id"
     t.integer  "schedule_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "trim_title"
+    t.string   "trim_title",  limit: 255
     t.text     "error"
   end
 
   add_index "contents", ["category_id"], name: "index_contents_on_category_id", using: :btree
   add_index "contents", ["schedule_id"], name: "index_contents_on_schedule_id", using: :btree
 
-  create_table "contents_holders", force: true do |t|
-    t.string   "contents_holder_code"
-    t.string   "contents_holder_name"
+  create_table "contents_holders", force: :cascade do |t|
+    t.string   "contents_holder_code", limit: 255
+    t.string   "contents_holder_name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "contents_holders", ["contents_holder_code"], name: "index_contents_holders_on_contents_holder_code", using: :btree
 
-  create_table "direct_urls", force: true do |t|
-    t.integer  "post_id"
-    t.string   "direct_url"
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "episodes", force: true do |t|
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "direct_urls", force: :cascade do |t|
+    t.integer  "post_id"
+    t.string   "direct_url", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "episodes", force: :cascade do |t|
     t.integer  "episode_num"
-    t.string   "episode_name"
+    t.string   "episode_name", limit: 255
     t.integer  "content_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -68,47 +84,47 @@ ActiveRecord::Schema.define(version: 20150124072006) do
   add_index "episodes", ["content_id"], name: "index_episodes_on_content_id", using: :btree
   add_index "episodes", ["episode_num"], name: "index_episodes_on_episode_num", using: :btree
 
-  create_table "errors", force: true do |t|
-    t.string   "name"
+  create_table "errors", force: :cascade do |t|
+    t.string   "name",        limit: 255
     t.text     "description"
     t.text     "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "images", force: true do |t|
-    t.string   "url"
+  create_table "images", force: :cascade do |t|
+    t.string   "url",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "table_name"
+    t.string   "table_name", limit: 255
     t.integer  "generic_id"
   end
 
-  create_table "phantom_js", force: true do |t|
+  create_table "phantom_js", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "platforms", force: true do |t|
-    t.string   "platform_code"
-    t.string   "platform_name"
+  create_table "platforms", force: :cascade do |t|
+    t.string   "platform_code", limit: 255
+    t.string   "platform_name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "platforms", ["platform_code"], name: "index_platforms_on_platform_code", using: :btree
 
-  create_table "posts", force: true do |t|
-    t.string   "post"
+  create_table "posts", force: :cascade do |t|
+    t.string   "post",               limit: 255
     t.text     "url"
-    t.string   "short_url"
+    t.string   "short_url",          limit: 255
     t.integer  "episode_id"
     t.integer  "contents_holder_id"
     t.integer  "platform_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "direct_url"
-    t.string   "available"
+    t.string   "direct_url",         limit: 255
+    t.string   "available",          limit: 255
     t.text     "error"
   end
 
@@ -116,10 +132,10 @@ ActiveRecord::Schema.define(version: 20150124072006) do
   add_index "posts", ["episode_id"], name: "index_posts_on_episode_id", using: :btree
   add_index "posts", ["platform_id"], name: "index_posts_on_platform_id", using: :btree
 
-  create_table "schedules", force: true do |t|
-    t.string   "schedule_code"
-    t.string   "schedule_name"
-    t.string   "week"
+  create_table "schedules", force: :cascade do |t|
+    t.string   "schedule_code", limit: 255
+    t.string   "schedule_name", limit: 255
+    t.string   "week",          limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "date"
@@ -127,9 +143,9 @@ ActiveRecord::Schema.define(version: 20150124072006) do
 
   add_index "schedules", ["schedule_code"], name: "index_schedules_on_schedule_code", using: :btree
 
-  create_table "term_frequencies", force: true do |t|
+  create_table "term_frequencies", force: :cascade do |t|
     t.integer  "content_id"
-    t.string   "word"
+    t.string   "word",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end

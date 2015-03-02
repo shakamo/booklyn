@@ -74,6 +74,7 @@ task :tfidf => :environment do
 end
 
 task :get_idf => :environment do
-  puts Scrape::ContentManager.get_tfidf("劇場版 銀魂 完結篇 万事屋よ永遠なれ")
+  # puts Scrape::ContentManager.get_tfidf("劇場版 銀魂 完結篇 万事屋よ永遠なれ")
+  puts Scrape::ContentManager.get_tfidf("第15話")
 end
 

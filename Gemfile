@@ -48,4 +48,6 @@ gem 'rails_12factor', group: :production
 
 gem 'dalli'
 
-ruby "2.1.5"
+gem 'delayed_job_active_record'
+
+ruby "2.2.0"
