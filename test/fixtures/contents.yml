@@ -1,15 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  initial: MyString
-  description: MyString
-  category_id: 
-  schedule_id: 
-
-two:
-  title: MyString
-  initial: MyString
-  description: MyString
-  category_id: 
-  schedule_id: 

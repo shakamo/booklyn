@@ -1,0 +1,2 @@
+class ReflectEscapedFragment
+end

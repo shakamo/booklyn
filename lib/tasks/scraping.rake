@@ -1,5 +1,4 @@
-
-require 'rake/testtask'
+namespace :old do
 =begin
 Contentsを更新したら、contents.errorを確認する。
 
@@ -11,15 +10,15 @@ select * from contents where error like '%set_schedule_id%'
 task :scrape_contents => :environment do
   # Scrape::ScrapeForContents.execute("2014", "spring")
   # Scrape::ContentManager.createAll("Anikore", "2014", "summer")
-  Scrape::ContentManager.createAll("Anikore", "2014", "autumn")
-  Scrape::ContentManager.createAll("Anikore", "2015", "winter")
+  ImportContents.createAll("Anikore", "2014", "autumn")
+  # Scrape::ContentManager.createAll("Anikore", "2015", "winter")
 
-  Scrape::ContentManager.createAll('Rakuten', '', 'autumn')
-  Scrape::ContentManager.createAll('Rakuten', '', 'winter')
+  # Scrape::ContentManager.createAll('Rakuten', '', 'autumn')
+  # Scrape::ContentManager.createAll('Rakuten', '', 'winter')
 end
 task :scrape_contents_rakuten => :environment do
-  Scrape::ContentManager.createAll('Rakuten', '', 'autumn')
-  Scrape::ContentManager.createAll('Rakuten', '', 'winter')
+  ImportContents.createAll('Rakuten', '', 'autumn')
+  ImportContents.createAll('Rakuten', '', 'winter')
 end
 
 =begin
@@ -62,13 +61,6 @@ task :scrape_dailymotion => :environment do
   dailymotion.execute_by_user('', 'x1cbwok')
 end
 
-
-task :default => [:test]
-  Rake::TestTask.new do |test|
-  test.test_files = Dir['test/**/test_*{holder,regex}*.rb'] 
-  test.verbose = true
-end
-
 task :tfidf => :environment do
   Scrape::ContentManager.insert_tfidf
 end
@@ -77,4 +69,4 @@ task :get_idf => :environment do
   # puts Scrape::ContentManager.get_tfidf("劇場版 銀魂 完結篇 万事屋よ永遠なれ")
   puts Scrape::ContentManager.get_tfidf("第15話")
 end
-
+end

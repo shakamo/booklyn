@@ -1,14 +1,17 @@
 require 'test_helper'
 
 class ApiControllerTest < ActionController::TestCase
-#  test "should get recent" do
-#    get :recent
-#    assert_response :success
-#  end
 
-#  test "should get content" do
-#    get :content
-#    assert_response :success
-#  end
+  def setup
+    @controller = ApiController.new
+    @request = ActionController::TestRequest.new
+    @response = ActionController::TestResponse.new
+  end
 
+  def test_1
+    post :recent
+
+    assert_response :success
+    json = JSON.parse(@response.body)
+  end
 end

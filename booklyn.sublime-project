@@ -1,0 +1,16 @@
+{
+	"folders":
+	[
+		{
+			"name": "Booklyn-Project",
+			"path": ".",
+			"folder_exclude_patterns": [".c9", ".yardoc", "bin"],
+			"file_exclude_patterns": [".gitignore", ".project", "*.sublime-project", "Gemfile.lock"]
+		}
+	],
+		"settings":
+	{
+		"tab_size": 2,
+		 "translate_tabs_to_spaces": true
+	}
+}

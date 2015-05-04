@@ -1,19 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  post: MyString
-  url: MyString
-  short_url: MyString
-  episode_id: 
-  contents_holder_id: 
-  platform_id: 
-  is_available: false
-
-two:
-  post: MyString
-  url: MyString
-  short_url: MyString
-  episode_id: 
-  contents_holder_id: 
-  platform_id: 
-  is_available: false

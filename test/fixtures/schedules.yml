@@ -1,17 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  schedule_code: MyString
-  schedule_name: MyString
-  year: MyString
-  month: MyString
-  day: MyString
-  week: MyString
-
-two:
-  schedule_code: MyString
-  schedule_name: MyString
-  year: MyString
-  month: MyString
-  day: MyString
-  week: MyString

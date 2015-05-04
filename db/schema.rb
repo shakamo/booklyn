@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20150301005051) do
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
-    t.string   "category_code", limit: 255
-    t.string   "category_name", limit: 255
+    t.string   "category_code"
+    t.string   "category_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -26,14 +26,14 @@ ActiveRecord::Schema.define(version: 20150301005051) do
   add_index "categories", ["category_code"], name: "index_categories_on_category_code", using: :btree
 
   create_table "contents", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.string   "initial",     limit: 255
+    t.string   "title"
+    t.string   "initial"
     t.string   "description", limit: 8192
     t.integer  "category_id"
     t.integer  "schedule_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "trim_title",  limit: 255
+    t.string   "trim_title"
     t.text     "error"
   end
 
@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 20150301005051) do
   add_index "contents", ["schedule_id"], name: "index_contents_on_schedule_id", using: :btree
 
   create_table "contents_holders", force: :cascade do |t|
-    t.string   "contents_holder_code", limit: 255
-    t.string   "contents_holder_name", limit: 255
+    t.string   "contents_holder_code"
+    t.string   "contents_holder_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -67,14 +67,14 @@ ActiveRecord::Schema.define(version: 20150301005051) do
 
   create_table "direct_urls", force: :cascade do |t|
     t.integer  "post_id"
-    t.string   "direct_url", limit: 255
+    t.string   "direct_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "episodes", force: :cascade do |t|
     t.integer  "episode_num"
-    t.string   "episode_name", limit: 255
+    t.string   "episode_name"
     t.integer  "content_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20150301005051) do
   add_index "episodes", ["episode_num"], name: "index_episodes_on_episode_num", using: :btree
 
   create_table "errors", force: :cascade do |t|
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.text     "description"
     t.text     "url"
     t.datetime "created_at"
@@ -93,10 +93,10 @@ ActiveRecord::Schema.define(version: 20150301005051) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string   "url",        limit: 255
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "table_name", limit: 255
+    t.string   "table_name"
     t.integer  "generic_id"
   end
 
@@ -106,8 +106,8 @@ ActiveRecord::Schema.define(version: 20150301005051) do
   end
 
   create_table "platforms", force: :cascade do |t|
-    t.string   "platform_code", limit: 255
-    t.string   "platform_name", limit: 255
+    t.string   "platform_code"
+    t.string   "platform_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -115,16 +115,16 @@ ActiveRecord::Schema.define(version: 20150301005051) do
   add_index "platforms", ["platform_code"], name: "index_platforms_on_platform_code", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.string   "post",               limit: 255
+    t.string   "post"
     t.text     "url"
-    t.string   "short_url",          limit: 255
+    t.string   "short_url"
     t.integer  "episode_id"
     t.integer  "contents_holder_id"
     t.integer  "platform_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "direct_url",         limit: 255
-    t.string   "available",          limit: 255
+    t.string   "direct_url"
+    t.string   "available"
     t.text     "error"
   end
 
@@ -133,9 +133,9 @@ ActiveRecord::Schema.define(version: 20150301005051) do
   add_index "posts", ["platform_id"], name: "index_posts_on_platform_id", using: :btree
 
   create_table "schedules", force: :cascade do |t|
-    t.string   "schedule_code", limit: 255
-    t.string   "schedule_name", limit: 255
-    t.string   "week",          limit: 255
+    t.string   "schedule_code"
+    t.string   "schedule_name"
+    t.string   "week"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "date"
@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(version: 20150301005051) do
 
   create_table "term_frequencies", force: :cascade do |t|
     t.integer  "content_id"
-    t.string   "word",       limit: 255
+    t.string   "word"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

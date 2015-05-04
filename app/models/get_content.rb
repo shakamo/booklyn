@@ -1,0 +1,2 @@
+class GetContent
+end

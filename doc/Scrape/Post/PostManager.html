@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Scrape::Post::PostManager
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../../';
+  framesUrl = "../../frames.html#!Scrape/Post/PostManager.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Scrape.html" title="Scrape (module)">Scrape</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Post.html" title="Scrape::Post (module)">Post</a></span></span>
+     &raquo; 
+    <span class="title">PostManager</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Scrape::Post::PostManager
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Scrape::Post::PostManager</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/services/scrape/post/post_manager.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="Contents-classvariable" class="">@@Contents =
+          
+        </dt>
+        <dd><pre class="code"><span class='qwords_beg'>%w(</span><span class='tstring_content'>ひまわり</span><span class='words_sep'> </span><span class='tstring_content'>B9</span><span class='words_sep'> </span><span class='tstring_content'>Saymove</span><span class='words_sep'> </span><span class='tstring_content'>anitube</span><span class='words_sep'> </span><span class='tstring_content'>NoSub</span><span class='words_sep'> </span><span class='tstring_content'>Videofan</span><span class='words_sep'> </span><span class='tstring_content'>Ｖｅｏｈ</span><span class='words_sep'>)</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_post-class_method" title="register_post (class method)">+ (Object) <strong>register_post</strong>(holder_name, url, trim_title, episode_num) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="register_post-class_method">
+  
+    + (<tt>Object</tt>) <strong>register_post</strong>(holder_name, url, trim_title, episode_num) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/services/scrape/post/post_manager.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_register_post'>register_post</span><span class='lparen'>(</span><span class='id identifier rubyid_holder_name'>holder_name</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_trim_title'>trim_title</span><span class='comma'>,</span> <span class='id identifier rubyid_episode_num'>episode_num</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_holder_name'>holder_name</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ひまわり</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>Himawari</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Himawari</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>Himawari</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>himawari</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>Himawari</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>B9</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>B9dm</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>B9DM</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>B9dm</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>NoSub</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>Nosub</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Nosub</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>Nosub</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>nosub</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>Nosub</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Ｖｅｏｈ</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>Veoh</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Veoh</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>Veoh</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>SayMove</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>Saymove</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Saymove</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>Saymove</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>saymove</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>Saymove</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Dailymotion</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_holder'>holder</span> <span class='op'>=</span> <span class='const'>Holders</span><span class='op'>::</span><span class='const'>Dailymotion</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='kw'>else</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_holder_name'>holder_name</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>検索</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+    <span class='kw'>elsif</span> <span class='id identifier rubyid_holder_name'>holder_name</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>動画一覧</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>unknown </span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_holder_name'>holder_name</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_url'>url</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='id identifier rubyid_holder'>holder</span>
+    <span class='id identifier rubyid_holder'>holder</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_trim_title'>trim_title</span><span class='comma'>,</span> <span class='id identifier rubyid_episode_num'>episode_num</span><span class='rparen'>)</span>
+    
+    <span class='kw'>if</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MEMCACHEDCLOUD_SERVERS</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+      <span class='gvar'>$cache</span> <span class='op'>=</span> <span class='const'>Dalli</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MEMCACHEDCLOUD_SERVERS</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>,</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='symbol'>:username</span> <span class='op'>=&gt;</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MEMCACHEDCLOUD_USERNAME</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:password</span> <span class='op'>=&gt;</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MEMCACHEDCLOUD_PASSWORD</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  
+      <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>http://video.booklyn.info/?_escaped_fragment_=</span><span class='tstring_end'>&#39;</span></span>        
+      <span class='gvar'>$cache</span><span class='period'>.</span><span class='id identifier rubyid_set'>set</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+      
+      <span class='id identifier rubyid_path'>path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>http://video.booklyn.info/episode/8037</span><span class='tstring_end'>&#39;</span></span>
+      <span class='gvar'>$cache</span><span class='period'>.</span><span class='id identifier rubyid_set'>set</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+                
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Thu Mar 12 23:53:52 2015 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.2.0).
+</div>
+
+  </body>
+</html>

@@ -27,6 +27,10 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  # Asset digests allow you to set far-future HTTP expiration dates on all assets,
+  # yet still be able to expire them through the digest params.
+  config.assets.digest = true
+
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
@@ -36,14 +40,14 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => 'localhost:4000' }
+  config.action_mailer.default_url_options = { :host => 'booklyn-web.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address => 'smtp.gmail.com',
     :port => 587,
-    :domain => 'example.com',
-    :user_name => 'js6070699@gmail.com',
-    :password => '8at6v7gm',
+    :domain => 'booklyn.info',
+    :user_name => 'video.booklyn@gmail.com',
+    :password => '159GEo7L',
     :authentication => :plain,
     :enable_starttls_auto => true
   }
