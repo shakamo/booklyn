@@ -5,7 +5,7 @@ require 'uri'
 
 module Scrape::Post
   class Dailymotion < Holder
-    def execute(url, content, episode)
+    def execute(url, _content, episode)
       holder_name = 'Dailymotion'
 
       document = Common::UrlUtils.instance.get_document(url)
@@ -13,14 +13,14 @@ module Scrape::Post
       platform_name = 'PC'
       post = create_post(url, episode, holder_name, platform_name)
 
-      if document == nil
+      if document.nil?
         post.available = 'NG'
         post.error = 'ResponseCode is 4xx'
       elsif document.css('div.media-block > div').inner_text != ''
         post.available = 'NG'
         post.error = document.css('div.media-block > div').inner_text
         return
-      elsif episode != nil
+      elsif !episode.nil?
         post.available = 'OK'
       else
         post.available = 'INSPECTION'
@@ -32,8 +32,7 @@ module Scrape::Post
     def execute_by_user(user_id)
       index = 1
 
-      while true do
-
+      loop do
         url = 'https://api.dailymotion.com/videos?fields=language,status%2Ctitle%2Curl&owners=' + user_id + '&sort=recent&limit=10&page=' + index.to_s
         json = Common::UrlUtils.instance.get_json(url)
 

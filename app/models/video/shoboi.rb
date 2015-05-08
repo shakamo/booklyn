@@ -25,12 +25,12 @@ module Scrape::Content
       subtitles = doc.css('#tid_subtitle > table > tbody > tr')
 
       subtitles.each do |subtitle|
-        if subtitle.css('td')[0].inner_text.to_i == episode.episode_num then
+        if subtitle.css('td')[0].inner_text.to_i == episode.episode_num
           return subtitle.css('td')[1].inner_text
         end
       end
 
-      return nil
+      nil
     end
   end
 end

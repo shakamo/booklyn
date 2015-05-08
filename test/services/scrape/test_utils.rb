@@ -13,7 +13,6 @@ require 'minitest/autorun'
 module Scrape::Holders
   class TestUtils
     def setup
-      
     end
   end
 end

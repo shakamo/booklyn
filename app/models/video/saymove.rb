@@ -5,7 +5,7 @@ require 'uri'
 
 module Scrape::Post
   class Saymove < Holder
-    def execute(url, content, episode)
+    def execute(url, _content, episode)
       holder_name = 'SayMove'
 
       document = Common::UrlUtils.instance.get_document(url)
@@ -13,13 +13,13 @@ module Scrape::Post
       platform_name = 'PC'
       post = create_post(url, episode, holder_name, platform_name)
 
-      if document == nil
+      if document.nil?
         post.available = 'NG'
         post.error = 'ResponseCode is 4xx'
       elsif false
         post.available = 'NG'
         post.error = ''
-      elsif episode != nil
+      elsif !episode.nil?
         post.available = 'OK'
       else
         post.available = 'INSPECTION'

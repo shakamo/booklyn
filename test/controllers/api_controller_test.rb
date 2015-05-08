@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ApiControllerTest < ActionController::TestCase
-
   def setup
     @controller = ApiController.new
     @request = ActionController::TestRequest.new

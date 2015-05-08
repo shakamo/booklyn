@@ -48,16 +48,16 @@ module Scrape::Post
 
       if holder
         holder.execute(url, trim_title, episode_num)
-        
-        if ENV["MEMCACHEDCLOUD_SERVERS"]
-          $cache = Dalli::Client.new(ENV["MEMCACHEDCLOUD_SERVERS"].split(','), :username => ENV["MEMCACHEDCLOUD_USERNAME"], :password => ENV["MEMCACHEDCLOUD_PASSWORD"])
-  
-          path = 'http://video.booklyn.info/?_escaped_fragment_='        
+
+        if ENV['MEMCACHEDCLOUD_SERVERS']
+          $cache = Dalli::Client.new(ENV['MEMCACHEDCLOUD_SERVERS'].split(','), username: ENV['MEMCACHEDCLOUD_USERNAME'], password: ENV['MEMCACHEDCLOUD_PASSWORD'])
+
+          path = 'http://video.booklyn.info/?_escaped_fragment_='
           $cache.set(path, nil)
-          
+
           path = 'http://video.booklyn.info/episode/8037'
           $cache.set(path, nil)
-                    
+
         end
       end
     end

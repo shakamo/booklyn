@@ -5,7 +5,6 @@ require 'chronic'
 
 module Scrape::Content
   class Posite
-
     def self.get_schedule(content, year, season)
       doc = Common::UrlUtils.instance.get_document_for_posite(year, season)
 
@@ -18,7 +17,7 @@ module Scrape::Content
 
       array = array.flatten
       array = array.compact
-      array.delete("")
+      array.delete('')
 
       if array.size == 0
         doc.css('.ani_o').each do |node|
@@ -28,25 +27,23 @@ module Scrape::Content
 
       array = array.flatten
       array = array.compact
-      array.delete("")
+      array.delete('')
 
       begin
-        date_array = Array.new
+        date_array = []
         array.each do |str|
           date = Chronic.parse(str)
-          if date
-            date_array << date
-          end
+          date_array << date if date
         end
 
-        date_array.sort! do |a,b|
+        date_array.sort! do |a, b|
           a <=> b
         end
       rescue
         return nil
       end
 
-      return date_array.first
+      date_array.first
     end
 
     def self.get_sorted_schedule(node, regex_title)
@@ -55,7 +52,7 @@ module Scrape::Content
       posite_title = node.css('td.title > a').inner_text
       /#{regex_title}/ =~ posite_title
 
-      if posite_title != "" && $1 != nil
+      if posite_title != '' && !Regexp.last_match(1).nil?
 
         node.search('br').each do |word|
           word.replace('～')
@@ -66,7 +63,7 @@ module Scrape::Content
         end
       end
 
-      return array
+      array
     end
   end
 end

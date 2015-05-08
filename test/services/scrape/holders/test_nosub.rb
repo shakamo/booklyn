@@ -9,7 +9,6 @@ require 'minitest/autorun'
 module Scrape::Holders
   class TestNosub
     def setup
-      
     end
   end
 end

@@ -11,7 +11,6 @@ require 'minitest/autorun'
 module Scrape::Holders
   class TestDailymotion
     def setup
-      
     end
   end
 end

@@ -18,7 +18,7 @@ module Scrape::Post
       platform = Platform.find_or_initialize_by(platform_name: platform_name)
       post.platform_id = platform.id
 
-      return post
+      post
     end
 
     def get_episode(trim_title, episode_num)
@@ -30,9 +30,9 @@ module Scrape::Post
         return episode
       end
 
-      contents = Content.where((Content.arel_table[:trim_title].matches(trim_title + '%').
-      or(Content.arel_table[:trim_title].matches('%' + trim_title).
-      or(Content.arel_table[:trim_title].matches('%' + trim_title + '%')))))
+      contents = Content.where((Content.arel_table[:trim_title].matches(trim_title + '%')
+      .or(Content.arel_table[:trim_title].matches('%' + trim_title)
+      .or(Content.arel_table[:trim_title].matches('%' + trim_title + '%')))))
 
       if contents && contents.size == 1
         episode = Episode.find_or_initialize_by(content_id: contents.first.id, episode_num: episode_num)

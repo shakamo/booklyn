@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.0'
 # Use sqlite3 as the database for Active Record
@@ -42,11 +41,11 @@ gem 'nokogiri'
 
 group :test do
   # 必須
-  gem "minitest"
-  gem "minitest-rails"
-  gem "minitest-rails-capybara" # capybaraで結合テストできるようにする
+  gem 'minitest'
+  gem 'minitest-rails'
+  gem 'minitest-rails-capybara' # capybaraで結合テストできるようにする
 
-  gem "minitest-doc_reporter" # テスト結果の表示を整形
+  gem 'minitest-doc_reporter' # テスト結果の表示を整形
 
   # 機能追加系
   # gem "minitest-stub_any_instance" # メソッドmockを追加できる様にする
@@ -54,8 +53,10 @@ group :test do
   # gem "minitest-bang" # let文で遅延読み込みを使えるようにする
   # gem "minitest-line" # 行番号指定でテスト実行出来る様にする
 
-  gem "factory_girl" # DBのデータのモックを作成
-end 
+  gem 'factory_girl' # DBのデータのモックを作成
+
+  gem 'rubocop'
+end
 
 gem 'chronic'
 
@@ -65,6 +66,8 @@ gem 'dalli'
 
 gem 'delayed_job_active_record'
 
-gem 'state_machine'
+gem 'aasm'
 
-ruby "2.2.2"
+gem 'rubocop', require: false
+
+ruby '2.2.2'

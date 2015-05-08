@@ -5,7 +5,7 @@ require 'uri'
 
 module Scrape::Post
   class Veoh < Holder
-    def execute(url, content, episode)
+    def execute(url, _content, episode)
       holder_name = 'Veoh'
 
       document = Common::UrlUtils.instance.get_document(url)
@@ -15,13 +15,13 @@ module Scrape::Post
 
       ## TO-DO
 
-      if document == nil
+      if document.nil?
         post.available = 'NG'
         post.error = 'ResponseCode is 4xx'
       elsif false
         post.available = 'NG'
         post.error = ''
-      elsif episode != nil
+      elsif !episode.nil?
         post.available = 'OK'
       else
         post.available = 'INSPECTION'

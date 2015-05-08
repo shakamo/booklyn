@@ -9,7 +9,6 @@ require 'minitest/autorun'
 module Scrape::Holders
   class TestScrapeForPosts
     def setup
-      
     end
   end
 end

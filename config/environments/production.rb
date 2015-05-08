@@ -77,22 +77,20 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-
-  if ENV["MEMCACHEDCLOUD_SERVERS"]
-      config.cache_store = :dalli_store, ENV["MEMCACHEDCLOUD_SERVERS"].split(','), { :username => ENV["MEMCACHEDCLOUD_USERNAME"], :password => ENV["MEMCACHEDCLOUD_PASSWORD"] }
+  if ENV['MEMCACHEDCLOUD_SERVERS']
+    config.cache_store = :dalli_store, ENV['MEMCACHEDCLOUD_SERVERS'].split(','), { username: ENV['MEMCACHEDCLOUD_USERNAME'], password: ENV['MEMCACHEDCLOUD_PASSWORD'] }
   end
 
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => 'booklyn-web.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'booklyn-web.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => 'smtp.gmail.com',
-    :port => 587,
-    :domain => 'booklyn.info',
-    :user_name => 'video.booklyn@gmail.com',
-    :password => '159GEo7L',
-    :authentication => :plain,
-    :enable_starttls_auto => true
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'booklyn.info',
+    user_name: 'video.booklyn@gmail.com',
+    password: '159GEo7L',
+    authentication: :plain,
+    enable_starttls_auto: true
   }
 end
-

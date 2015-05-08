@@ -40,18 +40,16 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => 'booklyn-web.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'booklyn-web.herokuapp.com' }
   config.action_mailer.delivery_method = :test
   config.action_mailer.smtp_settings = {
-    :address => 'smtp.gmail.com',
-    :port => 587,
-    :domain => 'booklyn.info',
-    :user_name => 'video.booklyn@gmail.com',
-    :password => '159GEo7L',
-    :authentication => :plain,
-    :enable_starttls_auto => true
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'booklyn.info',
+    user_name: 'video.booklyn@gmail.com',
+    password: '159GEo7L',
+    authentication: :plain,
+    enable_starttls_auto: true
   }
-
 end

@@ -13,9 +13,7 @@ Rails.application.routes.draw do
   get 'atoz/:atoz', to: 'api#seo'
   get 'howto/', to: 'api#seo'
 
-  
   get 'develop', to: 'api#develop'
-  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

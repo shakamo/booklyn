@@ -7,8 +7,7 @@ module Scrape::Page
   class ScrapeTvdramadougaPage
     @@url = 'http://youtubetvdoramadouga.blog111.fc2.com/archives.html?p=1'
 
-    def self.createAll()
-
+    def self.createAll
       document = Common::UrlUtils.instance.get_document(@@url)
 
       node = document.css('#blog_achives > div > dl > dt > a.entry_title')
@@ -18,7 +17,6 @@ module Scrape::Page
     end
 
     def self.update(count)
-
       document = Common::UrlUtils.instance.get_document(@@url)
 
       node = document.css('#blog_achives > div > dl > dt > a.entry_title')
@@ -33,7 +31,7 @@ module Scrape::Page
       title_trim = Common::RegexUtils.get_title_trim(item.inner_text)
       episode_num = Common::RegexUtils.get_episode_num(item.inner_text)
       content = Scrape::ContentManager.get_content(title_query)
-      if content != nil then
+      unless content.nil?
         episode = Scrape::EpisodeManager.get_episode(content, episode_num)
       end
       path = item.attribute('href').value
@@ -41,14 +39,14 @@ module Scrape::Page
     end
 
     def self.load_tvdramadouga_detail(path, content, episode)
-      detail_url = "http://youtubetvdoramadouga.blog111.fc2.com/" + path
+      detail_url = 'http://youtubetvdoramadouga.blog111.fc2.com/' + path
       document = Common::UrlUtils.instance.get_document(detail_url)
 
       list = document.css('#mainBlock > div.mainEntryBlock > div.mainEntryBase > div.mainEntrykiji > a')
       list.each do |item|
-        holder_name = item.inner_text.sub('【','').sub('】','')
+        holder_name = item.inner_text.sub('【', '').sub('】', '')
 
-        if !(holder_name.index('検索'))
+        unless holder_name.index('検索')
           unescape_url = item.attribute('href').value
           url = URI.escape(unescape_url)
 

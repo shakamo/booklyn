@@ -12,17 +12,17 @@ class GooLabsTest < ActiveSupport::TestCase
   end
 
   def test_2
-    str = "Fate／stay night[フェイト／ステイナイト][ufotable版] 2ndシーズン"
+    str = 'Fate／stay night[フェイト／ステイナイト][ufotable版] 2ndシーズン'
     morph = call_trim_morph(str)
 
-    assert_equal "Fatestaynightフェイトステイナイトufotable版2ndシーズン", morph
+    assert_equal 'Fatestaynightフェイトステイナイトufotable版2ndシーズン', morph
   end
 
   def test_3
-    str = "まじっく快斗1412　第12話"
+    str = 'まじっく快斗1412　第12話'
     morph = call_trim_morph(str)
 
-    assert_equal "まじっく快斗1412", morph
+    assert_equal 'まじっく快斗1412', morph
   end
 
   def test_4
@@ -44,7 +44,7 @@ class GooLabsTest < ActiveSupport::TestCase
     morph = call_trim_morph(str)
 
     assert_equal 'アカメが斬る第特別総集編', morph
-    
+
     # assert_equal '1', RegexUtils.get_episode_num(str)
     # assert_equal '1話', RegexUtils.get_episode_string(str)
     # assert_equal 'アカメが斬る！　第特別総集編', RegexUtils.get_title(str)
@@ -73,7 +73,7 @@ class GooLabsTest < ActiveSupport::TestCase
     morph = call_trim_morph(str)
 
     assert_equal '六畳間の侵略者', morph
-    
+
     # assert_equal '9', RegexUtils.get_episode_num(str)
     # assert_equal '第09話', RegexUtils.get_episode_string(str)
     # assert_equal '六畳間の侵略者！？', RegexUtils.get_title(str)
@@ -85,7 +85,7 @@ class GooLabsTest < ActiveSupport::TestCase
 
   def test_8
     str = 'ひめゴト #08 「はじめてだから優しくしてください」 - ひまわり動画'
-    
+
     # assert_equal '8', RegexUtils.get_episode_num(str)
     # assert_equal '#08', RegexUtils.get_episode_string(str)
     # assert_equal 'ひめゴト', RegexUtils.get_title(str)
@@ -97,7 +97,7 @@ class GooLabsTest < ActiveSupport::TestCase
 
   def test_9
     str = 'あの夏で待ってる OVA ねこちゃんＢＤ高画質「僕達は高校最後の夏を過ごしながら、あの夏を待っている。」 - ひまわり動画'
-    
+
     # assert_nil RegexUtils.get_episode_num(str)
     # assert_nil RegexUtils.get_episode_string(str)
     # assert_equal 'あの夏で待ってる OVA', RegexUtils.get_title(str)
@@ -109,7 +109,7 @@ class GooLabsTest < ActiveSupport::TestCase
 
   def test_10
     str = 'ログ・ホライズン 第2シリーズ　第13話'
-    
+
     # assert_equal '13', RegexUtils.get_episode_num(str)
     # assert_equal '第13話', RegexUtils.get_episode_string(str)
     # assert_equal 'ログ・ホライズン 第2シリーズ', RegexUtils.get_title(str)
@@ -121,7 +121,7 @@ class GooLabsTest < ActiveSupport::TestCase
 
   def test_11
     str = 'ドラマ24「怪奇恋愛作戦」'
-    
+
     # assert_nil RegexUtils.get_episode_num(str)
     # assert_nil RegexUtils.get_episode_string(str)
     # assert_equal 'ドラマ24「怪奇恋愛作戦」', RegexUtils.get_title(str)
@@ -133,7 +133,7 @@ class GooLabsTest < ActiveSupport::TestCase
 
   def test_12
     str = 'ドラマ24「怪奇恋愛作戦」'
-    
+
     # assert_nil RegexUtils.get_episode_num(str)
     # assert_nil RegexUtils.get_episode_string(str)
     # assert_equal 'ドラマ24「怪奇恋愛作戦」', RegexUtils.get_title(str)

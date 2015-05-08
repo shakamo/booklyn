@@ -9,7 +9,6 @@ require 'minitest/autorun'
 module Scrape::Holders
   class TestSaymove
     def setup
-      
     end
   end
 end

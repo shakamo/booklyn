@@ -1,5 +1,4 @@
 module ApplicationHelper
-	def slimHelper
-		
-	end
+  def slimHelper
+  end
 end

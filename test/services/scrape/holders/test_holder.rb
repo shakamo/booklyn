@@ -12,6 +12,5 @@ module Scrape::Holders
   class TestHolder < MiniTest::Unit::TestCase
     def setup
     end
-    
   end
 end

@@ -11,25 +11,19 @@ require 'active_support/concern'
 module UrlUtils
   extend ActiveSupport::Concern
 
-  @@contents = Hash.new
+  @@contents = {}
 
   def get_document(url, redirect = false)
-    if @@contents.has_key?(url) then
-      return @@contents[url]
-    end
+    return @@contents[url] if @@contents.key?(url)
 
-    if url?(url) == false
-      return nil
-    end
+    return nil if url?(url) == false
 
     url = URI.parse(url)
     Net::HTTP.version_1_2
 
     html = Net::HTTP.start(url.host, url.port) do |http|
       path = url.path.to_s
-      if 0 < url.query.to_s.length
-        path << '?' + url.query.to_s
-      end
+      path << '?' + url.query.to_s if 0 < url.query.to_s.length
       res = http.get(path)
 
       case res
@@ -69,10 +63,10 @@ module UrlUtils
     end
 
     @@contents[url] = Nokogiri::HTML.parse(html, nil)
-    return @@contents[url]
+    @@contents[url]
   end
 
-  def get_document_for_anikore(year, season, page)
+  def get_document_for_anikore(_year, _season, _page)
     get_document(url)
   end
 
@@ -82,7 +76,6 @@ module UrlUtils
   end
 
   def get_document_for_shoboi(content, type)
-
     if content.title == '蟲師 続章（後半エピソード）'
       result_search = get_document(URI.encode('http://cal.syoboi.jp/find?sd=0&kw=蟲師 続章(第2期)&ch=&st=&cm=&r=0&rd=&v=0'))
     else
@@ -91,7 +84,7 @@ module UrlUtils
 
     result_doc = result_search.css('#main > table > tr > td > table.tframe > tr > td > a')
 
-    if result_doc == nil || result_doc.length == 0
+    if result_doc.nil? || result_doc.length == 0
       return nil
     else
       path = result_doc[0][:href]
@@ -103,10 +96,10 @@ module UrlUtils
   end
 
   def get_document_for_posite(year, season)
-    season = "01" if season == "winter"
-    season = "04" if season == "spring"
-    season = "07" if season == "summer"
-    season = "10" if season == "autumn"
+    season = '01' if season == 'winter'
+    season = '04' if season == 'spring'
+    season = '07' if season == 'summer'
+    season = '10' if season == 'autumn'
 
     key = year + season
     url = 'http://www.posite-c.com/anime/weekly/?' + key
@@ -116,7 +109,7 @@ module UrlUtils
 
   def check_direct_url(direct_url)
     regex = direct_url.scan(/.*\.(mp4|ogv|webm)$/i).flatten.compact[0]
-    if regex == nil
+    if regex.nil?
       p direct_url
       return false
     elsif url?(direct_url) == false
@@ -130,9 +123,7 @@ module UrlUtils
     begin
       html = Net::HTTP.start(url.host, url.port) do |http|
         path = url.path.to_s
-        if 0 < url.query.to_s.length
-          path << '?' + url.query.to_s
-        end
+        path << '?' + url.query.to_s if 0 < url.query.to_s.length
 
         res = http.head(path)
 
@@ -147,28 +138,23 @@ module UrlUtils
     end
   end
 
-  def get_json(url)      if @contents.has_key?(url) then
-      return @@contents[url]
-    end
+  def get_json(url)      return @@contents[url] if @contents.key?(url)
+                         url = URI.parse(url)
+                         Net::HTTP.version_1_2
 
-    url = URI.parse(url)
-    Net::HTTP.version_1_2
+                         https = Net::HTTP.new(url.host, 443)
+                         https.use_ssl = true
+                         https.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-    https = Net::HTTP.new(url.host, 443)
-    https.use_ssl = true
-    https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+                         response = https.start do |http|
+                           path = url.path.to_s
+                           path << '?' + url.query.to_s if 0 < url.query.to_s.length
 
-    response = https.start do |http|
-      path = url.path.to_s
-      if 0 < url.query.to_s.length
-        path << '?' + url.query.to_s
-      end
+                           res = http.get(path)
+                           res.response.body
+                         end
 
-      res = http.get(path)
-      res.response.body
-    end
-
-    JSON.parse(response)
+                         JSON.parse(response)
   end
 
   def url?(str)
@@ -178,8 +164,6 @@ module UrlUtils
       p 'This is not url.' + str
       return false
     end
-    return uri.scheme == 'http' || uri.scheme == 'https'
+    uri.scheme == 'http' || uri.scheme == 'https'
   end
 end
-
-

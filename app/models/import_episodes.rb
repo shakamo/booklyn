@@ -5,16 +5,16 @@ require 'uri'
 
 class ImportEpisodes
   def self.createAll(site_name)
-  	if site_name == 'tvanimedouga'
-  		ScrapeTvanimedouga.createAll()
-      
-  	end
+    if site_name == 'tvanimedouga'
+      ScrapeTvanimedouga.createAll
+
+    end
   end
 
   def self.update(site_name, count)
-    if site_name == 'tvanimedouga' then
+    if site_name == 'tvanimedouga'
       ScrapeTvanimedouga.update(count)
-    elsif site_name == 'tvdramadouga' then
+    elsif site_name == 'tvdramadouga'
       ScrapeTvdramadouga.update(count)
     end
   end
@@ -23,15 +23,12 @@ class ImportEpisodes
     episode = Episode.find_or_initialize_by(content_id: content.id, episode_num: episode_num)
     set_episode_name(content, episode)
     episode.save
-    return episode
+    episode
   end
 
   def self.set_episode_name(content, episode)
-
     p content.to_yaml
-  	episode_name = Scrape::ShoboiContent.get_episode_name(content, episode)
-  	if episode_name != episode.episode_name then
-  		episode.episode_name = episode_name
-  	end
+    episode_name = Scrape::ShoboiContent.get_episode_name(content, episode)
+    episode.episode_name = episode_name if episode_name != episode.episode_name
   end
 end

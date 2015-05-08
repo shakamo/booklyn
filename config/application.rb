@@ -28,10 +28,10 @@ module Booklyn
     config.autoload_paths += %W(#{config.root}/lib)
 
     # config.active_job.queue_adapter = :delayed_job
-    
-    Time.zone = "UTC"
+
+    Time.zone = 'UTC'
     Chronic.time_class = Time.zone
-    
+
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
