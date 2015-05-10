@@ -23,7 +23,7 @@ gem 'jbuilder'
 gem 'sdoc',         group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+gem 'spring',        group: [:development, :test]
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -56,6 +56,11 @@ group :test do
   gem 'factory_girl' # DBのデータのモックを作成
 
   gem 'rubocop'
+
+  gem 'guard'
+  gem 'guard-minitest'
+  gem 'ruby-prof'
+  gem 'terminal-notifier-guard'
 end
 
 gem 'chronic'
@@ -68,6 +73,8 @@ gem 'delayed_job_active_record'
 
 gem 'aasm'
 
-gem 'rubocop', require: false
+gem 'activerecord-import'
+
+gem 'annotate', group: :development
 
 ruby '2.2.2'

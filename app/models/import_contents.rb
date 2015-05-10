@@ -27,7 +27,7 @@ class ImportContents
     StandardMailer.system_error_mail(e).deliver_now
   end
 
-  # TODO 削除する。
+  # TODO: 削除する。
   def get_content(title_query)
     contents = Content.where(Content.arel_table[:trim_title].matches(title_query))
 

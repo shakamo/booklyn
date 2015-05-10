@@ -5,10 +5,7 @@ require 'uri'
 
 class ImportEpisodes
   def self.createAll(site_name)
-    if site_name == 'tvanimedouga'
-      ScrapeTvanimedouga.createAll
-
-    end
+    ScrapeTvanimedouga.createAll if site_name == 'tvanimedouga'
   end
 
   def self.update(site_name, count)

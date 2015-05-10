@@ -1,27 +1,10 @@
 require 'active_support/concern'
 
+# TF-IDF Algorithm
 module TfIdf
   extend ActiveSupport::Concern
 
-  class Item < Struct.new(:word, :tfidf)
-  end
-
-  def insert_tfidf
-    contents = Content.all.to_a.each do |content|
-      puts content.title
-
-      json = GooLabs.call_morph(content.title)
-
-      json['word_list'].each do |item|
-        item.each do |word|
-          puts word[0]
-
-          tf = TermFrequency.find_or_initialize_by(content_id: content.id, word: word[0])
-          tf.save
-        end
-      end
-    end
-  end
+  Item = Struct.new(:word, :tfidf)
 
   def get_tfidf(title)
     json = GooLabs.call_morph(title)
@@ -31,7 +14,7 @@ module TfIdf
 
     json['word_list'].each do |words|
       words.each do |word|
-        tfidf = ActiveRecord::Base.connection.select_rows("SELECT CASE WHEN WORD <> 0 THEN LOG(DOCUMENT/WORD::DECIMAL)+1 ELSE 0 END AS IDF FROM (SELECT COUNT(A.X) AS WORD FROM (SELECT COUNT(*) AS X FROM TERM_FREQUENCIES WHERE WORD = '" + word[0] + "' GROUP BY CONTENT_ID) AS A) AS AA ,(SELECT COUNT(B.X) AS DOCUMENT FROM (SELECT COUNT(CONTENT_ID) AS X FROM TERM_FREQUENCIES GROUP BY CONTENT_ID) AS B) AS BB")[0][0].to_f
+        tfidf = ActiveRecord::Base.connection.select("SELECT CASE WHEN WORD <> 0 THEN LOG(DOCUMENT/WORD::DECIMAL)+1 ELSE 0 END AS IDF FROM (SELECT COUNT(A.X) AS WORD FROM (SELECT COUNT(*) AS X FROM TERM_FREQUENCIES WHERE WORD = '" + word[0] + "' GROUP BY CONTENT_ID) AS A) AS AA ,(SELECT COUNT(B.X) AS DOCUMENT FROM (SELECT COUNT(CONTENT_ID) AS X FROM TERM_FREQUENCIES GROUP BY CONTENT_ID) AS B) AS BB")[0][0].to_f
 
         items << Item.new(word[0], tfidf)
 

@@ -1,78 +1,54 @@
-require 'singleton'
+require 'active_support/concern'
+require 'uri'
 require 'open-uri'
-require 'nokogiri'
-require 'logger'
 require 'net/http'
 require 'net/https'
-require 'uri'
 require 'json'
-require 'active_support/concern'
 
+# URL Utility
 module UrlUtils
   extend ActiveSupport::Concern
 
-  @@contents = {}
+  def get_body(url, redirect = 3)
+    uri = URI.parse(url)
+    req = Net::HTTP::Get.new(uri.path)
 
-  def get_document(url, redirect = false)
-    return @@contents[url] if @@contents.key?(url)
-
-    return nil if url?(url) == false
-
-    url = URI.parse(url)
-    Net::HTTP.version_1_2
-
-    html = Net::HTTP.start(url.host, url.port) do |http|
-      path = url.path.to_s
-      path << '?' + url.query.to_s if 0 < url.query.to_s.length
-      res = http.get(path)
-
-      case res
-      when Net::HTTPSuccess then
-        res.response.body
-      when Net::HTTPRedirection then
-        if redirect
-          return nil
-        else
-          loc = res.fetch 'location'
-          if url?(loc)
-            p "redirected to #{loc}"
-            return get_document(loc, true)
-          end
-
-          loc = 'http://' + url.host.to_s + ':' + url.port.to_s + loc
-          if url?(loc)
-            p "redirected to #{loc}"
-            return get_document(loc, true)
-          end
-
-          return nil
-        end
-      else
-        if res.code == '410'
-          return nil
-        elsif res.code == '403'
-          return nil
-        elsif res.code == '404'
-          return nil
-        elsif res.code == '502'
-          return nil
-        else
-          return nil
-        end
-      end
+    http = Net::HTTP.new(uri.host, uri.port)
+    res = http.start do |con|
+      con.request(req)
     end
-
-    @@contents[url] = Nokogiri::HTML.parse(html, nil)
-    @@contents[url]
+    response_handler(res, redirect) do |redirect_url|
+      get_body(redirect_url, redirect - 1)
+    end
   end
 
-  def get_document_for_anikore(_year, _season, _page)
-    get_document(url)
+  def post_body_ssl(url, form_data, redirect = 3)
+    uri = URI.parse(url)
+    req = Net::HTTP::Post.new(uri.path)
+    req.set_form_data(form_data, ';')
+
+    http = Net::HTTP.new(uri.host, 443)
+    http.use_ssl = true
+    res = http.start do |con|
+      con.request(req)
+    end
+    response_handler(res, redirect) do |redirect_url|
+      post_body_ssl(redirect_url, form_data, redirect - 1)
+    end
   end
 
-  def get_document_for_anikore_by_detail(content_id)
-    url = 'http://www.anikore.jp/anime/' + content_id.to_s
-    get_document(url)
+  def response_handler(res, redirect)
+    case res
+    when Net::HTTPSuccess
+      res.body
+    when Net::HTTPRedirection
+      fail 'HTTPRedirection Error' if redirect <= 0
+      yield res['location']
+    when Net::HTTPBadRequest
+      fail 'BadRequest Error'
+    else
+      fail 'Unknown Error'
+    end
   end
 
   def get_document_for_shoboi(content, type)
@@ -136,34 +112,5 @@ module UrlUtils
     rescue
       p direct_url
     end
-  end
-
-  def get_json(url)      return @@contents[url] if @contents.key?(url)
-                         url = URI.parse(url)
-                         Net::HTTP.version_1_2
-
-                         https = Net::HTTP.new(url.host, 443)
-                         https.use_ssl = true
-                         https.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-                         response = https.start do |http|
-                           path = url.path.to_s
-                           path << '?' + url.query.to_s if 0 < url.query.to_s.length
-
-                           res = http.get(path)
-                           res.response.body
-                         end
-
-                         JSON.parse(response)
-  end
-
-  def url?(str)
-    begin
-      uri = URI.parse(str)
-    rescue
-      p 'This is not url.' + str
-      return false
-    end
-    uri.scheme == 'http' || uri.scheme == 'https'
   end
 end

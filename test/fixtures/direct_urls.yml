@@ -1,2 +1,13 @@
+# == Schema Information
+#
+# Table name: direct_urls
+#
+#  id         :integer          not null, primary key
+#  post_id    :integer
+#  direct_url :string
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 

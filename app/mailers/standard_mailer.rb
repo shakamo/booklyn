@@ -1,7 +1,7 @@
 class StandardMailer < ActionMailer::Base
   default from: 'video.booklyn@gmail.com'
 
-  # TODO Mail送信をJob経由で実行するよう変更する。
+  # TODO: Mail送信をJob経由で実行するよう変更する。
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
