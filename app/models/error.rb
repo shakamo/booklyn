@@ -9,6 +9,18 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #
-
 class Error < ActiveRecord::Base
+  after_initialize :set_default_value, if: :new_record?
+
+  def set_default_value
+    self.name = class_name + ':' + method_name
+  end
+
+  def class_name
+    caller_locations(1).first.path.scan(%r{.*\/(.*)[.]rb$}).join
+  end
+
+  def method_name
+    caller_locations(1).first.label
+  end
 end

@@ -3,12 +3,13 @@ require 'nokogiri'
 require 'chronic'
 require 'uri'
 
-module Scrape::Post
-  class Dailymotion < Holder
+module Video
+  class Dailymotion
+    include Holder
     def execute(url, _content, episode)
       holder_name = 'Dailymotion'
 
-      document = Common::UrlUtils.instance.get_document(url)
+      document = get_body(url)
 
       platform_name = 'PC'
       post = create_post(url, episode, holder_name, platform_name)

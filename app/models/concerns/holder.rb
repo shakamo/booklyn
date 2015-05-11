@@ -3,8 +3,7 @@ require 'nokogiri'
 require 'chronic'
 require 'uri'
 
-module Scrape::Post
-  class Holder
+module Holder
     def create_post(url, episode, holder_name, platform_name)
       post = Post.find_or_initialize_by(url: url)
       if episode
@@ -60,4 +59,3 @@ module Scrape::Post
       end
     end
   end
-end

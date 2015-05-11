@@ -4,7 +4,7 @@ require 'chronic'
 require 'uri'
 require 'dalli'
 
-module Scrape::Post
+module Video
   class PostManager
     @@Contents = %w(ひまわり B9 Saymove anitube NoSub Videofan Ｖｅｏｈ)
     def self.register_post(holder_name, url, trim_title, episode_num)

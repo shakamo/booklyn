@@ -13,7 +13,16 @@
 require 'test_helper'
 
 class ErrorTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+  end
+
+  def test_1
+    error = Error.new
+    assert_equal 'test_1', error.method_name
+  end
+
+  def test_2
+    error = Error.new
+    assert_equal 'error_test', error.class_name
+  end
 end

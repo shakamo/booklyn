@@ -1,13 +1,12 @@
 require 'open-uri'
 require 'nokogiri'
-require 'common/utils'
 require 'chronic'
 
-module Scrape::Content
+module Video
   class Rakuten
     def self.create(season)
       url = 'http://entertainment.rakuten.co.jp/drama/special/' + season + '_drama/'
-      document = Common::UrlUtils.instance.get_document(url)
+      document = get_body(url)
 
       if document.nil?
         StandardMailer.error_mail('RakutenContent', 'データの取得に失敗しました。url:' + url).deliver

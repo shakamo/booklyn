@@ -12,12 +12,15 @@
 #  updated_at  :datetime
 #  trim_title  :string
 #  error       :text
+#  tid         :integer
+#  akid        :integer
 #
 # Indexes
 #
 #  index_contents_on_category_id  (category_id)
 #  index_contents_on_schedule_id  (schedule_id)
 #
+
 class Content < ActiveRecord::Base
   belongs_to :category
   belongs_to :schedule

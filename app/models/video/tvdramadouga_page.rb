@@ -3,12 +3,12 @@ require 'nokogiri'
 require 'chronic'
 require 'uri'
 
-module Scrape::Page
+module Video
   class ScrapeTvdramadougaPage
     @@url = 'http://youtubetvdoramadouga.blog111.fc2.com/archives.html?p=1'
 
     def self.createAll
-      document = Common::UrlUtils.instance.get_document(@@url)
+      document = get_body(@@url)
 
       node = document.css('#blog_achives > div > dl > dt > a.entry_title')
       node.each do |item|
@@ -17,7 +17,7 @@ module Scrape::Page
     end
 
     def self.update(count)
-      document = Common::UrlUtils.instance.get_document(@@url)
+      document = get_body(@@url)
 
       node = document.css('#blog_achives > div > dl > dt > a.entry_title')
       count.times do |index|

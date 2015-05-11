@@ -11,6 +11,12 @@ module UrlUtils
 
   def get_body(url, redirect = 3)
     uri = URI.parse(url)
+
+    # ?以降のパラメータを追加する
+    if 0 < uri.query.to_s.length
+      uri.path << '?' + uri.query.to_s
+    end
+
     req = Net::HTTP::Get.new(uri.path)
 
     http = Net::HTTP.new(uri.host, uri.port)
@@ -49,38 +55,6 @@ module UrlUtils
     else
       fail 'Unknown Error'
     end
-  end
-
-  def get_document_for_shoboi(content, type)
-    if content.title == '蟲師 続章（後半エピソード）'
-      result_search = get_document(URI.encode('http://cal.syoboi.jp/find?sd=0&kw=蟲師 続章(第2期)&ch=&st=&cm=&r=0&rd=&v=0'))
-    else
-      result_search = get_document(URI.encode('http://cal.syoboi.jp/find?sd=0&kw=' + content.title + '&ch=&st=&cm=&r=0&rd=&v=0'))
-    end
-
-    result_doc = result_search.css('#main > table > tr > td > table.tframe > tr > td > a')
-
-    if result_doc.nil? || result_doc.length == 0
-      return nil
-    else
-      path = result_doc[0][:href]
-    end
-
-    url = 'http://cal.syoboi.jp' + path + '/' + type
-    url?(url)
-    get_document(url)
-  end
-
-  def get_document_for_posite(year, season)
-    season = '01' if season == 'winter'
-    season = '04' if season == 'spring'
-    season = '07' if season == 'summer'
-    season = '10' if season == 'autumn'
-
-    key = year + season
-    url = 'http://www.posite-c.com/anime/weekly/?' + key
-
-    get_document(url)
   end
 
   def check_direct_url(direct_url)

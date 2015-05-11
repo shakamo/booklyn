@@ -3,12 +3,13 @@ require 'nokogiri'
 require 'chronic'
 require 'uri'
 
-module Scrape::Post
-  class Himawari < Holder
+module Video
+  class Himawari
+    include Holder
     def execute(url, _content, episode)
       holder_name = 'ひまわり動画'
 
-      document = Common::UrlUtils.instance.get_document(url)
+      document = get_body(url)
 
       platform_name = 'All'
       post = create_post(url, episode, holder_name, platform_name)

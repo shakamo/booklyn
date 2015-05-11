@@ -12,6 +12,8 @@
 #  updated_at  :datetime
 #  trim_title  :string
 #  error       :text
+#  tid         :integer
+#  akid        :integer
 #
 # Indexes
 #
