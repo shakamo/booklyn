@@ -12,6 +12,10 @@ class AnikoreTest < ActiveSupport::TestCase
   end
 
   def test_import_titles
-    @@anikore.import_titles('http://www.anikore.jp/chronicle/2015/winter/ac:tv/page:2', 2015, :winter, :tv)
+    # @@anikore.import_titles('http://www.anikore.jp/chronicle/2015/winter/ac:tv/page:2', 2015, :winter, :tv)
+  end
+
+  def test_import_titles
+    # @@anikore.import_titles('http://www.anikore.jp/chronicle/2015/winter/ac:tv/page:2', 2015, :winter, :tv)
   end
 end
