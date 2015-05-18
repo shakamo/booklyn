@@ -5,7 +5,7 @@
 #  id          :integer          not null, primary key
 #  title       :string
 #  initial     :string
-#  description :string(8192)
+#  description :string(16384)
 #  category_id :integer
 #  schedule_id :integer
 #  created_at  :datetime
@@ -22,4 +22,103 @@
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+tf1:
+  title: クロノトリガー
+  initial: くろのとりがー
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf2:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf3:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf4:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf5:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf6:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf7:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf8:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf9:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf10:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf11:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf12:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf13:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
+tf14:
+  title: あいうえお
+  initial: あいうえお
+  description: 詳細詳細
+  category_id: 1
+  schedule_id: 1
+
 

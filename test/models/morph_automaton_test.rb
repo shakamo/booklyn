@@ -89,7 +89,6 @@ class MorphAutomatonTest < ActiveSupport::TestCase
     assert_equal job.episode_name, nil
   end
 
-
   def test_15
     str = 'アカメが斬る！　第特別総集編 1話'
 

@@ -14,4 +14,40 @@
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+contents_holder1:
+  contents_holder_code: :01
+  contents_holder_name: ひまわり動画
+  created_at: 2015-05-17 10:46:50.632497
+  updated_at: 2015-05-17 10:46:50.632497
+
+contents_holder2:
+  contents_holder_code: :02
+  contents_holder_name: B9DM
+  created_at: 2015-05-17 10:46:50.739785
+  updated_at: 2015-05-17 10:46:50.739785
+
+contents_holder3:
+  contents_holder_code: :03
+  contents_holder_name: Nosub
+  created_at: 2015-05-17 10:46:50.828957
+  updated_at: 2015-05-17 10:46:50.828957
+
+contents_holder4:
+  contents_holder_code: :04
+  contents_holder_name: Veoh
+  created_at: 2015-05-17 10:46:50.908282
+  updated_at: 2015-05-17 10:46:50.908282
+
+contents_holder5:
+  contents_holder_code: :05
+  contents_holder_name: SayMove
+  created_at: 2015-05-17 10:46:51.005254
+  updated_at: 2015-05-17 10:46:51.005254
+
+contents_holder6:
+  contents_holder_code: :06
+  contents_holder_name: Dailymotion
+  created_at: 2015-05-17 10:46:51.089127
+  updated_at: 2015-05-17 10:46:51.089127
+
 

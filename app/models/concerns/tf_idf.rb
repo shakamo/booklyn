@@ -3,54 +3,70 @@ require 'active_support/concern'
 # TF-IDF Algorithm
 module TfIdf
   extend ActiveSupport::Concern
+  include GooLabs
 
   Item = Struct.new(:word, :tfidf)
 
   def get_tfidf(title)
-    json = GooLabs.call_morph(title)
+    morph = call_morph(title)
+    words = morph[:raw].join("','")
+    words_for_in = "'" + words + "'"
 
-    items = []
-    wordSet = Set.new
+    sql = <<-SQL
+      SELECT
+          CONTENT_ID
+          ,SUM(TFIDF) AS TFIDF
+      FROM
+          (
+              SELECT
+                  RELN.CONTENT_ID AS CONTENT_ID
+                  ,IDF.IDF * TF.TF AS TFIDF
+              FROM
+                  (
+                      SELECT
+                          LOG(10 ,(
+                                  SELECT
+                                      COUNT(*) AS TOTAL
+                                  FROM
+                                      CONTENTS
+                              ) / COUNT(*)) + 1 AS IDF
+                          ,TF.WORD
+                      FROM
+                          TERM_FREQUENCIES TF
+                      WHERE
+                          TF.WORD IN(#{words_for_in})
+                      GROUP BY
+                          TF.WORD
+                  ) IDF
+                  LEFT OUTER JOIN
+                      TERM_FREQUENCIES AS RELN
+                  ON  (
+                          IDF.WORD = RELN.WORD
+                      )
+                  LEFT OUTER JOIN
+                      (
+                          SELECT
+                              CONTENT_ID
+                              ,1.0 / COUNT(*) AS TF
+                          FROM
+                              TERM_FREQUENCIES
+                          GROUP BY
+                              CONTENT_ID
+                      ) AS TF
+                  ON  (
+                          RELN.CONTENT_ID = TF.CONTENT_ID
+                      )
+          ) AS A
+      GROUP BY
+          CONTENT_ID
+      ORDER BY
+          SUM(TFIDF) DESC
+    SQL
 
-    json['word_list'].each do |words|
-      words.each do |word|
-        tfidf = ActiveRecord::Base.connection.select("SELECT CASE WHEN WORD <> 0 THEN LOG(DOCUMENT/WORD::DECIMAL)+1 ELSE 0 END AS IDF FROM (SELECT COUNT(A.X) AS WORD FROM (SELECT COUNT(*) AS X FROM TERM_FREQUENCIES WHERE WORD = '" + word[0] + "' GROUP BY CONTENT_ID) AS A) AS AA ,(SELECT COUNT(B.X) AS DOCUMENT FROM (SELECT COUNT(CONTENT_ID) AS X FROM TERM_FREQUENCIES GROUP BY CONTENT_ID) AS B) AS BB")[0][0].to_f
-
-        items << Item.new(word[0], tfidf)
-
-        wordSet << word[0] if 2.3 < tfidf
-      end
+    tfidf = ActiveRecord::Base.connection.select_all(sql).select do |item|
+      Settings.tfidf <= item['tfidf'].to_f
     end
-    items = items.sort do |left, right|
-      right.tfidf <=> left.tfidf
-    end
-
-    contentSet = Set.new
-    items.each do |item|
-      contents = TermFrequency.where(word: item.word)
-
-      currentSet = Set.new
-      contents.each do |content|
-        currentSet << content.content_id
-      end
-
-      if contentSet.size == 0
-        currentSet.each do |item|
-          contentSet << item
-        end
-      else
-        contentSet &= currentSet
-      end
-
-      if contentSet.size == 1
-        word_count = TermFrequency.where(word: wordSet.to_a, content_id: contentSet.first).group(:word).count.size
-
-        if wordSet.size * 0.8 < word_count && word_count <= wordSet.size
-          return contentSet.first
-        end
-        return nil
-      end
-    end
-    nil
+    tfidf[0] if tfidf.is_a?(Array)
+    tfidf
   end
 end

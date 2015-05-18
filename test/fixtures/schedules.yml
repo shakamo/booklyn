@@ -14,6 +14,68 @@
 #
 #  index_schedules_on_schedule_code  (schedule_code)
 #
+schedule1:
+  schedule_code: 80
+  schedule_name: Every
+  week: 
+  date: 
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+schedule2:
+  schedule_code: 81
+  schedule_name: Sun
+  week: Sun
+  date: 
 
+schedule3:
+  schedule_code: 82
+  schedule_name: Mon
+  week: Mon
+  date: 
+
+schedule4:
+  schedule_code: 83
+  schedule_name: Tue
+  week: Tue
+  date: 
+
+schedule5:
+  schedule_code: 84
+  schedule_name: Wed
+  week: Wed
+  date: 
+
+schedule6:
+  schedule_code: 85
+  schedule_name: Thu
+  week: Thu
+  date: 
+
+schedule7:
+  schedule_code: 86
+  schedule_name: Fri
+  week: Fri
+  date: 
+
+schedule8:
+  schedule_code: 87
+  schedule_name: Sat
+  week: Sat
+  date: 
+
+schedule9:
+  schedule_code: 90
+  schedule_name: Decided
+  week: 
+  date: 
+
+schedule10:
+  schedule_code: 99
+  schedule_name: Unknown
+  week: 
+  date: 
+
+schedule99999:
+  schedule_code: '01'
+  schedule_name: Mon
+  week: Mon
+  date: 2003-04-07

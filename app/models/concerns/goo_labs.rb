@@ -7,11 +7,8 @@ module GooLabs
   extend ActiveSupport::Concern
   include UrlUtils
 
-  API_KEY = '9f44e0022e49a2414c19d0689a687c44b0e85d603219e4f7042b6d57a668d678'
-  GOO_LAB_URI = 'https://labs.goo.ne.jp/api/morph'
-
   def call_morph(target_string)
-    body = post_body_ssl(GOO_LAB_URI, { app_id: API_KEY, sentence: target_string })
+    body = post_body_ssl(Settings.goo.url, app_id: Settings.goo.api_key, sentence: target_string)
     load_morph_array(body)
   end
 

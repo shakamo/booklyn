@@ -77,4 +77,6 @@ gem 'activerecord-import'
 
 gem 'annotate', group: :development
 
+gem 'rails_config'
+
 ruby '2.2.2'

@@ -1,0 +1,14 @@
+shoboi:
+    root: http://cal.syoboi.jp
+    search: http://cal.syoboi.jp/find?sd=0&kw=
+    title: http://cal.syoboi.jp/db.php?Command=TitleLookup&TID=*
+    schedule: http://cal.syoboi.jp/db.php?Command=ProgLookup&JOIN=SubTitles&Count=1&TID=
+
+anikore:
+    url: http://www.anikore.jp/chronicle/
+    detail_url: http://www.anikore.jp/anime/
+goo:
+    api_key: 9f44e0022e49a2414c19d0689a687c44b0e85d603219e4f7042b6d57a668d678
+    url: https://labs.goo.ne.jp/api/morph
+
+tfidf: 2.0

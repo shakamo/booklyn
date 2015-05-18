@@ -15,3 +15,63 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+category1:
+  category_code: '01'
+  category_name: テレビアニメ
+  created_at: 2015-05-17 10:46:48.713711
+  updated_at: 2015-05-17 10:46:48.713711
+
+category2:
+  category_code: '02'
+  category_name: アニメ映画
+  created_at: 2015-05-17 10:46:48.813687
+  updated_at: 2015-05-17 10:46:48.813687
+
+category3:
+  category_code: '03'
+  category_name: OVA
+  created_at: 2015-05-17 10:46:48.899724
+  updated_at: 2015-05-17 10:46:48.899724
+
+category4:
+  category_code: '04'
+  category_name: Webアニメ
+  created_at: 2015-05-17 10:46:48.988725
+  updated_at: 2015-05-17 10:46:48.988725
+
+category5:
+  category_code: '05'
+  category_name: OAD
+  created_at: 2015-05-17 10:46:49.066032
+  updated_at: 2015-05-17 10:46:49.066032
+
+category6:
+  category_code: '06'
+  category_name: アニメ関連
+  created_at: 2015-05-17 10:46:49.164303
+  updated_at: 2015-05-17 10:46:49.164303
+
+category10:
+  category_code: 10
+  category_name: 特撮
+  created_at: 2015-05-17 10:46:49.243824
+  updated_at: 2015-05-17 10:46:49.243824
+
+category11:
+  category_code: 11
+  category_name: ドラマ
+  created_at: 2015-05-17 10:46:49.325769
+  updated_at: 2015-05-17 10:46:49.325769
+
+category90:
+  category_code: 90
+  category_name: その他
+  created_at: 2015-05-17 10:46:49.400594
+  updated_at: 2015-05-17 10:46:49.400594
+
+category99:
+  category_code: 99
+  category_name: 未分類
+  created_at: 2015-05-17 10:46:49.510665
+  updated_at: 2015-05-17 10:46:49.510665
+

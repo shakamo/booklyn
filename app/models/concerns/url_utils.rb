@@ -13,9 +13,7 @@ module UrlUtils
     uri = URI.parse(url)
 
     # ?以降のパラメータを追加する
-    if 0 < uri.query.to_s.length
-      uri.path << '?' + uri.query.to_s
-    end
+    uri.path << '?' + uri.query.to_s if 0 < uri.query.to_s.length
 
     req = Net::HTTP::Get.new(uri.path)
 
@@ -29,6 +27,7 @@ module UrlUtils
   end
 
   def post_body_ssl(url, form_data, redirect = 3)
+    puts url
     uri = URI.parse(url)
     req = Net::HTTP::Post.new(uri.path)
     req.set_form_data(form_data, ';')

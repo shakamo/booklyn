@@ -5,10 +5,10 @@ development:
   pool: 5
   timeout: 5000
   encoding: utf8
-  database: d32tspk2luh2a6
-  username: lbyfyxiglqiefh
-  password: zwOXV5hwTAV0chWSnJAadMUOOB
-  host: ec2-184-73-165-195.compute-1.amazonaws.com
+  database: d8sl52v2pm07a
+  username: danmopscghfrwi
+  password: FpSuD33o5Ly_ouRnhMPkAS8zdO
+  host: ec2-54-243-187-196.compute-1.amazonaws.com
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -18,10 +18,10 @@ test:
   pool: 5
   timeout: 5000
   encoding: utf8
-  database: d32tspk2luh2a6
-  username: lbyfyxiglqiefh
-  password: zwOXV5hwTAV0chWSnJAadMUOOB
-  host: ec2-184-73-165-195.compute-1.amazonaws.com
+  database: booklyn-test
+  username: booklyn
+  password: 8at6v7gm
+  host: localhost
 
 production:
   adapter: postgresql

@@ -1,12 +1,1 @@
-Metrics/AbcSize:
-  # The ABC size is a calculated magnitude, so this number can be a Fixnum or
-  # a Float.
-  Max: 20 # default:15
-
-# 日本語でのコメントを許可
-AsciiComments:
-  Enabled: false
-
-Metrics/MethodLength:
-  CountComments: false  # count full line comments?
-  Max: 15 # default: 10
+Metrics/AbcSize:  # The ABC size is a calculated magnitude, so this number can be a Fixnum or  # a Float.  Max: 20 # default:15# 日本語でのコメントを許可AsciiComments:  Enabled: falseMetrics/MethodLength:  CountComments: false  # count full line comments?  Max: 15 # default: 10

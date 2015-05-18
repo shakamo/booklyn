@@ -14,4 +14,16 @@
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+platform1:
+  platform_code: :01
+  platform_name: All
+  created_at: 2015-05-17 10:46:51.251644
+  updated_at: 2015-05-17 10:46:51.251644
+
+platform10:
+  platform_code: 10
+  platform_name: PC
+  created_at: 2015-05-17 10:46:51.350681
+  updated_at: 2015-05-17 10:46:51.350681
+
 

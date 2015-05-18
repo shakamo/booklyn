@@ -5,7 +5,7 @@
 #  id          :integer          not null, primary key
 #  title       :string
 #  initial     :string
-#  description :string(8192)
+#  description :string(16384)
 #  category_id :integer
 #  schedule_id :integer
 #  created_at  :datetime

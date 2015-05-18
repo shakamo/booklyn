@@ -16,7 +16,11 @@
 require 'test_helper'
 
 class TermFrequencyTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def test_1
+    assert TermFrequency.new.search
+  end
+
+  def test_2
+    TermFrequency.new.register
+  end
 end

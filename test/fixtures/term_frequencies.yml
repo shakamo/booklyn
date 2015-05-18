@@ -15,3 +15,54 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+tfidf1:
+    content_id: 99990
+    word: あ
+
+tfidf2:
+    content_id: 99990
+    word: い
+
+tfidf3:
+    content_id: 99991
+    word: うえお
+
+tfidf4:
+    content_id: 99992
+    word: うえお
+
+tfidf5:
+    content_id: 99999
+    word: あ
+
+tfidf6:
+    content_id: 99999
+    word: あ
+
+tfidf7:
+    content_id: 99999
+    word: あ
+
+tfidf8:
+    content_id: 99999
+    word: あ
+
+tfidf9:
+    content_id: 99999
+    word: あ
+
+tfidf10:
+    content_id: 99999
+    word: あ
+
+tfidf11:
+    content_id: 99999
+    word: あ
+
+tfidf12:
+    content_id: 99999
+    word: あ
+
+tfidf13:
+    content_id: 99999
+    word: あ
