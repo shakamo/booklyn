@@ -17,14 +17,14 @@ require 'test_helper'
 #
 class TermFrequencyTest < ActiveSupport::TestCase
   def test_1
-    assert TermFrequency.new.search
+    assert TermFrequency.search
   end
 
   def test_2
-    TermFrequency.new.register
+    TermFrequency.register
   end
 
   def test_3
-    TermFrequency.new.execute
+    TermFrequency.execute
   end
 end

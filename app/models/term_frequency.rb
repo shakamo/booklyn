@@ -17,54 +17,57 @@ require 'goo_labs'
 
 #
 class TermFrequency < ActiveRecord::Base
-  include GooLabs
   belongs_to :content
 
-  def execute
-    register
-  end
+  class << self
+    include GooLabs
 
-  def register
-    new_term_frequencies = []
-
-    search.each do |item|
-      morph = call_morph(item['title'])
-
-      morph[:raw].each do |word|
-        tf = TermFrequency.new
-        tf.content_id = item['id']
-        tf.word = word
-
-        new_term_frequencies << tf
-      end
-
-      if 1000 < new_term_frequencies.size
-        TermFrequency.import new_term_frequencies
-        new_term_frequencies = []
-      end
+    def execute
+      TermFrequency.register
     end
 
-    TermFrequency.import new_term_frequencies
-  end
-  handle_asynchronously :register
+    def register
+      new_term_frequencies = []
 
-  def search
-    sql = <<-SQL
-    SELECT
-      C.ID       AS ID
-      , C.TITLE  AS TITLE
-    FROM
-      CONTENTS C
-    WHERE
-      NOT EXISTS(
-        SELECT
-          *
-        FROM
-          TERM_FREQUENCIES TF
-        WHERE
-          TF.CONTENT_ID = C.ID
-      )
-    SQL
-    ActiveRecord::Base.connection.select_all(sql)
+      search.each do |item|
+        morph = call_morph(item['title'])
+
+        morph[:raw].each do |word|
+          tf = TermFrequency.new
+          tf.content_id = item['id']
+          tf.word = word
+
+          new_term_frequencies << tf
+        end
+
+        if 1000 < new_term_frequencies.size
+          TermFrequency.import new_term_frequencies
+          new_term_frequencies = []
+        end
+      end
+
+      TermFrequency.import new_term_frequencies
+    end
+    handle_asynchronously :register
+
+    def search
+      sql = <<-SQL
+      SELECT
+        C.ID       AS ID
+        , C.TITLE  AS TITLE
+      FROM
+        CONTENTS C
+      WHERE
+        NOT EXISTS(
+          SELECT
+            *
+          FROM
+            TERM_FREQUENCIES TF
+          WHERE
+            TF.CONTENT_ID = C.ID
+        )
+      SQL
+      ActiveRecord::Base.connection.select_all(sql)
+    end
   end
 end
