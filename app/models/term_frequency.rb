@@ -23,18 +23,20 @@ class TermFrequency < ActiveRecord::Base
     include GooLabs
 
     def execute
-      TermFrequency.register
+      search.each_slice(10) do |items|
+        register(items.to_a)
+      end
     end
 
-    def register
+    def register(items)
       new_term_frequencies = []
 
-      search.each do |item|
-        morph = call_morph(item['title'])
+      items.each do |item|
+        morph = call_morph(item[:title])
 
         morph[:raw].each do |word|
           tf = TermFrequency.new
-          tf.content_id = item['id']
+          tf.content_id = item[:id]
           tf.word = word
 
           new_term_frequencies << tf
@@ -67,7 +69,7 @@ class TermFrequency < ActiveRecord::Base
             TF.CONTENT_ID = C.ID
         )
       SQL
-      ActiveRecord::Base.connection.select_all(sql)
+      TermFrequency.find_by_sql(sql)
     end
   end
 end

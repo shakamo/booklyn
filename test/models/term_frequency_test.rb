@@ -21,7 +21,8 @@ class TermFrequencyTest < ActiveSupport::TestCase
   end
 
   def test_2
-    TermFrequency.register
+    param = [{ id: '1', title: 'あいうえお' }, { id: '2', title: 'あいうえお' }]
+    TermFrequency.register param
   end
 
   def test_3
