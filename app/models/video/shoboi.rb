@@ -16,13 +16,27 @@ module Video
     end
 
     def import_all
+      contents = []
+
       docs = Nokogiri::XML(get_body(Settings.shoboi.title))
       docs.css(:TitleItem).each do |doc|
         content = get_content(doc)
-
         episodes = doc.css(:SubTitles).text
         save_episodes(content.id, episodes)
+
+        if content.new_record?
+          contents << content
+        else
+          content.save
+        end
+
+        if 100 < contents.size
+          Content.import contents
+          contents = []
+        end
       end
+
+      Content.import contents
     end
 
     def get_content(doc)
@@ -38,7 +52,6 @@ module Video
       content.description = comment
       content.category_id = get_category(doc, count)
       content.schedule_id = get_schedule(tid).id
-      content.save
 
       content
     end

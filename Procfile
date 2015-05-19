@@ -1,2 +1,2 @@
 web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb
-worker: bundle exec rake jobs:work -n 1
+worker: bundle exec rake jobs:work
