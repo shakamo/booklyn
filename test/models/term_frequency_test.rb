@@ -23,4 +23,8 @@ class TermFrequencyTest < ActiveSupport::TestCase
   def test_2
     TermFrequency.new.register
   end
+
+  def test_3
+    TermFrequency.new.execute
+  end
 end

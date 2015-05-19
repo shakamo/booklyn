@@ -20,6 +20,10 @@ class TermFrequency < ActiveRecord::Base
   include GooLabs
   belongs_to :content
 
+  def execute
+    register
+  end
+
   def register
     new_term_frequencies = []
 
@@ -28,13 +32,10 @@ class TermFrequency < ActiveRecord::Base
 
       morph[:raw].each do |word|
         tf = TermFrequency.new
-        tf.content_id = item[:ID]
+        tf.content_id = item['id']
         tf.word = word
 
         new_term_frequencies << tf
-
-        puts tf.content_id
-        puts tf.word
       end
 
       if 1000 < new_term_frequencies.size
@@ -45,6 +46,7 @@ class TermFrequency < ActiveRecord::Base
 
     TermFrequency.import new_term_frequencies
   end
+  handle_asynchronously :register
 
   def search
     sql = <<-SQL

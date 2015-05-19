@@ -1,18 +1,15 @@
 desc 'Contentsを取得する。'
 task scrape: :environment do
-  Rails.env = 'development'
   Video::Shoboi.new.import_all
 end
 
 desc 'TermFrequencyを登録する。'
 task term_frequency: :environment do
-  Rails.env = 'development'
-    ImportContents.new.perform_all(2015, :spring)
+  TermFrequency.new.execute
 end
 
 desc 'Imageを取得する。'
 task image: :environment do
-  Rails.env = 'development'
     ImportContents.new.perform_all(2015, :spring)
 end
 
