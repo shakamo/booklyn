@@ -14,7 +14,7 @@
 #
 
 require 'test_helper'
-
+#
 class TermFrequencyTest < ActiveSupport::TestCase
   def test_1
     assert TermFrequency.new.search
