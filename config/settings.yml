@@ -1,7 +1,7 @@
 shoboi:
     root: http://cal.syoboi.jp
     search: http://cal.syoboi.jp/find?sd=0&kw=
-    title: http://cal.syoboi.jp/db.php?Command=TitleLookup&TID=*&LastUpdate=20140421_000000-
+    title: http://cal.syoboi.jp/db.php?Command=TitleLookup&TID=*&LastUpdate=20150521_000000-
     schedule: http://cal.syoboi.jp/db.php?Command=ProgLookup&JOIN=SubTitles&Count=1&TID=
 
 anikore:
