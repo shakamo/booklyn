@@ -13,7 +13,7 @@ module TfIdf
     words_for_in = "'" + words + "'"
 
     sql = <<-SQL
-      SELECT
+    SELECT
           CONTENT_ID
           ,SUM(TFIDF) AS TFIDF
       FROM
