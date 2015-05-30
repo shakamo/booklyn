@@ -16,16 +16,4 @@
 require 'test_helper'
 #
 class TermFrequencyTest < ActiveSupport::TestCase
-  def test_1
-    assert TermFrequency.search
-  end
-
-  def test_2
-    param = [{ id: '1', title: 'あいうえお' }, { id: '2', title: 'あいうえお' }]
-    TermFrequency.register param
-  end
-
-  def test_3
-    TermFrequency.execute
-  end
 end
