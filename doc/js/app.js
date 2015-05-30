@@ -1,51 +1,51 @@
 function createSourceLinks() {
-    $('.method_details_list .source_code').
-        before("<span class='showSource'>[<a href='#' class='toggleSource'>View source</a>]</span>");
-    $('.toggleSource').toggle(function() {
-       $(this).parent().nextAll('.source_code').slideDown(100);
-       $(this).text("Hide source");
+  $('.method_details_list .source_code').
+  before("<span class='showSource'>[<a href='#' class='toggleSource'>View source</a>]</span>");
+  $('.toggleSource').toggle(function() {
+      $(this).parent().nextAll('.source_code').slideDown(100);
+      $(this).text("Hide source");
     },
     function() {
-        $(this).parent().nextAll('.source_code').slideUp(100);
-        $(this).text("View source");
+      $(this).parent().nextAll('.source_code').slideUp(100);
+      $(this).text("View source");
     });
 }
 
 function createDefineLinks() {
-    var tHeight = 0;
-    $('.defines').after(" <a href='#' class='toggleDefines'>more...</a>");
-    $('.toggleDefines').toggle(function() {
-        tHeight = $(this).parent().prev().height();
-        $(this).prev().show();
-        $(this).parent().prev().height($(this).parent().height());
-        $(this).text("(less)");
+  var tHeight = 0;
+  $('.defines').after(" <a href='#' class='toggleDefines'>more...</a>");
+  $('.toggleDefines').toggle(function() {
+      tHeight = $(this).parent().prev().height();
+      $(this).prev().show();
+      $(this).parent().prev().height($(this).parent().height());
+      $(this).text("(less)");
     },
     function() {
-        $(this).prev().hide();
-        $(this).parent().prev().height(tHeight);
-        $(this).text("more...");
+      $(this).prev().hide();
+      $(this).parent().prev().height(tHeight);
+      $(this).text("more...");
     });
 }
 
 function createFullTreeLinks() {
-    var tHeight = 0;
-    $('.inheritanceTree').toggle(function() {
-        tHeight = $(this).parent().prev().height();
-        $(this).parent().toggleClass('showAll');
-        $(this).text("(hide)");
-        $(this).parent().prev().height($(this).parent().height());
+  var tHeight = 0;
+  $('.inheritanceTree').toggle(function() {
+      tHeight = $(this).parent().prev().height();
+      $(this).parent().toggleClass('showAll');
+      $(this).text("(hide)");
+      $(this).parent().prev().height($(this).parent().height());
     },
     function() {
-        $(this).parent().toggleClass('showAll');
-        $(this).parent().prev().height(tHeight);
-        $(this).text("show all");
+      $(this).parent().toggleClass('showAll');
+      $(this).parent().prev().height(tHeight);
+      $(this).text("show all");
     });
 }
 
 function fixBoxInfoHeights() {
-    $('dl.box dd.r1, dl.box dd.r2').each(function() {
-       $(this).prev().height($(this).height());
-    });
+  $('dl.box dd.r1, dl.box dd.r2').each(function() {
+    $(this).prev().height($(this).height());
+  });
 }
 
 function searchFrameLinks() {
@@ -61,8 +61,7 @@ function toggleSearchFrame(id, link) {
   if (frame.attr('src') == link && frame.css('display') != "none") {
     frame.slideUp(100);
     $('#search a').removeClass('active inactive');
-  }
-  else {
+  } else {
     $(id).addClass('active').removeClass('inactive');
     frame.attr('src', link).slideDown(100);
   }
@@ -80,12 +79,11 @@ function framesInit() {
     $('#menu .noframes a').attr('href', document.location);
     try {
       window.top.document.title = $('html head title').text();
-    } catch(error) {
+    } catch (error) {
       // some browsers will not allow this when serving from file://
       // but we don't want to stop the world.
     }
-  }
-  else {
+  } else {
     $('#menu .noframes a').text('frames').attr('href', framesUrl);
   }
 }
@@ -95,13 +93,23 @@ function keyboardShortcuts() {
   $(document).keypress(function(evt) {
     if (evt.altKey || evt.ctrlKey || evt.metaKey || evt.shiftKey) return;
     if (typeof evt.target !== "undefined" &&
-        (evt.target.nodeName == "INPUT" ||
+      (evt.target.nodeName == "INPUT" ||
         evt.target.nodeName == "TEXTAREA")) return;
     switch (evt.charCode) {
-      case 67: case 99:  $('#class_list_link').click(); break;  // 'c'
-      case 77: case 109: $('#method_list_link').click(); break; // 'm'
-      case 70: case 102: $('#file_list_link').click(); break;   // 'f'
-      default: break;
+      case 67:
+      case 99:
+        $('#class_list_link').click();
+        break; // 'c'
+      case 77:
+      case 109:
+        $('#method_list_link').click();
+        break; // 'm'
+      case 70:
+      case 102:
+        $('#file_list_link').click();
+        break; // 'f'
+      default:
+        break;
     }
   });
 }
@@ -117,8 +125,7 @@ function summaryToggle() {
       if (next.hasClass('compact')) {
         next.toggle();
         next.nextAll('ul.summary').first().toggle();
-      }
-      else if (next.hasClass('summary')) {
+      } else if (next.hasClass('summary')) {
         var list = $('<ul class="summary compact" />');
         list.html(next.html());
         list.find('.summary_desc, .note').remove();
@@ -135,8 +142,7 @@ function summaryToggle() {
   if (localStorage) {
     if (localStorage.summaryCollapsed == "collapse") {
       $('.summary_toggle').first().click();
-    }
-    else localStorage.summaryCollapsed = "expand";
+    } else localStorage.summaryCollapsed = "expand";
   }
 }
 
@@ -155,7 +161,9 @@ function generateTOC() {
   var tags = ['h2', 'h3', 'h4', 'h5', 'h6'];
   var i;
   if ($('#filecontents h1').length > 1) tags.unshift('h1');
-  for (i = 0; i < tags.length; i++) { tags[i] = '#filecontents ' + tags[i]; }
+  for (i = 0; i < tags.length; i++) {
+    tags[i] = '#filecontents ' + tags[i];
+  }
   var lastTag = parseInt(tags[0][1], 10);
   $(tags.join(', ')).each(function() {
     if ($(this).parents('.method_details .docstring').length != 0) return;
@@ -167,13 +175,18 @@ function generateTOC() {
       if (typeof(proposedId) != "undefined") this.id = proposedId;
       else {
         var proposedId = $(this).text().replace(/[^a-z0-9-]/ig, '_');
-        if ($('#' + proposedId).length > 0) { proposedId += counter; counter++; }
+        if ($('#' + proposedId).length > 0) {
+          proposedId += counter;
+          counter++;
+        }
         this.id = proposedId;
       }
     }
     if (thisTag > lastTag) {
       for (i = 0; i < thisTag - lastTag; i++) {
-        var tmp = $('<ol/>'); toc.append(tmp); toc = tmp;
+        var tmp = $('<ol/>');
+        toc.append(tmp);
+        toc = tmp;
       }
     }
     if (thisTag < lastTag) {

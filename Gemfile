@@ -6,6 +6,10 @@ gem 'rails', '~> 4.2.0'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails'
+
+gem 'less-rails'
+gem 'therubyracer'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 # Use CoffeeScript for .js.coffee assets and views
@@ -78,5 +82,7 @@ gem 'activerecord-import'
 gem 'annotate', group: :development
 
 gem 'rails_config'
+
+gem 'bower-rails'
 
 ruby '2.2.2'
