@@ -5,7 +5,7 @@ end
 
 desc 'TermFrequencyを登録する。'
 task term_frequency: :environment do
-  TermFrequency.execute
+  RegisterTfidf.new.execute
 end
 
 desc 'Imageを取得する。'
