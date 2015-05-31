@@ -12,8 +12,8 @@ module GooLabs
     load_morph_array(body)
   end
 
-  def load_morph_array(json)
-    json = JSON.parse(json, symbolize_names: true)
+  def load_morph_array(body)
+    json = JSON.parse(body, symbolize_names: true)
 
     morph = { raw: [], morph: [], kana: [] }
 
