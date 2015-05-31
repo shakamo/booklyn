@@ -5,10 +5,10 @@ development:
   pool: 5
   timeout: 5000
   encoding: utf8
-  database: d8sl52v2pm07a
-  username: danmopscghfrwi
-  password: FpSuD33o5Ly_ouRnhMPkAS8zdO
-  host: ec2-54-243-187-196.compute-1.amazonaws.com
+  database: dbfgc956i3r03e
+  username: axbznqumhszall
+  password: 3jPCgCNkk0GRQrqy54jUPURsYt
+  host: ec2-50-19-233-111.compute-1.amazonaws.com
 
 test:
   adapter: postgresql
