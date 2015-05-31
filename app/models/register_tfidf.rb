@@ -10,14 +10,15 @@ class RegisterTfidf
   end
 
   def register(items)
+    puts items.to_s
     new_term_frequencies = []
 
     items.each do |item|
-      morph = call_morph(item["title"])
+      morph = call_morph(item['title'])
 
       morph[:raw].each do |word|
         tf = TermFrequency.new
-        tf.content_id = item["id"]
+        tf.content_id = item['id']
         tf.word = word
 
         new_term_frequencies << tf
