@@ -1,5 +1,7 @@
 require 'test_helper'
-require 'video/Tvanimedouga'
+require 'goo_labs'
+require 'tf_idf'
+require 'video/tvanimedouga'
 
 # Shoboi Test
 class TvanimedougaTest < ActiveSupport::TestCase
