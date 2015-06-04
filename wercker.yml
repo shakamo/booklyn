@@ -16,8 +16,4 @@ dev:
                 bundle exec unicorn -p 8080 -c ./config/unicorn.rb
             reload: true
 
-deploy:
-    steps:
-        - heroku-deploy:
-            key-name: booklyn_PRIVATE
 
