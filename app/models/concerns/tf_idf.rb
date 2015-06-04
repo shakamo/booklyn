@@ -5,10 +5,7 @@ module TfIdf
   extend ActiveSupport::Concern
   include GooLabs
 
-  Item = Struct.new(:word, :tfidf)
-
-  def get_tfidf(title)
-    morph = call_morph(title)
+  def get_tfidf(morph)
     words = morph[:raw].join("','")
     words_for_in = "'" + words + "'"
 
@@ -66,7 +63,7 @@ module TfIdf
     tfidf = ActiveRecord::Base.connection.select_all(sql).select do |item|
       Settings.tfidf <= item['tfidf'].to_f
     end
-    tfidf[0] if tfidf.is_a?(Array)
+    return tfidf[0] if tfidf.is_a?(Array)
     tfidf
   end
 end

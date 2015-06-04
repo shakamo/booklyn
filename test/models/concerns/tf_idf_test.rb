@@ -10,10 +10,15 @@ class TfIdfTest < ActiveSupport::TestCase
   end
 
   def test_1
-    assert get_tfidf('あいうえお')[0].key?('content_id')
+    morph = call_morph('あいうえお')
+    assert get_tfidf(morph).key?('content_id')
+    assert get_tfidf(morph).key?('tfidf')
+
+    puts get_tfidf(morph).to_s
   end
 
   def test_2
-    assert get_tfidf('うえお')[0].key?('content_id')
+    morph = call_morph('うえお')
+    assert get_tfidf(morph).key?('content_id')
   end
 end

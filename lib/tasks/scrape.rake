@@ -10,7 +10,12 @@ end
 
 desc 'Imageを取得する。'
 task image: :environment do
-    ImportContents.new.perform_all(2015, :spring)
+  ImportContents.new.perform_all(2015, :spring)
+end
+
+desc 'Tvanimedougaを登録する。'
+task tvanimedouga: :environment do
+  Video::Tvanimedouga.new.import_page
 end
 
 namespace :scrape do

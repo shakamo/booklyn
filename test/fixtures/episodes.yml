@@ -18,3 +18,8 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+episode1:
+    id: 999921
+    episode_num: 11
+    episode_name: かきくけこ
+    content_id: 99992

@@ -14,7 +14,6 @@ module GooLabs
 
   def load_morph_array(body)
     json = JSON.parse(body, symbolize_names: true)
-
     morph = { raw: [], morph: [], kana: [] }
 
     json[:word_list].each do |word_list|
