@@ -6,7 +6,7 @@ require 'chronic'
 module Video
   # あにこれサイトからコンテンツ情報を取り込む。
   class Anikore
-    include UrlUtils, TfIdf
+    include UrlUtils, TfIdf, GooLabs
 
     def import_tv(year, season)
       import_page(year, season, :tv)
@@ -39,7 +39,8 @@ module Video
         if content.new_record?
           title = title.css('div[1]/span[2]/a').inner_text
           next if title.blank?
-          tfidf = get_tfidf(title)
+          morph = call_morph(title)
+          tfidf = get_tfidf(morph)
           next if tfidf.blank?
           content_id = tfidf['content_id'].to_i
         end
