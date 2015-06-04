@@ -19,5 +19,5 @@ dev:
 deploy:
     steps:
         - heroku-deploy:
-            key-name: wercker
+            key-name: booklyn_PRIVATE
 
