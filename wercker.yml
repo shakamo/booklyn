@@ -19,5 +19,5 @@ dev:
 deploy:
     steps:
         - heroku-deploy:
-            key-name: booklyn
+            key-name: wercker
 
