@@ -29,8 +29,15 @@ class TvanimedougaTest < ActiveSupport::TestCase
   end
 
   def test_4
+    tvanimedouga = Video::Tvanimedouga.new
+    tvanimedouga.get_content({raw: ['a', 'b']})
   end
 
   def test_5
+    tvanimedouga = Video::Tvanimedouga.new
+
+    content = Content.create({id: 99, })
+
+    tvanimedouga.get_episode({raw: ['a', 'b']}, )
   end
 end

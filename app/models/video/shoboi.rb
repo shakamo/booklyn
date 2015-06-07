@@ -90,7 +90,7 @@ module Video
         episode.save
       end
     end
-    handle_asynchronously :save_episodes
+    handle_asynchronously :save_episodes, queue: :shoboi_save_episode
 
     def get_episodes(subTitles)
       subTitles = subTitles.split(/[*]([0-9]{3})[*]/)

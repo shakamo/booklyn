@@ -26,7 +26,7 @@ module Video
         break if @max_page == page
       end
     end
-    handle_asynchronously :import_page
+    handle_asynchronously :import_page, queue: :anikore_import_page
 
     def import_images(url)
       doc = Nokogiri::HTML(get_body(url))
@@ -48,7 +48,7 @@ module Video
         save_image(content_id)
       end
     end
-    handle_asynchronously :import_images
+    handle_asynchronously :import_images, queue: :anikore_import_images
 
     def save_image(content_id)
       url = Settings.anikore.detail_url + content_id.to_s
@@ -81,7 +81,6 @@ module Video
         raise content, 'AnikoreContent Anikore set_image cant save the image table.'
       end
     end
-    handle_asynchronously :save_image
 
     def get_max_page_size(year, season, type)
       url = Settings.anikore.url + path(year, season, type, '99')
