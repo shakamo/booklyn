@@ -3,6 +3,7 @@ require 'uri'
 require 'open-uri'
 require 'net/http'
 require 'net/https'
+require 'kconv'
 require 'json'
 
 # URL Utility

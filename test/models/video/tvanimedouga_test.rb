@@ -1,8 +1,9 @@
 require 'test_helper'
-require "open-uri"
+require "open-uri"  
 require 'goo_labs'
 require 'tf_idf'
 require 'video/tvanimedouga'
+require 'kconv'
 
 # Shoboi Test
 class TvanimedougaTest < ActiveSupport::TestCase

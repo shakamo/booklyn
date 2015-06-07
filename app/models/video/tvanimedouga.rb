@@ -2,6 +2,7 @@ require 'open-uri'
 require 'nokogiri'
 require 'chronic'
 require 'uri'
+require 'nokogiri'
 
 module Video
   #
