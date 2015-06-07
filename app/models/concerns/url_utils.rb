@@ -90,4 +90,14 @@ module UrlUtils
       p direct_url
     end
   end
+
+  def url?(str)
+    begin
+      uri = URI.parse(str)
+    rescue
+      p 'This is not url.' + str
+      return false
+    end
+    return uri.scheme == 'http' || uri.scheme == 'https'
+  end
 end
