@@ -4,6 +4,7 @@ require 'chronic'
 require 'uri'
 
 module Holder
+  include UrlUtils
   def create_post(url, episode, holder_name, platform_name)
     post = Post.find_or_initialize_by(url: url)
     if episode
@@ -52,7 +53,7 @@ module Holder
   end
 
   def save_direct_url(url, post)
-    if Common::UrlUtils.instance.check_direct_url(url)
+    if check_direct_url(url)
       direct_url = DirectUrl.find_or_initialize_by(direct_url: url)
       direct_url.post_id = post.id
       direct_url.save

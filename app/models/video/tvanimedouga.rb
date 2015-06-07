@@ -19,7 +19,6 @@ module Video
         import_page(num)
       end
     end
-    handle_asynchronously :import_all, queue: :tvanimedouga
 
     def import_page(num = 1)
       get_list(num).each do |item|
@@ -34,6 +33,7 @@ module Video
         import_detail(item[:path], content, episode)
       end
     end
+    handle_asynchronously :import_page, queue: :tvanimedouga
 
     def get_list(num = 1)
       url = Settings.tvanimedouga.url + num.to_s
