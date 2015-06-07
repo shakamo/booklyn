@@ -5,29 +5,29 @@ require 'uri'
 
 module Video
   class Himawari
-    include Holder
+    include Holder, UrlUtils
     def execute(url, _content, episode)
       holder_name = 'ひまわり動画'
 
-      document = get_body(url)
+      doc = Nokogiri::HTML(get_body(url))
 
       platform_name = 'All'
       post = create_post(url, episode, holder_name, platform_name)
 
-      if document.nil?
+      if doc.nil?
         post.available = 'NG'
         post.error = 'ResponseCode is 4xx'
-      elsif document.css('#link_disablemessag_own').inner_text != ''
+      elsif doc.css('#link_disablemessag_own').inner_text != ''
         post.available = 'NG'
-        post.error = document.css('#link_disablemessag_own').inner_text
-      elsif document.css('#link_disablemessage_rights').inner_text != ''
+        post.error = doc.css('#link_disablemessag_own').inner_text
+      elsif doc.css('#link_disablemessage_rights').inner_text != ''
         post.available = 'NG'
-        post.error = document.css('#link_disablemessage_rights').inner_text
+        post.error = doc.css('#link_disablemessage_rights').inner_text
       elsif !episode.nil?
         post.available = 'OK'
 
         direct_url = nil
-        script = document.css('#player > script').inner_text
+        script = doc.css('#player > script').inner_text
         /var movie_url = (?<direct_url>['].*['])/=~ script
         if direct_url
           direct_url = direct_url.gsub("'", '').gsub('?', '')
@@ -36,7 +36,7 @@ module Video
         end
       else
         post.available = 'INSPECTION'
-        post.error = document.css('#movie_title').inner_text
+        post.error = doc.css('#movie_title').inner_text
       end
 
       post.save

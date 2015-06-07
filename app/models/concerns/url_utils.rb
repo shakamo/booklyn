@@ -3,6 +3,7 @@ require 'uri'
 require 'open-uri'
 require 'net/http'
 require 'net/https'
+require 'kconv'
 require 'json'
 
 # URL Utility
@@ -11,7 +12,6 @@ module UrlUtils
 
   def get_body(url, redirect = 3)
     uri = URI.parse(url)
-
     # ?以降のパラメータを追加する
     uri.path << '?' + uri.query.to_s if 0 < uri.query.to_s.length
 
@@ -21,7 +21,7 @@ module UrlUtils
     res = http.start do |con|
       con.request(req)
     end
-    response_handler(res, redirect) do |redirect_url|
+    response_handler(res, redirect, url) do |redirect_url|
       get_body(redirect_url, redirect - 1)
     end
   end
@@ -36,23 +36,28 @@ module UrlUtils
     res = http.start do |con|
       con.request(req)
     end
-    response_handler(res, redirect) do |redirect_url|
+    response_handler(res, redirect, url) do |redirect_url|
       post_body_ssl(redirect_url, form_data, redirect - 1)
     end
   end
 
-  def response_handler(res, redirect)
+  def response_handler(res, redirect, url)
     case res
     when Net::HTTPSuccess
-      res.body
+      return res.body
     when Net::HTTPRedirection
-      fail 'HTTPRedirection Error' if redirect <= 0
-      yield res['location']
+      if redirect <= 0
+        Rails.logger.info 'HTTPRedirection Error ' + url
+      end
+      return yield res['location']
     when Net::HTTPBadRequest
-      fail 'BadRequest Error'
+      Rails.logger.info 'BadRequest Error ' + url
+    when Net::HTTPGone
+      Rails.logger.info 'HTTPGone Error ' + url
     else
-      fail 'Unknown Error'
+      Rails.logger.info 'Unknown Error ' + url
     end
+    nil
   end
 
   def check_direct_url(direct_url)

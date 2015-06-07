@@ -5,39 +5,40 @@ require 'uri'
 require 'dalli'
 
 module Video
+  #
   class PostManager
-    @@Contents = %w(ひまわり B9 Saymove anitube NoSub Videofan Ｖｅｏｈ)
+
     def self.register_post(holder_name, url, trim_title, episode_num)
       holder = nil
       case holder_name
       when 'ひまわり'
-        holder = Holders::Himawari.new
+        holder = Video::Himawari.new
       when 'Himawari'
-        holder = Holders::Himawari.new
+        holder = Video::Himawari.new
       when 'himawari'
-        holder = Holders::Himawari.new
+        holder = Video::Himawari.new
       when 'B9'
-        holder = Holders::B9dm.new
+        holder = Video::B9dm.new
       when 'B9DM'
-        holder = Holders::B9dm.new
+        holder = Video::B9dm.new
       when 'NoSub'
-        holder = Holders::Nosub.new
+        holder = Video::Nosub.new
       when 'Nosub'
-        holder = Holders::Nosub.new
+        holder = Video::Nosub.new
       when 'nosub'
-        holder = Holders::Nosub.new
+        holder = Video::Nosub.new
       when 'Ｖｅｏｈ'
-        holder = Holders::Veoh.new
+        holder = Video::Veoh.new
       when 'Veoh'
-        holder = Holders::Veoh.new
+        holder = Video::Veoh.new
       when 'SayMove'
-        holder = Holders::Saymove.new
+        holder = Video::Saymove.new
       when 'Saymove'
-        holder = Holders::Saymove.new
+        holder = Video::Saymove.new
       when 'saymove'
-        holder = Holders::Saymove.new
+        holder = Video::Saymove.new
       when 'Dailymotion'
-        holder = Holders::Dailymotion.new
+        holder = Video::Dailymotion.new
       else
         if holder_name.index('検索')
         elsif holder_name.index('動画一覧')

@@ -32,7 +32,7 @@ class RegisterTfidf
 
     TermFrequency.import new_term_frequencies
   end
-  handle_asynchronously :register
+  handle_asynchronously :register, queue: :tfidf_register
 
   def search
     sql = <<-SQL
