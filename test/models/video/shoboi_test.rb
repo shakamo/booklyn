@@ -47,4 +47,8 @@ class ShoboiTest < ActiveSupport::TestCase
     schedule = Video::Shoboi.new.get_schedule(15)
     assert schedule.id
   end
+
+  def test_7
+puts (Date.today - 3).strftime('%Y%m%d')
+  end
 end

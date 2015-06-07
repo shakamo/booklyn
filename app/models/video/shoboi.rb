@@ -18,7 +18,10 @@ module Video
     def import_all
       contents = []
 
-      docs = get_body(Settings.shoboi.title)
+      date = (Date.today - 3).strftime('%Y%m%d')
+      url = Settings.shoboi.title + date +'_000000-'
+
+      docs = get_body(url)
       docs.css(:titleitem).each do |doc|
         content = get_content(doc)
         episodes = doc.css(:subtitles).text
