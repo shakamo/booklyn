@@ -58,8 +58,4 @@ class TvanimedougaTest < ActiveSupport::TestCase
 
     tvanimedouga.import_detail 'blog-entry-21354.html', content, episode
   end
-
-  def test_7
-doc = Nokogiri::HTML.parse(open('http://up.b9dm.com/lz/66258.html', "r:CP51932").read.encode("UTF-8"))
-  end
 end
