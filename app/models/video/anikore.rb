@@ -29,7 +29,7 @@ module Video
     handle_asynchronously :import_page, queue: :anikore_import_page
 
     def import_images(url)
-      doc = Nokogiri::HTML(get_body(url))
+      doc = get_body(url)
 
       # タイトルを繰り返す。
       doc.xpath('//*[@id="main"]/div').each do |title|
@@ -52,7 +52,7 @@ module Video
 
     def save_image(content_id)
       url = Settings.anikore.detail_url + content_id.to_s
-      doc = Nokogiri::HTML(get_body(url))
+      doc = get_body(url)
       url = nil
       begin
         url = node.css('#sub > div.animeDetailSubImage > img').attribute('src').value
@@ -84,7 +84,7 @@ module Video
 
     def get_max_page_size(year, season, type)
       url = Settings.anikore.url + path(year, season, type, '99')
-      doc = Nokogiri::HTML(get_body(url))
+      doc = get_body(url)
 
       page_num = []
       doc.css('#main > div.paginator > span').each do |node|
@@ -104,7 +104,7 @@ module Video
       content.error = ''
 
       url = Settings.anikore.detail_url + content_id.to_s
-      doc = Nokogiri::HTML(get_body(url))
+      doc = get_body(url)
 
       set_title(content, doc)
       set_category(content, type)

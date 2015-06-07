@@ -9,7 +9,7 @@ module Video
     def execute(url, _content, episode)
       holder_name = 'Nosub'
 
-      doc = Nokogiri::HTML(get_body(url))
+      doc = get_body(url)
 
       platform_name = 'PC'
       post = create_post(url, episode, holder_name, platform_name)

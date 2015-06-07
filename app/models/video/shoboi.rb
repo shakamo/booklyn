@@ -18,10 +18,10 @@ module Video
     def import_all
       contents = []
 
-      docs = Nokogiri::XML(get_body(Settings.shoboi.title))
-      docs.css(:TitleItem).each do |doc|
+      docs = get_body(Settings.shoboi.title)
+      docs.css(:titleitem).each do |doc|
         content = get_content(doc)
-        episodes = doc.css(:SubTitles).text
+        episodes = doc.css(:subtitles).text
         save_episodes(content.id, episodes)
 
         if content.new_record?
@@ -40,11 +40,11 @@ module Video
     end
 
     def get_content(doc)
-      tid = doc.css(:TID).text.to_i
-      title = doc.css(:Title).text
-      count = doc.css(:Cat).text
-      yomi = doc.css(:TitleYomi).text
-      comment = doc.css(:Title).text
+      tid = doc.css(:tid).text.to_i
+      title = doc.css(:title).text
+      count = doc.css(:cat).text
+      yomi = doc.css(:titleyomi).text
+      comment = doc.css(:title).text
 
       content = Content.find_or_initialize_by(tid: tid)
       content.title = title
@@ -57,14 +57,14 @@ module Video
     end
 
     def get_schedule(tid)
-      docs = Nokogiri::XML(get_body(Settings.shoboi.schedule + tid.to_s))
-      if docs.css(:ProgItem).size == 0
+      docs = get_body(Settings.shoboi.schedule + tid.to_s)
+      if docs.css(:progitem).size == 0
         return Schedule.find_or_initialize_by(schedule_code: '99')
       end
 
       time = nil
-      docs.css(:ProgItem).each do |doc|
-        time = [Chronic.parse(doc.css(:StTime).text), time].compact.min
+      docs.css(:progitem).each do |doc|
+        time = [Chronic.parse(doc.css(:sttime).text), time].compact.min
       end
 
       return Schedule.find_or_initialize_by(id: 99) if time.nil?
@@ -100,7 +100,7 @@ module Video
     # 利用していない。
     def search_path(title)
       url = URI.encode(Settings.shoboi.search + title + '&ch=&st=&cm=&r=0&rd=&v=0')
-      result_search = Nokogiri::HTML(get_body(url), nil)
+      result_search = get_body(url)
       result = result_search.css('#main > table > tr > td > table.tframe > tr > td > a')
       result[0][:href] if result.present? && 1 <= result.size
     end

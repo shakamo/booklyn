@@ -44,7 +44,7 @@ module UrlUtils
   def response_handler(res, redirect, url)
     case res
     when Net::HTTPSuccess
-      return res.body
+      return Nokogiri::HTML(res.body.toutf8, nil, 'utf-8')
     when Net::HTTPRedirection
       if redirect <= 0
         Rails.logger.info 'HTTPRedirection Error ' + url

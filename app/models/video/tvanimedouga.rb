@@ -39,7 +39,7 @@ module Video
       url = Settings.tvanimedouga.url + num.to_s
       list = []
 
-      docs = Nokogiri::XML(get_body(url))
+      docs = get_body(url)
 
       contents = docs.css('#blog_achives > div > dl > dt > a.entry_title')
       contents.each do |content|
@@ -78,7 +78,7 @@ module Video
 
     def import_detail(path, content, episode)
       url = 'http://tvanimedouga.blog93.fc2.com/' + path
-      doc = Nokogiri::HTML(get_body(url))
+      doc = get_body(url)
 
       list = doc.css('#mainBlock > div.mainEntryBlock > div.mainEntryBase > div.mainEntrykiji > a')
       list.each do |item|

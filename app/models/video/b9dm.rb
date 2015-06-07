@@ -1,16 +1,13 @@
 require 'open-uri'
 require 'nokogiri'
 require 'chronic'
-require 'uri'
-require 'kconv'
 
 module Video
   class B9dm
     include Holder, UrlUtils
     def execute(url, _content, episode)
       holder_name = 'B9DM'
-      body = get_body(url)
-      doc = Nokogiri::HTML(body.toutf8, nil, 'utf-8')
+      doc = get_body(url)
 
       platform_name = 'PC'
       post = create_post(url, episode, holder_name, platform_name)
