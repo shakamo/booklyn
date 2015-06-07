@@ -5,18 +5,18 @@ require 'uri'
 
 module Video
   class Veoh
-    include Holder
+    include Holder, UrlUtils
     def execute(url, _content, episode)
       holder_name = 'Veoh'
 
-      document = get_body(url)
+      doc = get_body(url)
 
       platform_name = 'PC'
       post = create_post(url, episode, holder_name, platform_name)
 
       ## TO-DO
 
-      if document.nil?
+      if doc.nil?
         post.available = 'NG'
         post.error = 'ResponseCode is 4xx'
       elsif false

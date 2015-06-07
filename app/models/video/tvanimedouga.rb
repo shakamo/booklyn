@@ -2,6 +2,7 @@ require 'open-uri'
 require 'nokogiri'
 require 'chronic'
 require 'uri'
+require 'nokogiri'
 
 module Video
   #
@@ -18,14 +19,14 @@ module Video
         import_page(num)
       end
     end
-    handle_asynchronously :import_all
+    handle_asynchronously :import_all, queue: :tvanimedouga
 
     def import_page(num = 1)
       get_list(num).each do |item|
         morph = call_morph(item[:title])
 
         content = get_content(morph)
-        return if content.nil?
+        next if content.nil?
 
         episode = get_episode(morph, content)
         next if episode.nil?
@@ -38,7 +39,7 @@ module Video
       url = Settings.tvanimedouga.url + num.to_s
       list = []
 
-      docs = Nokogiri::XML(get_body(url))
+      docs = get_body(url)
 
       contents = docs.css('#blog_achives > div > dl > dt > a.entry_title')
       contents.each do |content|
@@ -54,9 +55,12 @@ module Video
 
     def get_content(morph)
       tfidf = get_tfidf(morph)
-      return nil if tfidf.nil?
+      if tfidf.nil?
+        Error.create description: morph[:raw].to_s
+        return nil
+      end
 
-      return Content.find_by id: tfidf['content_id']
+      Content.find_by id: tfidf['content_id']
     end
 
     def get_episode(morph, content)
@@ -64,32 +68,32 @@ module Video
       job.auto
       episode_num = job.episode_num
 
-      tfidf = get_tfidf(morph)
-      return nil if tfidf.nil?
+      if episode_num.nil?
+        Error.create description: morph[:raw].to_s
+        return nil
+      end
 
-      return Episode.find_by(content_id: content.id, episode_num: episode_num)
+      Episode.find_by(content_id: content.id, episode_num: episode_num)
     end
 
     def import_detail(path, content, episode)
-      detail_url = 'http://tvanimedouga.blog93.fc2.com/' + path
-      document = Common::UrlUtils.instance.get_document(detail_url)
+      url = 'http://tvanimedouga.blog93.fc2.com/' + path
+      doc = get_body(url)
 
-      list = document.css('#mainBlock > div.mainEntryBlock > div.mainEntryBase > div.mainEntrykiji > a')
+      list = doc.css('#mainBlock > div.mainEntryBlock > div.mainEntryBase > div.mainEntrykiji > a')
       list.each do |item|
         holder_name = item.inner_text.sub('【', '').sub('】', '')
 
-        unless holder_name.index('検索')
-          unescape_url = item.attribute('href').value
-          url = URI.escape(unescape_url)
+        next if holder_name.index('検索')
 
-          if url.index('http://himado.in/?sort=&')
-          elsif url.index('http://himado.in/?keyword=')
-          elsif url.index('http://www.nosub.tv/?s=%')
-          elsif url.index('http://www.veoh.com/find/?query')
-          else
-            Scrape::PostManager.register_post(holder_name, url, content, episode)
-          end
-        end
+        url = URI.escape(item.attribute('href').value)
+
+        next if url.index('http://himado.in/?sort=&')
+        next if url.index('http://himado.in/?keyword=')
+        next if url.index('http://www.nosub.tv/?s=%')
+        next if url.index('http://www.veoh.com/find/?query')
+
+        Video::PostManager.register_post(holder_name, url, content, episode)
       end
     end
   end

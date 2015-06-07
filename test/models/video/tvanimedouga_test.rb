@@ -1,7 +1,9 @@
 require 'test_helper'
+require "open-uri"  
 require 'goo_labs'
 require 'tf_idf'
 require 'video/tvanimedouga'
+require 'kconv'
 
 # Shoboi Test
 class TvanimedougaTest < ActiveSupport::TestCase
@@ -29,8 +31,31 @@ class TvanimedougaTest < ActiveSupport::TestCase
   end
 
   def test_4
+    tvanimedouga = Video::Tvanimedouga.new
+    morph = call_morph('あいうえお #11')
+
+    assert tvanimedouga.get_content(morph)
   end
 
   def test_5
+    tvanimedouga = Video::Tvanimedouga.new
+    morph = call_morph('あいうえお #11')
+
+    content = Content.new({id: 99992})
+
+    episode = tvanimedouga.get_episode(morph, content)
+    assert episode
+  end
+
+  def test_6
+    tvanimedouga = Video::Tvanimedouga.new
+    morph = call_morph('あいうえお #11')
+
+    content = Content.new({id: 99992})
+
+    episode = tvanimedouga.get_episode(morph, content)
+    assert episode
+
+    tvanimedouga.import_detail 'blog-entry-21354.html', content, episode
   end
 end

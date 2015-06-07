@@ -5,21 +5,21 @@ require 'uri'
 
 module Video
   class Dailymotion
-    include Holder
+    include Holder, UrlUtils
     def execute(url, _content, episode)
       holder_name = 'Dailymotion'
 
-      document = get_body(url)
+      doc = get_body(url)
 
       platform_name = 'PC'
       post = create_post(url, episode, holder_name, platform_name)
 
-      if document.nil?
+      if doc.nil?
         post.available = 'NG'
         post.error = 'ResponseCode is 4xx'
-      elsif document.css('div.media-block > div').inner_text != ''
+      elsif doc.css('div.media-block > div').inner_text != ''
         post.available = 'NG'
-        post.error = document.css('div.media-block > div').inner_text
+        post.error = doc.css('div.media-block > div').inner_text
         return
       elsif !episode.nil?
         post.available = 'OK'
