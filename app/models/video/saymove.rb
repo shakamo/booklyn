@@ -5,16 +5,16 @@ require 'uri'
 
 module Video
   class Saymove
-    include Holder
+    include Holder, UrlUtils
     def execute(url, _content, episode)
       holder_name = 'SayMove'
 
-      document = get_body(url)
+      doc = Nokogiri::HTML(get_body(url))
 
       platform_name = 'PC'
       post = create_post(url, episode, holder_name, platform_name)
 
-      if document.nil?
+      if doc.nil?
         post.available = 'NG'
         post.error = 'ResponseCode is 4xx'
       elsif false

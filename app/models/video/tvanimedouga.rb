@@ -92,7 +92,7 @@ module Video
         next if url.index('http://www.nosub.tv/?s=%')
         next if url.index('http://www.veoh.com/find/?query')
 
-        Scrape::PostManager.register_post(holder_name, url, content, episode)
+        Video::PostManager.register_post(holder_name, url, content, episode)
       end
     end
   end

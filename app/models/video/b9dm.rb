@@ -5,16 +5,18 @@ require 'uri'
 
 module Video
   class B9dm
-    include Holder
+    include Holder, UrlUtils
     def execute(url, _content, episode)
       holder_name = 'B9DM'
+      body = get_body(url)
+puts 'aaa' + url
+      doc = Nokogiri::HTML(body)
 
-      document = get_body(url)
-
+puts 'bbb'
       platform_name = 'PC'
       post = create_post(url, episode, holder_name, platform_name)
 
-      if document.nil?
+      if doc.nil?
         post.available = 'NG'
         post.error = 'ResponseCode is 4xx'
       elsif false
@@ -24,7 +26,7 @@ module Video
         post.available = 'OK'
       else
         post.available = 'INSPECTION'
-        post.error = document.css('.caption > h3').inner_text
+        post.error = doc.css('.caption > h3').inner_text
       end
       post.save
     end
