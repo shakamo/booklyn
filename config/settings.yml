@@ -12,7 +12,7 @@ goo:
     api_key: f1e955ecdad2c58490666bd77b11d0e655a38f828467245f6cd80ec53b611b1d
     url: https://labs.goo.ne.jp/api/morph
 
-tfidf: 2.0
+tfidf: 1.0
 tvanimedouga:
     url: http://tvanimedouga.blog93.fc2.com/?all&p=
 

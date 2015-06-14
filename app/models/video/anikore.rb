@@ -29,29 +29,34 @@ module Video
     handle_asynchronously :import_page, queue: :anikore_import_page
 
     def import_images(url)
-      doc = get_body(url)
+      docs = get_body(url)
 
       # タイトルを繰り返す。
-      doc.xpath('//*[@id="main"]/div').each do |title|
-        content_id = doc.css('div[1]/span[2]/a').attribute('href').value.split('/')[2].to_i
-        content = Content.find_or_initialize_by(id: content_id)
+      docs.xpath('//*[@id="main"]/div/div/span[2]').each do |doc|
+        ak_id = doc.xpath('a').attribute('href').value.split('/')[2].to_i
+        content = Content.find_by(akid: ak_id)
 
-        if content.new_record?
-          title = title.css('div[1]/span[2]/a').inner_text
+        if content.nil?
+          title = doc.css('a').inner_text
+          puts title
           next if title.blank?
           morph = call_morph(title)
           tfidf = get_tfidf(morph)
           next if tfidf.blank?
           content_id = tfidf['content_id'].to_i
+        elsif
+          content_id = content.id
         end
 
-        save_image(content_id)
+puts ak_id.to_s + content_id.to_s
+        save_image(ak_id, content_id)
       end
     end
     handle_asynchronously :import_images, queue: :anikore_import_images
 
-    def save_image(content_id)
-      url = Settings.anikore.detail_url + content_id.to_s
+    def save_image(ak_id, content_id)
+      puts ak_id.to_s + content_id.to_s
+      url = Settings.anikore.detail_url + ak_id.to_s
       doc = get_body(url)
       url = nil
       begin
@@ -96,98 +101,6 @@ module Video
 
     def path(year, season, type, page)
       year.to_s + '/' + season.to_s + '/ac:' + type.to_s + '/page:' + page.to_s
-    end
-
-    # 使用しない
-    def create_content(content_id, year, season, type)
-      content = Content.find_or_initialize_by(id: content_id)
-      content.error = ''
-
-      url = Settings.anikore.detail_url + content_id.to_s
-      doc = get_body(url)
-
-      set_title(content, doc)
-      set_category(content, type)
-      set_image(content, doc)
-      set_initial(content, doc)
-      set_description(content, doc)
-      set_schedule(content, doc, year, season)
-
-      content.save
-    end
-
-    # 使用しない
-    def set_title(_content, doc)
-      title = doc.css('div.animeDetailCommonHeadTitle.cb.cf.naturalFont > h2 > a').inner_text
-      title.gsub!('」')
-      title.gsub!('」')
-    end
-
-    # 使用しない
-    def set_category(content, type)
-      case type
-      when :tv
-        content.category_id = 1
-      end
-      return
-
-      if title.index('（テレビアニメ）')
-        content.category_id = 1
-      elsif title.index('（TVアニメ動画）')
-        content.category_id = 1
-      elsif title.index('（アニメ映画）')
-        content.category_id = 2
-      elsif title.index('（OVA）')
-        content.category_id = 3
-      elsif title.index('（Webアニメ）')
-        content.category_id = 4
-      elsif title.index('（OAD）')
-        content.category_id = 5
-      elsif title.index('（その他）')
-        content.category_id = 90
-      else
-      end
-    end
-
-    # 使用しない
-    def set_initial(content, doc)
-      initial = doc.css('p.animeDetailCommonHeadTitleKana').inner_text.sub!('よみがな：', '')
-      if initial
-        content.initial = initial
-      else
-        if content.initial
-        else
-          StandardMailer.error_mail('AnikoreContent', 'よみがなの取得に失敗しました。' + content.to_yaml).deliver
-        end
-      end
-    end
-
-    # 使用しない
-    def set_description(content, doc)
-      description = doc.css('blockquote').inner_text
-
-      if description.present?
-        content.description = description
-      else
-        StandardMailer.error_mail('AnikoreContent', 'Descriptionの取得に失敗しました。処理は中断しません。Content is ' + content.to_yaml).deliver
-      end
-    end
-
-    # 使用しない
-    def set_schedule(content, node, _year, _season)
-      schedule = Video::ShoboiContent.get_schedule(content)
-
-      if schedule.present?
-        schedule = Schedule.find_or_initialize_by(schedule_code: '01', date: schedule, week: Common::Utils.Weeks(schedule.wday))
-        schedule.save
-        content.schedule_id = schedule.id
-      else
-        if content.schedule_id && content.schedule_id != 90 && content.schedule_id != 99
-        else
-          content.schedule_id = Schedule.find_or_initialize_by(schedule_code: '99').id
-          StandardMailer.error_mail('AnikoreContent', 'Scheduleの取得に失敗しました。ただし、処理は中断されません。 content id is' + content.id.to_s + '. title is' + content.title + '. Anikore is ' + node.css('div.animeChronicle > span > a').inner_text).deliver
-        end
-      end
     end
   end
 end

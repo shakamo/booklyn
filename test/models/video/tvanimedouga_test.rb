@@ -58,4 +58,12 @@ class TvanimedougaTest < ActiveSupport::TestCase
 
     tvanimedouga.import_detail 'blog-entry-21354.html', content, episode
   end
+
+  def test_7
+    tvanimedouga = Video::Tvanimedouga.new
+
+    error = tvanimedouga.error_test
+
+    assert_equal error.name, 'tvanimedouga:error_test'
+  end
 end
