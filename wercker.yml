@@ -2,7 +2,7 @@ box: wercker/rvm
 build:
     steps:
         - rvm-use:
-            version: ruby-2.2.0
+            version: ruby-2.2.2
         - bundle-install
         - script:
             name: minitest
