@@ -79,11 +79,18 @@ gem 'activerecord-import'
 
 gem 'annotate', group: :development
 
-gem 'rails_config'
+gem 'config'
 
+gem 'bundler', '>= 1.8.4'
+gem 'sass-rails'
+gem 'jquery-rails'
 source 'https://rails-assets.org' do
+  gem 'rails-assets-underscore'
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-angular'
+  gem 'rails-assets-angular-animate'
+  gem 'rails-assets-angular-route'
+  gem 'rails-assets-font-awesome', '= 4.3.0'
 end
 
 ruby '2.2.2'
