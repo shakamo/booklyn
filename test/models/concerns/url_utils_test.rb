@@ -8,7 +8,7 @@ class UrlUtilsTest < ActiveSupport::TestCase
   end
 
   def test_1
-    assert get_body('http://htaccess1.cman.jp/sample/redirect/site/')
+    assert get_body('http://htaccess1.cman.jp/sample_go/redirect/site/')
   end
 
   def test_2
