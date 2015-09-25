@@ -20,16 +20,6 @@ test:
   password: zwOXV5hwTAV0chWSnJAadMUOOB
   host: ec2-184-73-165-195.compute-1.amazonaws.com
 
-test2:
-  adapter: postgresql
-  pool: 5
-  timeout: 5000
-  encoding: utf8
-  database: booklyn-test
-  username: booklyn
-  password: 8at6v7gm
-  host: localhost
-
 production:
   adapter: postgresql
   pool: 5
