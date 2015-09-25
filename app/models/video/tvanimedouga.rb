@@ -15,7 +15,7 @@ module Video
     end
 
     def import_all
-      for num in 3..30 do
+      for num in 1..30 do
         import_page(num)
       end
     end
@@ -95,6 +95,10 @@ module Video
 
         Video::PostManager.register_post(holder_name, url, content, episode)
       end
+    end
+
+    def error_test
+      Error.new description: 'test'
     end
   end
 end

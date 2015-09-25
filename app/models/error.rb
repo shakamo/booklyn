@@ -17,10 +17,10 @@ class Error < ActiveRecord::Base
   end
 
   def class_name
-    caller_locations(1).first.path.scan(%r{.*\/(.*)[.]rb$}).join
+    caller_locations(14).first.path.scan(%r{.*\/(.*)[.]rb$}).join
   end
 
   def method_name
-    caller_locations(1).first.label
+    caller_locations(14).first.label
   end
 end

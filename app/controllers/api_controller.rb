@@ -3,6 +3,8 @@ require 'dalli'
 
 class ApiController < ApplicationController
   def recent
+    puts 'testtest'
+    puts Episode.new.get_recent.to_s
     render json: Episode.new.get_recent
   end
 

@@ -143,7 +143,7 @@ var App = function () {
     return {
         init: function () {
             handleBootstrap();
-            handleIEFixes();
+          　// handleIEFixes();
             handleSearch();
             handleToggle();
             handleSwitcher();

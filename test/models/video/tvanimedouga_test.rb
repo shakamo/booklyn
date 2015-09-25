@@ -25,23 +25,23 @@ class TvanimedougaTest < ActiveSupport::TestCase
     morph = call_morph('あいうえお #11')
 
     content = tvanimedouga.get_content(morph)
-    assert content
+    assert content, 'no content'
     episode = tvanimedouga.get_episode(morph, content)
-    assert episode
+    assert episode, 'no episode'
   end
 
   def test_4
     tvanimedouga = Video::Tvanimedouga.new
     morph = call_morph('あいうえお #11')
 
-    assert tvanimedouga.get_content(morph)
+    assert tvanimedouga.get_content(morph), 'no content'
   end
 
   def test_5
     tvanimedouga = Video::Tvanimedouga.new
     morph = call_morph('あいうえお #11')
 
-    content = Content.new({id: 99992})
+    content = Content.new({id: 99991})
 
     episode = tvanimedouga.get_episode(morph, content)
     assert episode
@@ -51,11 +51,19 @@ class TvanimedougaTest < ActiveSupport::TestCase
     tvanimedouga = Video::Tvanimedouga.new
     morph = call_morph('あいうえお #11')
 
-    content = Content.new({id: 99992})
+    content = Content.new({id: 99991})
 
     episode = tvanimedouga.get_episode(morph, content)
     assert episode
 
     tvanimedouga.import_detail 'blog-entry-21354.html', content, episode
+  end
+
+  def test_7
+    tvanimedouga = Video::Tvanimedouga.new
+
+    error = tvanimedouga.error_test
+
+    assert_equal error.name, 'tvanimedouga:error_test'
   end
 end

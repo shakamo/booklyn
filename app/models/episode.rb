@@ -67,14 +67,12 @@ class Episode < ActiveRecord::Base
         to_char(e.created_at, 'YYYYMMDDHH24MISS')    as created_at
     from
         episodes e,
-        contents c,
-        posts p,
-        images i
+        contents c left outer join images i
+            on c.id = i.generic_id and i.table_name = 'contents',
+        posts p
     where
         c.id = e.content_id
         and p.episode_id = e.id
-        and c.id = i.generic_id
-        and i.table_name = 'contents'
     group by
         e.created_at,
         c.id,
@@ -85,7 +83,6 @@ class Episode < ActiveRecord::Base
     order by
         e.created_at desc limit 20
     SQL
-
     ActiveRecord::Base.connection.select_all(sql)
   end
 

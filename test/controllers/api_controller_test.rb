@@ -2,15 +2,16 @@ require 'test_helper'
 
 class ApiControllerTest < ActionController::TestCase
   def setup
-    @controller = ApiController.new
-    @request = ActionController::TestRequest.new
-    @response = ActionController::TestResponse.new
   end
 
   def test_1
     post :recent
 
+    puts @response.body.inspect
+    json = JSON.parse(response.body)
+
+    puts json
+
     assert_response :success
-    json = JSON.parse(@response.body)
   end
 end
