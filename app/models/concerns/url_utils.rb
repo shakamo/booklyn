@@ -12,6 +12,8 @@ module UrlUtils
 
   def get_body(url, redirect = 3)
     uri = URI.parse(url)
+    return nil if uri.host.blank?
+
     # ?以降のパラメータを追加する
     uri.path << '?' + uri.query.to_s if 0 < uri.query.to_s.length
     req = Net::HTTP::Get.new(uri.path)

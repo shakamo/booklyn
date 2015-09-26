@@ -8,7 +8,6 @@ module Video
     include Holder, UrlUtils
     def execute(url, _content, episode)
       holder_name = 'Dailymotion'
-
       doc = get_body(url)
 
       platform_name = 'PC'
