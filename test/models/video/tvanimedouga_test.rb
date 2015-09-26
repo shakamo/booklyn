@@ -5,7 +5,7 @@ require 'tf_idf'
 require 'video/tvanimedouga'
 require 'kconv'
 
-# Shoboi Test
+# Shoboi  Test
 class TvanimedougaTest < ActiveSupport::TestCase
   include GooLabs, TfIdf
   def setup
