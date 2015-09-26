@@ -75,8 +75,8 @@ class Content < ActiveRecord::Base
     order by
         e.episode_num
     SQL
-    puts sql
-    posts = ActiveRecord::Base.connection.select_all(sql).to_ary
+    result = ActiveRecord::Base.connection.select_all(sql).to_ary
+    posts = result.to_ary if result.present?
 
     content['episodes'].each do |episode|
       episode['posts'] = []
