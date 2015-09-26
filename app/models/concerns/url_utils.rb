@@ -14,16 +14,14 @@ module UrlUtils
     uri = URI.parse(url)
     # ?以降のパラメータを追加する
     uri.path << '?' + uri.query.to_s if 0 < uri.query.to_s.length
-
     req = Net::HTTP::Get.new(uri.path)
-
     http = Net::HTTP.new(uri.host, uri.port)
 
     begin
       res = http.start do |con|
         con.request(req)
       end
-      response_handler(res, redirect, url) do |redirect_url|
+      return response_handler(res, redirect, url) do |redirect_url|
         get_body(redirect_url, redirect - 1)
       end
     rescue => e
@@ -38,12 +36,12 @@ module UrlUtils
 
     http = Net::HTTP.new(uri.host, 443)
     http.use_ssl = true
-
     begin
       res = http.start do |con|
         con.request(req)
       end
-      response_handler(res, redirect, url) do |redirect_url|
+
+      return response_handler(res, redirect, url) do |redirect_url|
         post_body_ssl(redirect_url, form_data, redirect - 1)
       end
     rescue => e

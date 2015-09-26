@@ -19,9 +19,7 @@ class ApiControllerTest < ActionController::TestCase
     post :content, id: 1252
 
     puts @response.body.inspect
-    json = JSON.parse(response.body)
-
-    puts json
+    json = JSON.parse(response.body) if response.body.blank?
 
     assert_response :success
   end
