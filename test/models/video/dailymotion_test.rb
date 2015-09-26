@@ -19,6 +19,6 @@ class DailymotionTest < ActiveSupport::TestCase
     episode = tvanimedouga.get_episode(morph, content)
     assert episode, 'no episode'
 
-    Video::Dailymotion.new.execute('http://www.dailymotion.com/video/x37onvu_%E3%81%8C%E3%81%A3%E3%81%93%E3%81%86%E3%81%90%E3%82%89%E3%81%97-12-gakkou-gurashi-12-end_shortfilms', content, episode)
+    Video::Dailymotion.new.execute('http://www.dailymotion.com/video/x378b86', content, episode)
   end
 end
