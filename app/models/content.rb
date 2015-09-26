@@ -55,7 +55,11 @@ class Content < ActiveRecord::Base
         e.episode_num desc
     SQL
     episodes = ActiveRecord::Base.connection.select_all(sql)
-    content['episodes'] = episodes.to_ary if episodes.present?
+    if episodes.present?
+      content['episodes'] = episodes.to_ary
+    else
+      return nil
+    end
 
     sql = <<-SQL
     select
