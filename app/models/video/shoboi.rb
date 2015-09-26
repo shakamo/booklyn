@@ -19,7 +19,7 @@ module Video
       contents = []
 
       date = (Date.today - 3).strftime('%Y%m%d')
-      url = Settings.shoboi.title + date +'_000000-'
+      url = Settings.shoboi.title + date + '_000000-'
 
       docs = get_body(url)
       docs.css(:titleitem).each do |doc|
@@ -97,7 +97,7 @@ module Video
 
     def get_episodes(subTitles)
       subTitles = subTitles.split(/[*]([0-9]{3})[*]/)
-      return subTitles.drop(1)
+      subTitles.drop(1)
     end
 
     # 利用していない。

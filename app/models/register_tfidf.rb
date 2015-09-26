@@ -1,5 +1,5 @@
 
-# 
+#
 class RegisterTfidf
   include GooLabs
 

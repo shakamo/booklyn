@@ -11,9 +11,7 @@ class StandardMailer < ActionMailer::Base
   def error_mail(subject = 'Error', text = '')
     @error_text = @@error_text << text
 
-    mail(to: 'video.booklyn@gmail.com', subject: subject) do |format|
-      format.text
-    end
+    mail(to: 'video.booklyn@gmail.com', subject: subject, &:text)
   end
 
   @@error_text = ''
@@ -26,8 +24,6 @@ class StandardMailer < ActionMailer::Base
     return if e.nil?
 
     @system_error_text = '' << e.message.to_s << "\r\n" << e.backtrace.to_s
-    mail(to: 'video.booklyn@gmail.com', subject: 'System Error') do |format|
-      format.text
-    end
+    mail(to: 'video.booklyn@gmail.com', subject: 'System Error', &:text)
   end
 end

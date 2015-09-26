@@ -18,11 +18,16 @@ module UrlUtils
     req = Net::HTTP::Get.new(uri.path)
 
     http = Net::HTTP.new(uri.host, uri.port)
-    res = http.start do |con|
-      con.request(req)
-    end
-    response_handler(res, redirect, url) do |redirect_url|
-      get_body(redirect_url, redirect - 1)
+
+    begin
+      res = http.start do |con|
+        con.request(req)
+      end
+      response_handler(res, redirect, url) do |redirect_url|
+        get_body(redirect_url, redirect - 1)
+      end
+    rescue => e
+      raise(StandardError, e.message + '!!' + url, e.backtrace)
     end
   end
 
@@ -33,11 +38,16 @@ module UrlUtils
 
     http = Net::HTTP.new(uri.host, 443)
     http.use_ssl = true
-    res = http.start do |con|
-      con.request(req)
-    end
-    response_handler(res, redirect, url) do |redirect_url|
-      post_body_ssl(redirect_url, form_data, redirect - 1)
+
+    begin
+      res = http.start do |con|
+        con.request(req)
+      end
+      response_handler(res, redirect, url) do |redirect_url|
+        post_body_ssl(redirect_url, form_data, redirect - 1)
+      end
+    rescue => e
+      raise(StandardError, e.message + '!!' + url, e.backtrace)
     end
   end
 
@@ -46,9 +56,7 @@ module UrlUtils
     when Net::HTTPSuccess
       return Nokogiri::HTML(res.body.toutf8, nil, 'utf-8')
     when Net::HTTPRedirection
-      if redirect <= 0
-        Rails.logger.info 'HTTPRedirection Error ' + url
-      end
+      Rails.logger.info 'HTTPRedirection Error ' + url if redirect <= 0
       return yield res['location']
     when Net::HTTPBadRequest
       Rails.logger.info 'BadRequest Error ' + url
@@ -98,6 +106,6 @@ module UrlUtils
       p 'This is not url.' + str
       return false
     end
-    return uri.scheme == 'http' || uri.scheme == 'https'
+    uri.scheme == 'http' || uri.scheme == 'https'
   end
 end

@@ -20,8 +20,8 @@ class Utils
       trim_value.gsub!(str, '')
     end
 
-    trim_value.gsub!(' ', '')
-    trim_value.gsub!('　', '')
+    trim_value.delete!(' ')
+    trim_value.delete!('　')
     trim_value
   end
 
@@ -32,8 +32,8 @@ class Utils
       trim_value.gsub!(str, '%')
     end
 
-    trim_value.gsub!(' ', '%')
-    trim_value.gsub!('　', '%')
+    trim_value.tr!(' ', '%')
+    trim_value.tr!('　', '%')
     trim_value.gsub!('%%', '%')
     trim_value
   end

@@ -48,7 +48,7 @@ module Video
           content_id = content.id
         end
 
-puts ak_id.to_s + content_id.to_s
+        puts ak_id.to_s + content_id.to_s
         save_image(ak_id, content_id)
       end
     end

@@ -6,7 +6,7 @@ class RegisterTfidfTest < ActiveSupport::TestCase
   end
 
   def test_2
-    param = [{ 'id'  => '1', 'title' => 'あいうえお' },
+    param = [{ 'id' => '1', 'title' => 'あいうえお' },
              { 'id' => '2', 'title' => 'あいうえお' }]
     RegisterTfidf.new.register param
   end

@@ -83,8 +83,6 @@ module RegexUtils
     if str
       str.upcase!
       str = Utils.multi_trim(str)
-    else
-      nil
     end
   end
 
@@ -93,8 +91,6 @@ module RegexUtils
       str.upcase!
       str = Utils.query_trim(str)
       p str
-    else
-      nil
     end
   end
 
@@ -104,8 +100,6 @@ module RegexUtils
     if str
       str.upcase!
       str = Utils.regex_trim(str)
-    else
-      nil
     end
   end
 

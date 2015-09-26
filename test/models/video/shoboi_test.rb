@@ -49,6 +49,6 @@ class ShoboiTest < ActiveSupport::TestCase
   end
 
   def test_7
-puts (Date.today - 3).strftime('%Y%m%d')
+    puts (Date.today - 3).strftime('%Y%m%d')
   end
 end

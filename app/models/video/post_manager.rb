@@ -7,7 +7,6 @@ require 'dalli'
 module Video
   #
   class PostManager
-
     def self.register_post(holder_name, url, trim_title, episode_num)
       holder = nil
       case holder_name

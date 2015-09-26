@@ -30,7 +30,7 @@ module Video
         script = doc.css('#player > script').inner_text
         /var movie_url = (?<direct_url>['].*['])/=~ script
         if direct_url
-          direct_url = direct_url.gsub("'", '').gsub('?', '')
+          direct_url = direct_url.delete("'").delete('?')
           direct_url = URI.unescape(direct_url).sub('external:', '')
           save_direct_url(direct_url, post)
         end
