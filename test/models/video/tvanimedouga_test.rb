@@ -41,7 +41,7 @@ class TvanimedougaTest < ActiveSupport::TestCase
     tvanimedouga = Video::Tvanimedouga.new
     morph = call_morph('あいうえお #11')
 
-    content = Content.new(id: 99_991)
+    content = Content.new(id: 99991)
 
     episode = tvanimedouga.get_episode(morph, content)
     assert episode
@@ -51,7 +51,7 @@ class TvanimedougaTest < ActiveSupport::TestCase
     tvanimedouga = Video::Tvanimedouga.new
     morph = call_morph('あいうえお #11')
 
-    content = Content.new(id: 99_991)
+    content = Content.new(id: 99991)
 
     episode = tvanimedouga.get_episode(morph, content)
     assert episode
