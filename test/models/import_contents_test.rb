@@ -6,6 +6,7 @@ class ImportContentsTest < ActiveSupport::TestCase
   end
 
   def test_1
+    ImportContents.new.perform_all :Test, 2015, :winter
   end
 
   def test_2

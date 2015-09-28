@@ -12,20 +12,23 @@ class ImportContents
   # @param site_name [String] Contentを取得するサイトを指定する。Anikore, Rakuten
   # @param year [String] Contentを取得する範囲を指定する。Anikore のみ。2015
   # @param season [String] Contentを取得するシーズンを指定する。winter, spring, summer, autumn
-  def perform_all(site_name, year, season)
-    case site_name
-    when :Anikore
-      Video::Anikore.new.import_all(year, season)
-    when :Rakuten
-      Video::Rakuten.new.import_all(year, season)
-    else
-      fail 'ImportContents 呼び出しが不正です。' << site_name.to_s << year.to_s << season.to_s
+  def perform_all(site_name, year, season, days)
+    begin
+      case site_name
+      when :Anikore
+        Video::Anikore.new.import_all(year, season)
+      when :Rakuten
+        Video::Rakuten.new.import_all(year, season)
+      when :Shoboi
+        Video::Shoboi.new.import_all
+      else
+        fail 'ImportContents 呼び出しが不正です。' << site_name.to_s << year.to_s << season.to_s
+      end
+    rescue => e
+      raise(StandardError, e.message + '!!', e.backtrace)
     end
-  rescue => e
-    puts e.message
-    puts e.backtrace
-    StandardMailer.system_error_mail(e).deliver_now
   end
+  handle_asynchronously :perform_all, queue: :perform_content
 
   # TODO: 削除する。
   def get_content(title_query)
