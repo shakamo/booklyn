@@ -12,7 +12,7 @@ class ImportContents
   # @param site_name [String] Contentを取得するサイトを指定する。Anikore, Rakuten
   # @param year [String] Contentを取得する範囲を指定する。Anikore のみ。2015
   # @param season [String] Contentを取得するシーズンを指定する。winter, spring, summer, autumn
-  def perform_all(site_name, year, season, days)
+  def perform_all(site_name, year, season, days = 3)
     begin
       case site_name
       when :Anikore
