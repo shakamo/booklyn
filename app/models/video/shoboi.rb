@@ -15,10 +15,10 @@ module Video
       Chronic.time_class = Time.zone
     end
 
-    def import_all
+    def import_all(days = 3)
       contents = []
 
-      date = (Date.today - 3).strftime('%Y%m%d')
+      date = (Date.today - days).strftime('%Y%m%d')
       url = Settings.shoboi.title + date + '_000000-'
 
       docs = get_body(url)

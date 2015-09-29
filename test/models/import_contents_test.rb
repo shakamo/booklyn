@@ -6,6 +6,9 @@ class ImportContentsTest < ActiveSupport::TestCase
   end
 
   def test_1
+    assert_raises StandardError do
+      ImportContents.new.perform_all(:Test, 2015, :winter, 50)
+    end
   end
 
   def test_2

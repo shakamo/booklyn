@@ -46,7 +46,7 @@ class MorphAutomaton
   end
 
   def subtitle?
-    fail 'Multiple Symbol(括弧)' if 2 < @morph[:morph].count do |item|
+    fail 'Multiple Symbol(括弧)' + morph[:raw] if 2 < @morph[:morph].count do |item|
       item == '括弧'
     end
 
