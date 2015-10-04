@@ -62,7 +62,15 @@ module Video
       doc = get_body(url)
       image_url = nil
       begin
-        image_url = doc.css('.animeDetailSubImage > a > img').attribute('src').value
+        path = doc.css('.animeDetailSubImage > a > img')
+        if path.present?
+          image_url = path.attribute('src').value
+        end
+        path = doc.css('.animeDetailSubImage > img')
+        if path.present?
+          image_url = path.attribute('src').value
+        end
+
         image_url = image_url.slice(0, image_url.index('?'))
       rescue
         fail 'AnikoreImageが取得できません。' << content_id.to_s << '::' << url
