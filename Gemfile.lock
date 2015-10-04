@@ -269,7 +269,7 @@ DEPENDENCIES
   aasm
   activerecord-import
   annotate
-  bundler (>= 1.8.4)
+  bundler
   chronic
   coffee-rails
   config
