@@ -21,4 +21,9 @@ class TfIdfTest < ActiveSupport::TestCase
     morph = call_morph('うえお')
     assert get_tfidf(morph).key?('content_id')
   end
+
+  def test_3
+    morph = call_morph("あ'い'う")
+    assert get_tfidf(morph)
+  end
 end

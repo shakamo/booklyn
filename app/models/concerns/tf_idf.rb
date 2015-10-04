@@ -6,8 +6,12 @@ module TfIdf
   include GooLabs
 
   def get_tfidf(morph)
-    words = morph[:raw].join("','")
-    words_for_in = "'" + words + "'"
+    words = []
+    morph[:raw].each do |word|
+      words << word.gsub("'", "''")
+    end
+
+    words_for_in = "'" + words.join("','") + "'"
 
     sql = <<-SQL
       SELECT

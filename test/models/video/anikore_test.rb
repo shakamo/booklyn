@@ -24,4 +24,8 @@ class AnikoreTest < ActiveSupport::TestCase
   def test_save_image2
     @anikore.save_image(8895, 99992)
   end
+
+  def test_save_image3
+    @anikore.save_image(1145, 99992)
+  end
 end
