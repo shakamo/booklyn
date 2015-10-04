@@ -12,6 +12,8 @@ class AnikoreTest < ActiveSupport::TestCase
   end
 
   def test_import_images
-    @anikore.import_images('http://www.anikore.jp/chronicle/2015/winter/ac:tv/page:2')
+    assert_raises StandardError do
+      @anikore.import_images('http://www.anikore.jp/chronicle/2015/winter/ac:tv/page:2')
+    end
   end
 end
