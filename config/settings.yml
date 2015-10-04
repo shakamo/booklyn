@@ -8,8 +8,14 @@ anikore:
     url: http://www.anikore.jp/chronicle/
     detail_url: http://www.anikore.jp/anime/
 goo:
+# 05
     api_key_1: 9f44e0022e49a2414c19d0689a687c44b0e85d603219e4f7042b6d57a668d678
-    api_key_2: f1e955ecdad2c58490666bd77b11d0e655a38f828467245f6cd80ec53b611b1d
+# hotmail.com
+    api_key_2: 3297fbb347863a8b9664767a0f846e96e6069e9db09b59145e2e5e0994e90439
+# hotmail.co.jp
+    api_key_3: 93b21160247c2a38c989a745860f7e91ea8338b56944f36086bb1d6c1a16b3ac
+# なんだっけ？
+    api_key_4: f1e955ecdad2c58490666bd77b11d0e655a38f828467245f6cd80ec53b611b1d
     url: https://labs.goo.ne.jp/api/morph
 
 tfidf: 1.0
