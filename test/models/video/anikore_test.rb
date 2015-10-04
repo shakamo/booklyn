@@ -16,4 +16,8 @@ class AnikoreTest < ActiveSupport::TestCase
       @anikore.import_images('http://www.anikore.jp/chronicle/2015/winter/ac:tv/page:2')
     end
   end
+
+  def test_save_image
+    @anikore.save_image(2282, 99992)
+  end
 end
