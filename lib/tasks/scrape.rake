@@ -1,11 +1,7 @@
+# Daily Jobs
 desc 'Latest Contentsを取得する。'
 task shoboi_latest: :environment do
-  ImportContents.new.perform_all(:Shoboi, 2015, :Winter, 90)
-end
-
-desc 'Contentsを取得する。'
-task shoboi_three_month: :environment do
-  ImportContents.new.perform_all(:Shoboi, nil, nil, 90)
+  ImportContents.new.perform_all(:Shoboi, 2015, :Winter, 3)
 end
 
 desc 'TermFrequencyを登録する。'
@@ -16,6 +12,12 @@ end
 desc 'Imageを取得する。'
 task image: :environment do
   ImportContents.new.perform_all(:Anikore, 2015, :spring, 90)
+end
+
+# Rescue Jobs
+desc 'Contentsを取得する。'
+task shoboi_three_month: :environment do
+  ImportContents.new.perform_all(:Shoboi, nil, nil, 90)
 end
 
 desc 'Tvanimedougaを登録する。'
