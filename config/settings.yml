@@ -8,7 +8,7 @@ anikore:
     url: http://www.anikore.jp/chronicle/
     detail_url: http://www.anikore.jp/anime/
 goo:
-    api_key: 9f44e0022e49a2414c19d0689a687c44b0e85d603219e4f7042b6d57a668d678
+    api_key_1: 9f44e0022e49a2414c19d0689a687c44b0e85d603219e4f7042b6d57a668d678
     api_key_2: f1e955ecdad2c58490666bd77b11d0e655a38f828467245f6cd80ec53b611b1d
     url: https://labs.goo.ne.jp/api/morph
 
