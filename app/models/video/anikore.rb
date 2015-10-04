@@ -19,7 +19,7 @@ module Video
     def import_page(year, season, type)
       max_page_size = get_max_page_size(year, season, type)
 
-      1..max_page_size.each do |page|
+      (1..max_page_size).each do |page|
         url = Settings.anikore.url + path(year, season, type, page)
         import_images(url)
 
