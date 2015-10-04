@@ -60,26 +60,26 @@ module Video
     def save_image(ak_id, content_id)
       url = Settings.anikore.detail_url + ak_id.to_s
       doc = get_body(url)
-      url = nil
+      image_url = nil
       begin
-        url = doc.css('#sub > div.animeDetailSubImage > a > img').attribute('src').value
-        url = url.slice(0, url.index('?'))
+        image_url = doc.css('.animeDetailSubImage > a > img').attribute('src').value
+        image_url = image_url.slice(0, image_url.index('?'))
       rescue
-        fail 'AnikoreImageが取得できません。' << content_id.to_s << '::' << doc.css('#sub > div.animeDetailSubImage > a > img')
+        fail 'AnikoreImageが取得できません。' << content_id.to_s << '::' << url
       end
 
-      if url.nil?
+      if image_url.nil?
         fail 'AnikorImageのURLがnilです。' + content_id.to_s + '.'
       end
 
       image = Image.find_or_initialize_by(table_name: 'contents', generic_id: content_id.to_s)
-      if url == image.url
+      if image_url == image.url
         # Already it is set the same url.
         return
       end
 
       begin
-        image.url = url
+        image.url = image_url
         image.save
       rescue
         fail 'AnikoreContent Anikore set_image cant save the image table.' << url << '::' << content_id.to_s
