@@ -58,16 +58,14 @@ module Video
     handle_asynchronously :import_images, queue: :anikore_import_images
 
     def save_image(ak_id, content_id)
-      puts ak_id.to_s + content_id.to_s
       url = Settings.anikore.detail_url + ak_id.to_s
       doc = get_body(url)
       url = nil
       begin
-        url = node.css('#sub > div.animeDetailSubImage > img').attribute('src').value
+        url = doc.css('#sub > div.animeDetailSubImage > a > img').attribute('src').value
         url = url.slice(0, url.index('?'))
       rescue
-        fail 'ImportContents 呼び出しが不正です。' << site_name.to_s << year.to_s << season.to_s
-        fail 'AnikoreImageが取得できません。' << content_id.to_s
+        fail 'AnikoreImageが取得できません。' << content_id.to_s << '::' << doc.css('#sub > div.animeDetailSubImage > a > img')
       end
 
       if url.nil?
@@ -84,8 +82,7 @@ module Video
         image.url = url
         image.save
       rescue
-        StandardMailer.error_mail('AnikoreContent', '画像URLの保存に失敗しました。url is ' + url + '. content id is' + content_id.to_s + '.').deliver
-        raise content, 'AnikoreContent Anikore set_image cant save the image table.'
+        fail 'AnikoreContent Anikore set_image cant save the image table.' << url << '::' << content_id.to_s
       end
     end
 
