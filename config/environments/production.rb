@@ -93,4 +93,6 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true
   }
+
+  config.goo_api_key_num = 1
 end

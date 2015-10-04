@@ -8,8 +8,16 @@ module GooLabs
   include UrlUtils
 
   def call_morph(target_string)
-    body = post_body_ssl(Settings.goo.url, app_id: Settings.goo.api_key, sentence: target_string)
-    load_morph_array(body)
+    fail 'Goo API Key Error' if Rails.application.config.goo_api_key_num == 3
+
+    body = post_body_ssl(Settings.goo.url, app_id: get_api_key, sentence: target_string)
+
+    if body.blank?
+      Rails.application.config.goo_api_key_num += 1
+      call_morph(target_string)
+    else
+      load_morph_array(body)
+    end
   end
 
   def load_morph_array(body)
@@ -24,6 +32,16 @@ module GooLabs
       end
     end
     morph
+  end
+
+  def get_api_key
+    if Rails.application.config.goo_api_key_num == 1
+      Settings.goo.api_key_1
+    elsif Rails.application.config.goo_api_key_num == 2
+      Settings.goo.api_key_2
+    else
+      nil
+    end
   end
 
   module_function :call_morph
