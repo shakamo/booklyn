@@ -15,4 +15,14 @@ class GooLabsTest < ActiveSupport::TestCase
     assert_equal array[:morph].size, 10
     assert_equal array[:kana].size, 10
   end
+
+  def test_key_1
+    Rails.application.config.goo_api_key_num = 4
+    assert get_api_key
+  end
+
+  def test_key_2
+    Rails.application.config.goo_api_key_num = 5
+    assert_nil get_api_key
+  end
 end

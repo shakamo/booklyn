@@ -39,6 +39,10 @@ module GooLabs
       Settings.goo.api_key_1
     elsif Rails.application.config.goo_api_key_num == 2
       Settings.goo.api_key_2
+    elsif Rails.application.config.goo_api_key_num == 3
+      Settings.goo.api_key_3
+    elsif Rails.application.config.goo_api_key_num == 4
+      Settings.goo.api_key_4
     else
       nil
     end
