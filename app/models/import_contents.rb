@@ -16,7 +16,8 @@ class ImportContents
     begin
       case site_name
       when :Anikore
-        Video::Anikore.new.import_all(year, season)
+        Video::Anikore.new.import_tv(year, season)
+        Video::Anikore.new.import_movie(year, season)
       when :Rakuten
         Video::Rakuten.new.import_all(year, season)
       when :Shoboi

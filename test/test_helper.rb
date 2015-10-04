@@ -1,6 +1,9 @@
 require 'minitest/autorun'
 require 'rails/test_help'
 require 'minitest/rails'
+require 'simplecov'
+
+SimpleCov.start 'rails'
 
 ENV['RAILS_ENV'] ||= 'test'
 
