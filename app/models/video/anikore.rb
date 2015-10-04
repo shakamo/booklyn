@@ -38,17 +38,20 @@ module Video
 
         if content.nil?
           title = doc.css('a').inner_text
-          puts title
-          next if title.blank?
+          if title.blank?
+            fail 'Title is blank.' << doc.css('a').inner_text
+          end
           morph = call_morph(title)
           tfidf = get_tfidf(morph)
-          next if tfidf.blank?
+          if tfidf.blank?
+            fail '(TFIDF is blank.' << title
+          end
+
           content_id = tfidf['content_id'].to_i
         elsif
           content_id = content.id
         end
 
-        puts ak_id.to_s + content_id.to_s
         save_image(ak_id, content_id)
       end
     end
@@ -63,12 +66,11 @@ module Video
         url = node.css('#sub > div.animeDetailSubImage > img').attribute('src').value
         url = url.slice(0, url.index('?'))
       rescue
-        StandardMailer.error_mail('AnikoreContent', '画像が存在しませんでした。 content id is' + content_id.to_s + '.').deliver
-        raise 'AnikoreImageが取得できません。' + content_id.to_s + '.'
+        fail 'ImportContents 呼び出しが不正です。' << site_name.to_s << year.to_s << season.to_s
+        fail 'AnikoreImageが取得できません。' << content_id.to_s
       end
 
       if url.nil?
-        StandardMailer.error_mail('AnikoreContent', '画像が取得できませんでした。url is null. content id is' + content_id.to_s + '.').deliver
         fail 'AnikorImageのURLがnilです。' + content_id.to_s + '.'
       end
 
