@@ -83,7 +83,7 @@ gem 'annotate', group: :development
 
 gem 'config'
 
-gem 'bundler', '>= 1.8.4'
+gem 'bundler'
 gem 'sass-rails'
 gem 'jquery-rails'
 source 'https://rails-assets.org' do
