@@ -63,6 +63,8 @@ group :test do
   gem 'guard-minitest'
   gem 'ruby-prof'
   gem 'terminal-notifier-guard'
+
+  gem 'simplecov'
 end
 
 gem 'chronic'
@@ -93,4 +95,4 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-font-awesome', '= 4.3.0'
 end
 
-ruby '2.2.2'
+ruby '2.2.3'
