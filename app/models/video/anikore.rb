@@ -71,7 +71,9 @@ module Video
           image_url = path.attribute('src').value
         end
 
-        image_url = image_url.slice(0, image_url.index('?'))
+        if image_url.index('?')
+          image_url = image_url.slice(0, image_url.index('?'))
+        end
       rescue
         fail 'AnikoreImageが取得できません。' << content_id.to_s << '::' << url
       end
