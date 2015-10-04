@@ -21,7 +21,7 @@ class ImportContents
       when :Rakuten
         Video::Rakuten.new.import_all(year, season)
       when :Shoboi
-        Video::Shoboi.new.import_all
+        Video::Shoboi.new.import_all(days)
       else
         fail 'ImportContents 呼び出しが不正です。' << site_name.to_s << year.to_s << season.to_s
       end
