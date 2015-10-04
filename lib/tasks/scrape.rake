@@ -10,8 +10,56 @@ task term_frequency: :environment do
 end
 
 desc 'Imageを取得する。'
-task image: :environment do
+task anikore_latest: :environment do
+  ImportContents.new.perform_all(:Anikore, 2015, :autumn, 90)
+end
+
+desc 'Imageを取得する。'
+task anikore_all: :environment do
+  ImportContents.new.perform_all(:Anikore, 2008, :winter, 90)
+  ImportContents.new.perform_all(:Anikore, 2008, :spring, 90)
+  ImportContents.new.perform_all(:Anikore, 2008, :summer, 90)
+  ImportContents.new.perform_all(:Anikore, 2008, :autumn, 90)
+
+  ImportContents.new.perform_all(:Anikore, 2009, :winter, 90)
+  ImportContents.new.perform_all(:Anikore, 2009, :spring, 90)
+  ImportContents.new.perform_all(:Anikore, 2009, :summer, 90)
+  ImportContents.new.perform_all(:Anikore, 2009, :autumn, 90)
+
+  ImportContents.new.perform_all(:Anikore, 2010, :winter, 90)
+  ImportContents.new.perform_all(:Anikore, 2010, :spring, 90)
+  ImportContents.new.perform_all(:Anikore, 2010, :summer, 90)
+  ImportContents.new.perform_all(:Anikore, 2010, :autumn, 90)
+
+  ImportContents.new.perform_all(:Anikore, 2011, :winter, 90)
+  ImportContents.new.perform_all(:Anikore, 2011, :spring, 90)
+  ImportContents.new.perform_all(:Anikore, 2011, :summer, 90)
+  ImportContents.new.perform_all(:Anikore, 2011, :autumn, 90)
+
+  ImportContents.new.perform_all(:Anikore, 2012, :winter, 90)
+  ImportContents.new.perform_all(:Anikore, 2012, :spring, 90)
+  ImportContents.new.perform_all(:Anikore, 2012, :summer, 90)
+  ImportContents.new.perform_all(:Anikore, 2012, :autumn, 90)
+
+  ImportContents.new.perform_all(:Anikore, 2013, :winter, 90)
+  ImportContents.new.perform_all(:Anikore, 2013, :spring, 90)
+  ImportContents.new.perform_all(:Anikore, 2013, :summer, 90)
+  ImportContents.new.perform_all(:Anikore, 2013, :autumn, 90)
+  
+  ImportContents.new.perform_all(:Anikore, 2014, :winter, 90)
+  ImportContents.new.perform_all(:Anikore, 2014, :spring, 90)
+  ImportContents.new.perform_all(:Anikore, 2014, :summer, 90)
+  ImportContents.new.perform_all(:Anikore, 2014, :autumn, 90)
+
+  ImportContents.new.perform_all(:Anikore, 2015, :winter, 90)
   ImportContents.new.perform_all(:Anikore, 2015, :spring, 90)
+  ImportContents.new.perform_all(:Anikore, 2015, :summer, 90)
+  ImportContents.new.perform_all(:Anikore, 2015, :autumn, 90)
+
+  ImportContents.new.perform_all(:Anikore, 2016, :winter, 90)
+  ImportContents.new.perform_all(:Anikore, 2016, :spring, 90)
+  ImportContents.new.perform_all(:Anikore, 2016, :summer, 90)
+  ImportContents.new.perform_all(:Anikore, 2016, :autumn, 90)
 end
 
 # Rescue Jobs
