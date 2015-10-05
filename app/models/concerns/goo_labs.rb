@@ -34,13 +34,13 @@ module GooLabs
   end
 
   def get_api_key
-    if Rails.application.config.goo_api_key_num == 1
+    if Rails.application.config.goo_api_key_num < 3
       Settings.goo.api_key_1
-    elsif Rails.application.config.goo_api_key_num == 2
+    elsif Rails.application.config.goo_api_key_num < 6
       Settings.goo.api_key_2
-    elsif Rails.application.config.goo_api_key_num == 3
+    elsif Rails.application.config.goo_api_key_num < 9
       Settings.goo.api_key_3
-    elsif Rails.application.config.goo_api_key_num == 4
+    elsif Rails.application.config.goo_api_key_num < 12
       Settings.goo.api_key_4
     else
       fail 'Goo API Key Error' << Rails.application.config.goo_api_key_num.to_s
