@@ -42,7 +42,7 @@ module GooLabs
     elsif Rails.application.config.goo_api_key_num == 4
       Settings.goo.api_key_4
     else
-      fail 'Goo API Key Error'
+      fail 'Goo API Key Error' << Rails.application.config.goo_api_key_num.to_s
     end
   end
 
