@@ -8,8 +8,6 @@ module GooLabs
   include UrlUtils
 
   def call_morph(target_string)
-    fail 'Goo API Key Error' if Rails.application.config.goo_api_key_num == 3
-
     body = post_body_ssl(Settings.goo.url, app_id: get_api_key, sentence: target_string)
 
     if body.blank?
@@ -44,7 +42,7 @@ module GooLabs
     elsif Rails.application.config.goo_api_key_num == 4
       Settings.goo.api_key_4
     else
-      nil
+      fail 'Goo API Key Error'
     end
   end
 
