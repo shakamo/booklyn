@@ -11,6 +11,7 @@ module GooLabs
     body = post_body_ssl(Settings.goo.url, app_id: get_api_key, sentence: target_string)
 
     if body.blank?
+      puts 'Goo Error.' << Settings.goo.url << get_api_key << target_string
       Rails.application.config.goo_api_key_num += 1
       call_morph(target_string)
     else
