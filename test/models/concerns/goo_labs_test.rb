@@ -46,7 +46,7 @@ class GooLabsTest < ActiveSupport::TestCase
 
   def test_5
     assert_raises StandardError do
-      Rails.application.config.goo_api_key_num = 5
+      Rails.application.config.goo_api_key_num = 12
       array = call_morph('まじっく快斗1412　第12話')
       assert_equal array.size, 3
       assert_equal array[:raw].size, 10
@@ -56,13 +56,13 @@ class GooLabsTest < ActiveSupport::TestCase
   end
 
   def test_key_1
-    Rails.application.config.goo_api_key_num = 4
+    Rails.application.config.goo_api_key_num = 11
     assert get_api_key
   end
 
   def test_key_2
     assert_raises StandardError do
-      Rails.application.config.goo_api_key_num = 5
+      Rails.application.config.goo_api_key_num = 12
       get_api_key
     end
   end
