@@ -62,9 +62,9 @@ group :test do
   gem 'guard'
   gem 'guard-minitest'
   gem 'ruby-prof'
+  gem 'rack-contrib'
   gem 'terminal-notifier-guard'
 
-  gem 'simplecov'
 end
 
 gem 'chronic'
@@ -92,7 +92,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular'
   gem 'rails-assets-angular-animate'
   gem 'rails-assets-angular-route'
-  gem 'rails-assets-font-awesome', '= 4.3.0'
+  gem 'rails-assets-font-awesome'
 end
 
-ruby '2.2.3'
+ruby '2.3.0'

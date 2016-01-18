@@ -1,4 +1,12 @@
 # Daily Jobs
+desc 'ルーチンワーク'
+task work: :environment do
+    Rake::Task['shoboi_latest'].invoke
+    Rake::Task['term_frequency'].invoke
+    Rake::Task['anikore_latest'].invoke
+    Rake::Task['tvanimedouga'].invoke
+end
+
 desc 'Latest Contentsを取得する。'
 task shoboi_latest: :environment do
   ImportContents.new.perform_all(:Shoboi, 2015, :Winter, 3)

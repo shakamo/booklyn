@@ -9,6 +9,8 @@ class AnikoreTest < ActiveSupport::TestCase
 
   def test_get_max_page_size
     assert_equal 3, @anikore.get_max_page_size(2015, :winter, :tv)
+
+
   end
 
   def test_import_images
