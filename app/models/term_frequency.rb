@@ -7,6 +7,7 @@
 #  word       :string
 #  created_at :datetime
 #  updated_at :datetime
+#  order_num  :integer
 #
 # Indexes
 #
