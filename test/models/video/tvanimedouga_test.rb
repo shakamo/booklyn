@@ -64,6 +64,6 @@ class TvanimedougaTest < ActiveSupport::TestCase
 
     error = tvanimedouga.error_test
 
-    assert_equal error.name, 'tvanimedouga:error_test'
+    assert_equal 'tvanimedouga:error_test', error.description
   end
 end

@@ -8,7 +8,7 @@ class GooLabsTest < ActiveSupport::TestCase
   def setup
   end
 
-  def test_1
+  def test_get_morph
     Rails.application.config.goo_api_key_num = 1
     array = call_morph('まじっく快斗1412　第12話')
     assert_equal array.size, 3
@@ -17,41 +17,14 @@ class GooLabsTest < ActiveSupport::TestCase
     assert_equal array[:kana].size, 10
   end
 
-  def test_2
-    Rails.application.config.goo_api_key_num = 2
-    array = call_morph('まじっく快斗1412　第12話')
-    assert_equal array.size, 3
-    assert_equal array[:raw].size, 10
-    assert_equal array[:morph].size, 10
-    assert_equal array[:kana].size, 10
-  end
-
-  def test_3
-    Rails.application.config.goo_api_key_num = 3
-    array = call_morph('まじっく快斗1412　第12話')
-    assert_equal array.size, 3
-    assert_equal array[:raw].size, 10
-    assert_equal array[:morph].size, 10
-    assert_equal array[:kana].size, 10
-  end
-
-  def test_4
-    Rails.application.config.goo_api_key_num = 4
-    array = call_morph('まじっく快斗1412　第12話')
-    assert_equal array.size, 3
-    assert_equal array[:raw].size, 10
-    assert_equal array[:morph].size, 10
-    assert_equal array[:kana].size, 10
-  end
-
-  def test_5
-    assert_raises StandardError do
-      Rails.application.config.goo_api_key_num = 12
-      array = call_morph('まじっく快斗1412　第12話')
+  def test_api_key_num
+    Rails.application.config.goo_api_key_num = 1
+    GooLabs.stub :call_morph, {:raw=>["第", "12", "話"], :morph=>["冠数詞", "Number", "助数詞"], :kana=>["ダイ", "ジューニ", "ワ"]} do
+      array = call_morph('第12話')
       assert_equal array.size, 3
-      assert_equal array[:raw].size, 10
-      assert_equal array[:morph].size, 10
-      assert_equal array[:kana].size, 10
+      assert_equal array[:raw].size, 3
+      assert_equal array[:morph].size, 3
+      assert_equal array[:kana].size, 3
     end
   end
 
@@ -62,7 +35,7 @@ class GooLabsTest < ActiveSupport::TestCase
 
   def test_key_2
     assert_raises StandardError do
-      Rails.application.config.goo_api_key_num = 12
+      Rails.application.config.goo_api_key_num = 13
       get_api_key
     end
   end

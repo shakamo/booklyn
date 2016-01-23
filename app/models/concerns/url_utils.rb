@@ -38,6 +38,7 @@ module UrlUtils
 
     http = Net::HTTP.new(uri.host, 443)
     http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_PEER
     begin
       res = http.start do |con|
         con.request(req)
@@ -62,6 +63,8 @@ module UrlUtils
       Rails.logger.info 'BadRequest Error ' + url
     when Net::HTTPGone
       Rails.logger.info 'HTTPGone Error ' + url
+    when Net::HTTPNotFound
+      Rails.logger.info 'HTTPNotFound' + url
     else
       Rails.logger.info 'Unknown Error ' + url
     end
