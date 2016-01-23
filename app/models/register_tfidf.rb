@@ -13,10 +13,10 @@ class RegisterTfidf
     puts items.to_s
     new_term_frequencies = []
 
-    items.each_with_index do |item, index|
+    items.each do |item|
       morph = call_morph(item['title'])
 
-      morph[:raw].each do |word|
+      morph[:raw].each_with_index do |word, index|
         tf = TermFrequency.new
         tf.content_id = item['id']
         tf.word = word
