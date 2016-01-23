@@ -98,7 +98,7 @@ module Video
     end
 
     def error_test
-      Error.new description: 'test'
+      Error.new description: 'tvanimedouga:error_test'
     end
   end
 end
