@@ -9,7 +9,7 @@ end
 
 desc 'Latest Contentsを取得する。'
 task shoboi_latest: :environment do
-  ImportContents.new.perform_all(:Shoboi, 2015, :Winter, 3)
+  ImportContents.new.perform_all(:Shoboi, 2015, :Winter, 365)
 end
 
 desc 'TermFrequencyを登録する。'
