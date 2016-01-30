@@ -2,18 +2,8 @@ box: wercker/rvm
 build:
     steps:
         - rvm-use:
-            version: ruby-2.2.3
+            version: ruby-2.3.0
         - bundle-install
         - script:
             name: minitest
             code: bin/rake test
-
-dev:
-    steps:
-        - bundle-install
-        - internal/watch:
-            code: |
-                bundle exec unicorn -p 8080 -c ./config/unicorn.rb
-            reload: true
-
-
