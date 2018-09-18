@@ -7,9 +7,11 @@
 * heroku
 
 ライブラリ
-* Rails3（ActiveRecord、Delayed Job）
+* Rails3（ActiveRecord）
 * Angular JS　1.4
 
 勉強要素
 * tdidfアルゴリズム
 * （開発環境として）c9
+* Server Side Rendering（PhantomJS）
+* Delayed Jobを用いた非同期バッチ処理
